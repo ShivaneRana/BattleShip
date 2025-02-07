@@ -2,6 +2,10 @@ const {Ship} = require('../module/ship.js');
 
 describe("Ship class",() => {
 
+    const uwu = jest.fn();
+
+    uwu.mockReturnValueOnce("shivane");
+
     let ship1;
 
     beforeEach(() => {
