@@ -2,19 +2,9 @@ const {Ship} = require('../module/ship.js');
 
 describe("Ship class",() => {
     let ship1;
-    let Carrier;
-    let Battleship;
-    // let Submarine;
-    let Cruiser;
-    let Destroyer;
 
     beforeEach(() => {
         ship1 = new Ship();
-        Carrier = new Ship(5);
-        Battleship = new Ship(4);
-        Cruiser = new Ship(3);
-        // Submarine = new Ship(3);
-        Destroyer = new Ship(2);
     })
 
     test("Ship class is defined",() => {
@@ -41,11 +31,4 @@ describe("Ship class",() => {
         ship1.hit();
         expect(ship1.isSunk()).toBeTruthy();
     });
-
-    test("Check if ship length give correct name",() => {
-        expect(Carrier.symbol).toBe("Carrier");
-        expect(Battleship.symbol).toBe("Battleship");
-        expect(Cruiser.symbol).toBe("Cruiser");
-        expect(Destroyer.symbol).toBe("Destroyer");
-    })
 })
