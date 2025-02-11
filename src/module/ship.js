@@ -1,5 +1,5 @@
 class Ship{
-    constructor(name){
+    constructor(name = "none"){
         this.length = this.getLength(name);
         this.hitTaken = 0;
         this.sank = false;
@@ -7,16 +7,13 @@ class Ship{
 
     getLength(value){
 
-        if(!value){
-            return 3; // return 3 as a default length
-        }
-
         const chart = {
             "carrier":5,
             "battleship":4,
             "cruiser":3,
             "submarine":3,
             "destroyer":2,
+            "none":3,
         }
 
         return chart[value];
