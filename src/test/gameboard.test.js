@@ -11,15 +11,26 @@ describe("gameboard.js",() => {
         expect(Gameboard).toBeDefined();
     })
 
-
-    test("gameboard return object",() => {
-        expect(typeof gameboard).toBe("object")
-    })
-
-    test("gameboard exist",() => {
+    test("gameboard has board object",() => {
         expect(gameboard.board).toBeDefined();
+        expect(Array.isArray(gameboard.board)).toBeTruthy()
     })
 
+    test("gameboard has placeShip function",() => {
+        expect(gameboard.placeShip).toBeDefined();
+        expect(typeof gameboard.placeShip).toBe("function");
+    })
+
+    test("check if both argument in placeShip are array",() => {
+        expect(() => gameboard.placeShip("shivane",[0,1],"carrier")).toThrow("start should be an array");
+        expect(() => gameboard.placeShip([0,1],"shivane","carrier")).toThrow("end should be an array");
+        expect(() => gameboard.placeShip([0,1],[0,1],90)).toThrow("name should be a string");
+    })
+
+    test("check argument length for placeship",() => {
+        expect(() => gameboard.placeShip([0,9,0],[0,1],"carrier")).toThrow("array length should be 2");
+        expect(() => gameboard.placeShip([0,9],[0,1,0],"carrier")).toThrow("array length should be 2");
+    })
 
 })
 
