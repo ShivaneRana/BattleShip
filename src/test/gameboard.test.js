@@ -21,7 +21,7 @@ describe("gameboard.js",() => {
         expect(typeof gameboard.placeShip).toBe("function");
     })
 
-    test("check if both argument in placeShip are array",() => {
+    test("check if argument type are correct in placeShip",() => {
         expect(() => gameboard.placeShip("shivane",[0,1],"carrier")).toThrow("start should be an array");
         expect(() => gameboard.placeShip([0,1],"shivane","carrier")).toThrow("end should be an array");
         expect(() => gameboard.placeShip([0,1],[0,1],90)).toThrow("name should be a string");
