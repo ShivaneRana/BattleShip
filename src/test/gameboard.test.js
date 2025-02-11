@@ -2,9 +2,9 @@ const {Gameboard} = require("../module/gameboard.js")
 
 describe("gameboard.js",() => {
 
-    let gameB;
+    let gameboard;
     beforeEach(() => {
-        gameB = new Gameboard()
+        gameboard = new Gameboard()
     });
     
     test("gameboard class exist",() => {
@@ -13,11 +13,11 @@ describe("gameboard.js",() => {
 
 
     test("gameboard return object",() => {
-        expect(typeof gameB).toBe("object")
+        expect(typeof gameboard).toBe("object")
     })
 
     test("gameboard exist",() => {
-        expect(gameB.gameboard).toBeDefined();
+        expect(gameboard.board).toBeDefined();
     })
 
 
