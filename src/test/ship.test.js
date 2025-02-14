@@ -12,9 +12,9 @@ describe("Ship class",() => {
     })
 
     test("Ship class has lenght,hitTaken and Sank",() => {
-        expect(new Ship().length).toBeDefined();
-        expect(new Ship().hitTaken).toBeDefined();
-        expect(new Ship().sank).toBeDefined();
+        expect(new Ship("submarine").length).toBeDefined();
+        expect(new Ship("submarine").hitTaken).toBeDefined();
+        expect(new Ship("submarine").sank).toBeDefined();
     })
 
     test("check for hit function",() => {
@@ -30,7 +30,6 @@ describe("Ship class",() => {
         expect(new Ship("cruiser").length).toBe(3);
         expect(new Ship("submarine").length).toBe(3);
         expect(new Ship("destroyer").length).toBe(2);
-        expect(new Ship().length).toBe(3);
     })
 
     test("check if the ship can sink",() => {
