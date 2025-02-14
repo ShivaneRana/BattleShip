@@ -1,3 +1,4 @@
+import { Ship } from "./ship.js";
 class Gameboard{
     constructor(){
         this.board = Array.from({length:10},() => Array(10).fill(0));
@@ -9,7 +10,6 @@ class Gameboard{
     }
 
     placeShip(start,end,name){
-
 
         if(!(Array.isArray(start))){
             throw new Error("start should be an array");
