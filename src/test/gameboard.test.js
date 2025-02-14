@@ -20,6 +20,7 @@ describe("gameboard.js", () => {
     expect(typeof gameboard.placeShip).toBe("function");
   });
 
+
   test("check if argument type are correct in placeShip", () => {
     expect(() => gameboard.placeShip("shivane", [0, 1], "carrier")).toThrow(
       "start should be an array",
