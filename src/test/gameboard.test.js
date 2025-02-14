@@ -32,5 +32,19 @@ describe("gameboard.js",() => {
         expect(() => gameboard.placeShip([0,9],[0,1,0],"carrier")).toThrow("array length should be 2");
     })
 
+    test("place ship in gameboard",() => {
+        gameboard.placeShip([0,0],[0,4],"Carrier")
+        for(let i = 0;i < 4;i++){
+            expect(gameboard.board[0][i]).toBe("C");
+        }
+    })
+
+    test("place ship in gameboard(2)",() => {
+        gameboard.placeShip([5,0],[9,0],"BattleShip")
+        for(let i = 5;i < 9;i++){
+            expect(gameboard.board[i][0]).toBe("B")
+        }
+    })
+
 })
 
