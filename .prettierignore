@@ -1,3 +1,10 @@
 # Ignore artifacts:
 build
 coverage
+package-lock
+package
+eslint.config
+webpack.config
+.prettierrc
+.gitignore
+.prettierignore
