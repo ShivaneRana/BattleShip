@@ -13,7 +13,6 @@ class Ship{
             "cruiser":3,
             "submarine":3,
             "destroyer":2,
-            "none":3,
         }
 
         return chart[value];
