@@ -27,10 +27,15 @@ describe("gameboard.js",() => {
         expect(() => gameboard.placeShip([0,1],[0,1],90)).toThrow("name should be a string");
     })
 
+    test("check if start and end position are the same",() => {
+        expect(() => gameboard.placeShip([0,1],[0,1],"carrier")).toThrow("start and end position cannot be same");
+    })
+
     test("check argument length for placeship",() => {
         expect(() => gameboard.placeShip([0,9,0],[0,1],"carrier")).toThrow("array length should be 2");
         expect(() => gameboard.placeShip([0,9],[0,1,0],"carrier")).toThrow("array length should be 2");
     })
+
 
     test("place ship in gameboard",() => {
         gameboard.placeShip([0,0],[0,4],"Carrier")
