@@ -9,6 +9,8 @@ class Gameboard{
     }
 
     placeShip(start,end,name){
+
+
         if(!(Array.isArray(start))){
             throw new Error("start should be an array");
         }
@@ -26,9 +28,21 @@ class Gameboard{
         }
 
 
+        if(start[0] === end[0]){
+            for(let i = start[1];i < end[1];i++){
+                this.board[start[0]][i] = "C";
+            }
+        }
+
+        if(start[1] === end[1]){
+            for(let i = start[0];i < end[0];i++){
+                this.board[i][end[1]] = "B";
+            }
+        }
     }
 };
 
 module.exports = {
     Gameboard
 }
+
