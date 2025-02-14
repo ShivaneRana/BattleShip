@@ -17,6 +17,10 @@ describe("Ship class",() => {
         expect(new Ship("submarine").sank).toBeDefined();
     })
 
+    test("Ship class with no argument", () => {
+        expect(() => new Ship()).toThrow("invalid name provided");
+    })
+
     test("check for hit function",() => {
         expect(ship1.hitTaken).toBe(0);
         ship1.hit();
