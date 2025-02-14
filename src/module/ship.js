@@ -15,6 +15,10 @@ class Ship{
             "destroyer":2,
         }
 
+        if(!chart[value]){
+            throw new Error("invalid name provided");
+        }
+
         return chart[value];
     }
 
