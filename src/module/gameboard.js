@@ -27,6 +27,10 @@ class Gameboard{
             throw new Error("name should be a string");
         }
 
+        if(`${start}` === `${end}`){
+            throw new Error("start and end position cannot be same");
+        }
+
 
         if(start[0] === end[0]){
             for(let i = start[1];i < end[1];i++){
