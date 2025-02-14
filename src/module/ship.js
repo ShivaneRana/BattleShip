@@ -1,4 +1,4 @@
-export class Ship {
+class Ship {
   constructor(name = "none") {
     this.length = this.getLength(name);
     this.hitTaken = 0;
@@ -13,6 +13,7 @@ export class Ship {
       submarine: 3,
       destroyer: 2,
     };
+
 
     if (!chart[value]) {
       throw new Error("invalid name provided");
