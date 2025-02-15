@@ -48,11 +48,25 @@ export class Gameboard {
 
     if (start[0] === end[0]) {
       for (let i = start[1]; i <= end[1]; i++) {
+        if(this.board[start[0]][i] !== 0){
+          throw new Error("position already occupied");
+        };
+      }
+
+      for (let i = start[1]; i <= end[1]; i++) {
         this.board[start[0]][i] = ship.symbol;
       }
     }
 
     if (start[1] === end[1]) {
+
+      for (let i = start[0]; i <= end[0]; i++) {
+        if(this.board[i][end[1]] !== 0){
+          throw new Error("position already occupied");
+        };
+      }
+      
+
       for (let i = start[0]; i <= end[0]; i++) {
         this.board[i][end[1]] = ship.symbol;
       }
@@ -60,7 +74,3 @@ export class Gameboard {
 
   }
 }
-
-const game = new Gameboard();
-game.placeShip([0,1],[0,6],"carrier");
-game.print();
