@@ -42,38 +42,43 @@ describe("gameboard.js", () => {
     );
   });
 
-  test("test for diagonal placement of the ships(1)", () => {
-    expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("diagonal placement of ship not allowed");
+  test("check for invalid placement(1)",() => {
+    expect(() => gameboard.placeShip([0,0],[0,0],"carrier")).toThrow("invalid placement");
   })
 
-  test("test for diagonal placement of the ships(2)", () => {
-    expect(() => gameboard.placeShip([7,1],[3,5],"carrier")).toThrow("diagonal placement of ship not allowed");
+  test("check for invalid placement(2)",() => {
+    expect(() => gameboard.placeShip([1,2],[3,4],"carrier")).toThrow("invalid placement");
+  })
+
+  
+  test("check for invalid placement(3)",() => {
+    expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("invalid placement");
   })
 
   // test("place ship in gameboard", () => {
   //   gameboard.placeShip([0, 0], [0, 4], "Carrier");
-  //   for (let i = 0; i < 4; i++) {
+  //   for (let i = 0; i <= 4; i++) {
   //     expect(gameboard.board[0][i]).toBe("C");
   //   }
   // });
 
   // test("place ship in gameboard(1)", () => {
   //   gameboard.placeShip([6, 0], [6, 3], "Submarine");
-  //   for (let i = 0; i < 3; i++) {
+  //   for (let i = 0; i <= 3; i++) {
   //     expect(gameboard.board[6][i]).toBe("S");
   //   }
   // });
 
   // test("place ship in gameboard(2)", () => {
   //   gameboard.placeShip([5, 0], [9, 0], "BattleShip");
-  //   for (let i = 5; i < 9; i++) {
+  //   for (let i = 5; i <= 9; i++) {
   //     expect(gameboard.board[i][0]).toBe("B");
   //   }
   // });
 
   // test("place ship in gameboard(3)", () => {
   //   gameboard.placeShip([5, 8], [7, 8], "Cruiser");
-  //   for (let i = 5; i < 7; i++) {
+  //   for (let i = 5; i <= 7; i++) {
   //     expect(gameboard.board[i][8]).toBe("R");
   //   }
   // });
