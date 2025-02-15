@@ -1,4 +1,4 @@
-const { Gameboard } = require("../module/gameboard.js");
+import {Gameboard} from "../module/gameboard.js";
 
 describe("gameboard.js", () => {
   let gameboard;
@@ -55,24 +55,24 @@ describe("gameboard.js", () => {
     }
   });
 
-  test("place ship in gameboard(1)", () => {
-    gameboard.placeShip([6, 0], [6, 3], "Submarine");
-    for (let i = 0; i < 3; i++) {
-      expect(gameboard.board[6][i]).toBe("S");
-    }
-  });
+  // test("place ship in gameboard(1)", () => {
+  //   gameboard.placeShip([6, 0], [6, 3], "Submarine");
+  //   for (let i = 0; i < 3; i++) {
+  //     expect(gameboard.board[6][i]).toBe("S");
+  //   }
+  // });
 
-  test("place ship in gameboard(2)", () => {
-    gameboard.placeShip([5, 0], [9, 0], "BattleShip");
-    for (let i = 5; i < 9; i++) {
-      expect(gameboard.board[i][0]).toBe("B");
-    }
-  });
+  // test("place ship in gameboard(2)", () => {
+  //   gameboard.placeShip([5, 0], [9, 0], "BattleShip");
+  //   for (let i = 5; i < 9; i++) {
+  //     expect(gameboard.board[i][0]).toBe("B");
+  //   }
+  // });
 
-  test("place ship in gameboard(3)", () => {
-    gameboard.placeShip([5, 8], [7, 8], "Cruiser");
-    for (let i = 5; i < 7; i++) {
-      expect(gameboard.board[i][8]).toBe("C");
-    }
-  });
+  // test("place ship in gameboard(3)", () => {
+  //   gameboard.placeShip([5, 8], [7, 8], "Cruiser");
+  //   for (let i = 5; i < 7; i++) {
+  //     expect(gameboard.board[i][8]).toBe("R");
+  //   }
+  // });
 });

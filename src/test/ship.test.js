@@ -1,4 +1,4 @@
-const { Ship } = require("../module/ship.js");
+import {Ship} from "../module/ship.js";
 
 describe("Ship class", () => {
   let ship1;
