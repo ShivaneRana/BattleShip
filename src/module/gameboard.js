@@ -19,13 +19,13 @@ export class Gameboard {
 
   placeShip(start, end, name) {
     const ship = this.allShip[name];
+    const x = start[0]; // start position x axis
+    const y = start[1]; // start position y axis
+    const x1 = end[0];  // end position x axis
+    const y1 = end[1];  // end position y axis
 
-    if (!Array.isArray(start)) {
-      throw new Error("start should be an array");
-    }
-
-    if (!Array.isArray(end)) {
-      throw new Error("end should be an array");
+    if (!Array.isArray(start) || !Array.isArray(end)) {
+      throw new Error("start and end should be arrays");
     }
 
     if (start.length !== 2 || end.length !== 2) {
@@ -36,36 +36,38 @@ export class Gameboard {
       throw new Error("name should be a string");
     }
 
-    if (start[0] !== end[0] && start[1] !== end[1]) {
+    if (x !== x1 && y !== y1) {
       throw new Error("invalid placement");
     }
 
-    if (start[0] === end[0] && start[1] === end[1]) {
+    if (x === x1 && y === y1) {
       throw new Error("invalid placement");
     }
 
-    if (start[0] === end[0]) {
-      for (let i = start[1]; i <= end[1]; i++) {
-        if (this.board[start[0]][i] !== 0) {
+    if (x === x1) {
+      for (let i = y; i <= y1; i++) {
+        if (this.board[x][i] !== 0) {
           throw new Error("position already occupied");
         }
       }
-
-      for (let i = start[1]; i <= end[1]; i++) {
-        this.board[start[0]][i] = ship.symbol;
+      for (let i = y; i <= y1; i++) {
+        this.board[x][i] = ship.symbol;
       }
     }
 
-    if (start[1] === end[1]) {
-      for (let i = start[0]; i <= end[0]; i++) {
-        if (this.board[i][end[1]] !== 0) {
+    if (y === y1) {
+      for (let i = x; i <= x1; i++) {
+        if (this.board[i][y1] !== 0) {
           throw new Error("position already occupied");
         }
       }
-
-      for (let i = start[0]; i <= end[0]; i++) {
-        this.board[i][end[1]] = ship.symbol;
+      for (let i = x; i <= x1; i++) {
+        this.board[i][y1] = ship.symbol;
       }
     }
+  }
+
+  receiveAttack([x, y]) {
+    return true;
   }
 }
