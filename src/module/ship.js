@@ -52,3 +52,4 @@ export class Ship {
     return this.sank;
   }
 }
+
