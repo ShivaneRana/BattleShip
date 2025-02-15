@@ -55,31 +55,31 @@ describe("gameboard.js", () => {
     expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("invalid placement");
   })
 
-  // test("place ship in gameboard", () => {
-  //   gameboard.placeShip([0, 0], [0, 4], "Carrier");
-  //   for (let i = 0; i <= 4; i++) {
-  //     expect(gameboard.board[0][i]).toBe("C");
-  //   }
-  // });
+  test("place ship in gameboard", () => {
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    for (let i = 0; i <= 4; i++) {
+      expect(gameboard.board[0][i]).toBe("C");
+    }
+  });
 
-  // test("place ship in gameboard(1)", () => {
-  //   gameboard.placeShip([6, 0], [6, 3], "Submarine");
-  //   for (let i = 0; i <= 3; i++) {
-  //     expect(gameboard.board[6][i]).toBe("S");
-  //   }
-  // });
+  test("place ship in gameboard(1)", () => {
+    gameboard.placeShip([6, 0], [6, 3], "submarine");
+    for (let i = 0; i <= 3; i++) {
+      expect(gameboard.board[6][i]).toBe("S");
+    }
+  });
 
-  // test("place ship in gameboard(2)", () => {
-  //   gameboard.placeShip([5, 0], [9, 0], "BattleShip");
-  //   for (let i = 5; i <= 9; i++) {
-  //     expect(gameboard.board[i][0]).toBe("B");
-  //   }
-  // });
+  test("place ship in gameboard(2)", () => {
+    gameboard.placeShip([5, 0], [9, 0], "battleship");
+    for (let i = 5; i <= 9; i++) {
+      expect(gameboard.board[i][0]).toBe("B");
+    }
+  });
 
-  // test("place ship in gameboard(3)", () => {
-  //   gameboard.placeShip([5, 8], [7, 8], "Cruiser");
-  //   for (let i = 5; i <= 7; i++) {
-  //     expect(gameboard.board[i][8]).toBe("R");
-  //   }
-  // });
+  test("place ship in gameboard(3)", () => {
+    gameboard.placeShip([5, 8], [7, 8], "cruiser");
+    for (let i = 5; i <= 7; i++) {
+      expect(gameboard.board[i][8]).toBe("R");
+    }
+  });
 });
