@@ -82,4 +82,15 @@ describe("gameboard.js", () => {
       expect(gameboard.board[i][8]).toBe("R");
     }
   });
+
+
+  test("check if inserting in a position is valid",() => {
+    gameboard.placeShip([0,0],[0,5],"carrier");
+    expect(() => gameboard.placeShip([0,0],[0,5],"carrier")).toThrow("position already occupied");
+  })
+
+  test("check if inserting in a position is valid(1)",() => {
+    gameboard.placeShip([0,5],[5,5],"carrier");
+    expect(() => gameboard.placeShip([0,5],[5,5],"carrier")).toThrow("position already occupied");
+  })
 });
