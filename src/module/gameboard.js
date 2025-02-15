@@ -19,6 +19,9 @@ export class Gameboard {
 
   placeShip(start, end, name) {
 
+    const ship = this.allShip[name];
+  
+
     if (!Array.isArray(start)) {
       throw new Error("start should be an array");
     }
@@ -45,14 +48,19 @@ export class Gameboard {
 
     if (start[0] === end[0]) {
       for (let i = start[1]; i <= end[1]; i++) {
-        this.board[start[0]][i] = "C";
+        this.board[start[0]][i] = ship.symbol;
       }
     }
 
     if (start[1] === end[1]) {
       for (let i = start[0]; i <= end[0]; i++) {
-        this.board[i][end[1]] = "B";
+        this.board[i][end[1]] = ship.symbol;
       }
     }
+
   }
 }
+
+const game = new Gameboard();
+game.placeShip([0,1],[0,6],"carrier");
+game.print();
