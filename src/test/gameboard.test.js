@@ -1,4 +1,4 @@
-import {Gameboard} from "../module/gameboard.js";
+import { Gameboard } from "../module/gameboard.js";
 
 describe("gameboard.js", () => {
   let gameboard;
@@ -19,7 +19,6 @@ describe("gameboard.js", () => {
     expect(gameboard.placeShip).toBeDefined();
     expect(typeof gameboard.placeShip).toBe("function");
   });
-
 
   test("check if argument type are correct in placeShip", () => {
     expect(() => gameboard.placeShip("shivane", [0, 1], "carrier")).toThrow(
@@ -42,18 +41,23 @@ describe("gameboard.js", () => {
     );
   });
 
-  test("check for invalid placement(1)",() => {
-    expect(() => gameboard.placeShip([0,0],[0,0],"carrier")).toThrow("invalid placement");
-  })
+  test("check for invalid placement(1)", () => {
+    expect(() => gameboard.placeShip([0, 0], [0, 0], "carrier")).toThrow(
+      "invalid placement",
+    );
+  });
 
-  test("check for invalid placement(2)",() => {
-    expect(() => gameboard.placeShip([1,2],[3,4],"carrier")).toThrow("invalid placement");
-  })
+  test("check for invalid placement(2)", () => {
+    expect(() => gameboard.placeShip([1, 2], [3, 4], "carrier")).toThrow(
+      "invalid placement",
+    );
+  });
 
-  
-  test("check for invalid placement(3)",() => {
-    expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("invalid placement");
-  })
+  test("check for invalid placement(3)", () => {
+    expect(() => gameboard.placeShip([0, 0], [4, 4], "carrier")).toThrow(
+      "invalid placement",
+    );
+  });
 
   test("place ship in gameboard", () => {
     gameboard.placeShip([0, 0], [0, 4], "carrier");
@@ -83,14 +87,17 @@ describe("gameboard.js", () => {
     }
   });
 
+  test("check if inserting in a position is valid", () => {
+    gameboard.placeShip([0, 0], [0, 5], "carrier");
+    expect(() => gameboard.placeShip([0, 0], [0, 5], "carrier")).toThrow(
+      "position already occupied",
+    );
+  });
 
-  test("check if inserting in a position is valid",() => {
-    gameboard.placeShip([0,0],[0,5],"carrier");
-    expect(() => gameboard.placeShip([0,0],[0,5],"carrier")).toThrow("position already occupied");
-  })
-
-  test("check if inserting in a position is valid(1)",() => {
-    gameboard.placeShip([0,5],[5,5],"carrier");
-    expect(() => gameboard.placeShip([0,5],[5,5],"carrier")).toThrow("position already occupied");
-  })
+  test("check if inserting in a position is valid(1)", () => {
+    gameboard.placeShip([0, 5], [5, 5], "carrier");
+    expect(() => gameboard.placeShip([0, 5], [5, 5], "carrier")).toThrow(
+      "position already occupied",
+    );
+  });
 });

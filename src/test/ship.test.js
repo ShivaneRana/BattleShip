@@ -1,4 +1,4 @@
-import {Ship} from "../module/ship.js";
+import { Ship } from "../module/ship.js";
 
 describe("Ship class", () => {
   let ship1;
@@ -44,27 +44,27 @@ describe("Ship class", () => {
     expect(ship1.isSunk()).toBeTruthy();
   });
 
-  test("get correct symbol(1)",() => {
+  test("get correct symbol(1)", () => {
     expect(new Ship("carrier").symbol).toBe("C");
-  })
+  });
 
-  test("get correct symbol(2)",() => {
+  test("get correct symbol(2)", () => {
     expect(new Ship("battleship").symbol).toBe("B");
-  })
+  });
 
-  test("get correct symbol(3)",() => {
+  test("get correct symbol(3)", () => {
     expect(new Ship("cruiser").symbol).toBe("R");
-  })
-  
-  test("get correct symbol(4)",() => {
+  });
+
+  test("get correct symbol(4)", () => {
     expect(new Ship("destroyer").symbol).toBe("D");
-  })
+  });
 
-  test("get correct symbol(5)",() => {
+  test("get correct symbol(5)", () => {
     expect(new Ship("submarine").symbol).toBe("S");
-  })
+  });
 
-  test("throw error on invalid ship object",() => {
-    expect(() => new Ship().symbol).toThrow("invalid name provided")
-  })
+  test("throw error on invalid ship object", () => {
+    expect(() => new Ship().symbol).toThrow("invalid name provided");
+  });
 });

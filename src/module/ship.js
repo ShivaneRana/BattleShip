@@ -22,16 +22,16 @@ export class Ship {
     return chart[value];
   }
 
-  getSymbol(value){
+  getSymbol(value) {
     const chart = {
-      carrier:"C",
-      battleship:"B",
-      cruiser:"R",
-      submarine:"S",
-      destroyer:"D"
-    }
+      carrier: "C",
+      battleship: "B",
+      cruiser: "R",
+      submarine: "S",
+      destroyer: "D",
+    };
 
-    if(!chart[value]){
+    if (!chart[value]) {
       throw new Error("invalid name provided");
     }
 
@@ -52,4 +52,3 @@ export class Ship {
     return this.sank;
   }
 }
-
