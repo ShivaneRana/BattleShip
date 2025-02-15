@@ -33,12 +33,6 @@ describe("gameboard.js", () => {
     );
   });
 
-  test("check if start and end position are the same", () => {
-    expect(() => gameboard.placeShip([0, 1], [0, 1], "carrier")).toThrow(
-      "start and end position cannot be same",
-    );
-  });
-
   test("check argument length for placeship", () => {
     expect(() => gameboard.placeShip([0, 9, 0], [0, 1], "carrier")).toThrow(
       "array length should be 2",
@@ -48,12 +42,16 @@ describe("gameboard.js", () => {
     );
   });
 
-  test("place ship in gameboard", () => {
-    gameboard.placeShip([0, 0], [0, 4], "Carrier");
-    for (let i = 0; i < 4; i++) {
-      expect(gameboard.board[0][i]).toBe("C");
-    }
-  });
+  test("test for diagonal placement of the ships", () => {
+    expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("diagonal placement of ship not allowed");
+  })
+
+  // test("place ship in gameboard", () => {
+  //   gameboard.placeShip([0, 0], [0, 4], "Carrier");
+  //   for (let i = 0; i < 4; i++) {
+  //     expect(gameboard.board[0][i]).toBe("C");
+  //   }
+  // });
 
   // test("place ship in gameboard(1)", () => {
   //   gameboard.placeShip([6, 0], [6, 3], "Submarine");

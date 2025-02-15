@@ -35,7 +35,7 @@ export class Gameboard {
       throw new Error("name should be a string");
     }
 
-    if((end[0] - start[0]) === (end[1] - start[1])){
+    if(Math.abs((end[0] - start[0])) === Math.abs((end[1] - start[1]))){
       throw new Error("diagonal placement of ship not allowed");
     }
 
