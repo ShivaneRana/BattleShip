@@ -3,6 +3,7 @@ export class Ship {
     this.length = this.getLength(name);
     this.hitTaken = 0;
     this.sank = false;
+    this.symbol = this.getSymbol(name);
   }
 
   getLength(value) {
@@ -14,8 +15,23 @@ export class Ship {
       destroyer: 2,
     };
 
-
     if (!chart[value]) {
+      throw new Error("invalid name provided");
+    }
+
+    return chart[value];
+  }
+
+  getSymbol(value){
+    const chart = {
+      carrier:"C",
+      battleship:"B",
+      cruiser:"R",
+      submarine:"S",
+      destroyer:"D"
+    }
+
+    if(!chart[value]){
       throw new Error("invalid name provided");
     }
 
