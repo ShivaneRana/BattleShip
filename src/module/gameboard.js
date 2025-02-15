@@ -1,6 +1,15 @@
+import { Ship } from "./ship.js";
+
 export class Gameboard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
+    this.allShip = {
+      carrier: new Ship("carrier"),
+      destroyer: new Ship("destroyer"),
+      cruiser: new Ship("cruiser"),
+      battleship: new Ship("battleship"),
+      submarine: new Ship("submarine"),
+    }
   }
 
   print() {
@@ -9,6 +18,7 @@ export class Gameboard {
   }
 
   placeShip(start, end, name) {
+
     if (!Array.isArray(start)) {
       throw new Error("start should be an array");
     }
@@ -25,8 +35,8 @@ export class Gameboard {
       throw new Error("name should be a string");
     }
 
-    if (`${start}` === `${end}`) {
-      throw new Error("start and end position cannot be same");
+    if((end[0] - start[0]) === (end[1] - start[1])){
+      throw new Error("diagonal placement of ship not allowed");
     }
 
     if (start[0] === end[0]) {
