@@ -42,8 +42,12 @@ describe("gameboard.js", () => {
     );
   });
 
-  test("test for diagonal placement of the ships", () => {
+  test("test for diagonal placement of the ships(1)", () => {
     expect(() => gameboard.placeShip([0,0],[4,4],"carrier")).toThrow("diagonal placement of ship not allowed");
+  })
+
+  test("test for diagonal placement of the ships(2)", () => {
+    expect(() => gameboard.placeShip([7,1],[3,5],"carrier")).toThrow("diagonal placement of ship not allowed");
   })
 
   // test("place ship in gameboard", () => {
