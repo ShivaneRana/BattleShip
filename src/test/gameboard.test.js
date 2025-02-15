@@ -22,10 +22,10 @@ describe("gameboard.js", () => {
 
   test("check if argument type are correct in placeShip", () => {
     expect(() => gameboard.placeShip("shivane", [0, 1], "carrier")).toThrow(
-      "start should be an array",
+      "start and end should be arrays",
     );
     expect(() => gameboard.placeShip([0, 1], "shivane", "carrier")).toThrow(
-      "end should be an array",
+      "start and end should be arrays",
     );
     expect(() => gameboard.placeShip([0, 1], [0, 1], 90)).toThrow(
       "name should be a string",
@@ -100,4 +100,15 @@ describe("gameboard.js", () => {
       "position already occupied",
     );
   });
+
+  test("recieve function exist",() => {
+    expect(gameboard.receiveAttack).toBeDefined();
+  })
+
+  test("if receivedAttack hit a ship",() => {
+    gameboard.placeShip([0,0],[0,4],"carrier");
+    expect(gameboard.receiveAttack([0,0])).toBeTruthy();
+
+  })
+
 });
