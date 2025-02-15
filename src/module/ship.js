@@ -1,4 +1,4 @@
-class Ship {
+export class Ship {
   constructor(name = "none") {
     this.length = this.getLength(name);
     this.hitTaken = 0;
@@ -36,7 +36,3 @@ class Ship {
     return this.sank;
   }
 }
-
-module.exports = {
-  Ship,
-};

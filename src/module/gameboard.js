@@ -1,4 +1,4 @@
-class Gameboard {
+export class Gameboard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
   }
@@ -42,7 +42,3 @@ class Gameboard {
     }
   }
 }
-
-module.exports = {
-  Gameboard,
-};
