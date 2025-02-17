@@ -100,10 +100,4 @@ describe("gameboard.js", () => {
       "position already occupied",
     );
   });
-
-  test("recieve function exist",() => {
-    expect(gameboard.receiveAttack).toBeDefined();
-  })
-
-  
 });

@@ -10,6 +10,7 @@ export class Gameboard {
       battleship: new Ship("battleship"),
       submarine: new Ship("submarine"),
     };
+    this.visited = new Set();
   }
 
   print() {
@@ -69,16 +70,5 @@ export class Gameboard {
     }
   }
 
-  receiveAttack([posx,posy]) {
-    if(this.board[posx][posy] === 0){
-      this.board[posx][posy] = 1;
-      return false;
-    }
-    return true;
-  }
+  
 }
-
-// const game = new Gameboard();
-// game.board[0][0] = 1;
-// console.log(game.receiveAttack([0,0]));
-// game.print();
