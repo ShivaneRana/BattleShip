@@ -40,35 +40,35 @@ export class Gameboard {
     }
 
     if (x !== x1 && y !== y1) {
-      throw new Error("invalid placement");
+      return false;
     }
 
     if (x === x1 && y === y1) {
-      throw new Error("invalid placement");
+      return false;
     }
 
-    if (x === x1) {
+    if (x === x1 && y !== y1) {
       for (let i = y; i <= y1; i++) {
         if (this.board[x][i] !== 0) {
-          throw new Error("position already occupied");
+          return false;
         }
       }
       for (let i = y; i <= y1; i++) {
         this.board[x][i] = ship.symbol;
       }
+      return true;
     }
 
-    if (y === y1) {
+    if (y === y1 && x !== x1) {
       for (let i = x; i <= x1; i++) {
         if (this.board[i][y1] !== 0) {
-          throw new Error("position already occupied");
+          return false;
         }
       }
       for (let i = x; i <= x1; i++) {
         this.board[i][y1] = ship.symbol;
       }
+      return true;
     }
   }
-
-  
 }
