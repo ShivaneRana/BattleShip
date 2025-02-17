@@ -14,7 +14,9 @@ export class Gameboard {
 
   print() {
     console.log("GameBoard~");
-    this.board.forEach((row) => console.log(row.join(" ")));
+    this.board.forEach((row) => {
+      console.log(row.join(" "))
+    });
   }
 
   placeShip(start, end, name) {
@@ -67,7 +69,16 @@ export class Gameboard {
     }
   }
 
-  receiveAttack([x, y]) {
+  receiveAttack([posx,posy]) {
+    if(this.board[posx][posy] === 0){
+      this.board[posx][posy] = 1;
+      return false;
+    }
     return true;
   }
 }
+
+// const game = new Gameboard();
+// game.board[0][0] = 1;
+// console.log(game.receiveAttack([0,0]));
+// game.print();

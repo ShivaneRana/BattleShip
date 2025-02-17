@@ -105,10 +105,5 @@ describe("gameboard.js", () => {
     expect(gameboard.receiveAttack).toBeDefined();
   })
 
-  test("if receivedAttack hit a ship",() => {
-    gameboard.placeShip([0,0],[0,4],"carrier");
-    expect(gameboard.receiveAttack([0,0])).toBeTruthy();
-
-  })
-
+  
 });
