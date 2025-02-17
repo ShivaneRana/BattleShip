@@ -1,11 +1,12 @@
 export class Ship {
   constructor(name = "none") {
     this.length = this.getLength(name);
+    this.symbol = this.getSymbol(name);
     this.hitTaken = 0;
     this.sank = false;
-    this.symbol = this.getSymbol(name);
   }
 
+  // return specific length for each ship
   getLength(value) {
     const chart = {
       carrier: 5,
@@ -22,6 +23,7 @@ export class Ship {
     return chart[value];
   }
 
+  // return specific symbol for each ship
   getSymbol(value) {
     const chart = {
       carrier: "C",

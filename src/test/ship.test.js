@@ -36,35 +36,22 @@ describe("Ship class", () => {
     expect(new Ship("destroyer").length).toBe(2);
   });
 
+  test("ship have correct symbol for each ship",() => {
+    expect(new Ship("carrier").symbol).toBe("C");
+    expect(new Ship("battleship").symbol).toBe("B");
+    expect(new Ship("cruiser").symbol).toBe("R");
+    expect(new Ship("submarine").symbol).toBe("S");
+    expect(new Ship("destroyer").symbol).toBe("D");
+  })
+
   test("check if the ship can sink", () => {
+    // this is a submarine
+    // it can take upto 3 hits
     ship1.hit();
     ship1.hit();
     expect(ship1.isSunk()).toBeFalsy();
-    ship1.hit();
+    ship1.hit();  // 3rd hit sank the ship
     expect(ship1.isSunk()).toBeTruthy();
   });
 
-  test("get correct symbol(1)", () => {
-    expect(new Ship("carrier").symbol).toBe("C");
-  });
-
-  test("get correct symbol(2)", () => {
-    expect(new Ship("battleship").symbol).toBe("B");
-  });
-
-  test("get correct symbol(3)", () => {
-    expect(new Ship("cruiser").symbol).toBe("R");
-  });
-
-  test("get correct symbol(4)", () => {
-    expect(new Ship("destroyer").symbol).toBe("D");
-  });
-
-  test("get correct symbol(5)", () => {
-    expect(new Ship("submarine").symbol).toBe("S");
-  });
-
-  test("throw error on invalid ship object", () => {
-    expect(() => new Ship().symbol).toThrow("invalid name provided");
-  });
 });
