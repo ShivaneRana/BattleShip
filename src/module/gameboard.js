@@ -72,12 +72,20 @@ export class Gameboard {
     }
   }
 
-  //convert an array into a string
+  //convert an array into a string to store in visted.
   stringfoo(x,y){
     return `${x}:${y}`;
   }
 
   receiveAttack(posx,posy){
+
+    if(posx > 9 || posx < 0){
+      throw new Error("argument out of bound");
+    }
+    
+    if(posy > 9 || posy < 0){
+      throw new Error("argument out of bound");
+    }
     
     // if the position has already been visited
     if(this.visited.has(this.stringfoo(posx,posy))){
@@ -89,8 +97,8 @@ export class Gameboard {
         return false;
       }if(typeof this.board[posx][posy] === "string"){ // a ship was hit
         const symbol = this.board[posx][posy];
-        this.getShip(symbol).hit();
-        this.board[posx][posy] = 1;
+        this.getShip(symbol).hit(); // hit the specific ship
+        this.board[posx][posy] = 1; // make the target board 1 after hitting
         this.visited.add(this.stringfoo(posx,posy));
         return true;
       }
@@ -122,4 +130,3 @@ export class Gameboard {
     }
   }
 }
-
