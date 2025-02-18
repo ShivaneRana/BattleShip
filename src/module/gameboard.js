@@ -49,6 +49,11 @@ export class Gameboard {
         }
       }
 
+      const len = y1 - y + 1;
+      if (len !== this.allShip[name].length) {
+        return false;
+      }
+
       for (let i = y; i <= y1; i++) {
         this.board[x][i] = ship.symbol;
       }
@@ -61,6 +66,11 @@ export class Gameboard {
         if (this.board[i][y1] !== 0) {
           return false;
         }
+      }
+
+      const len = x1 - x + 1;
+      if (len !== this.allShip[name].length) {
+        return false;
       }
 
       for (let i = x; i <= x1; i++) {
