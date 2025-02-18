@@ -18,6 +18,14 @@ describe("gameboard.js", () => {
     expect(gameboard.board).toBeDefined();
     expect(Array.isArray(gameboard.board)).toBeTruthy();
   });
+});
+
+describe("placeShip function", () => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard();
+  });
 
   test("gameboard has placeShip function", () => {
     expect(gameboard.placeShip).toBeDefined();
@@ -83,6 +91,19 @@ describe("gameboard.js", () => {
     for (let i = 5; i <= 7; i++) {
       expect(gameboard.board[i][8]).toBe("R");
     }
+  });
+});
+
+// test suite for receiveAttack function
+describe("receiveAttack function", () => {
+  let gameboard;
+
+  function stringfoo(x, y) {
+    return `${x}:${y}`;
+  }
+
+  beforeEach(() => {
+    gameboard = new Gameboard();
   });
 
   test("receiveAttack function is created", () => {
