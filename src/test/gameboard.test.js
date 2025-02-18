@@ -120,4 +120,11 @@ describe("gameboard.js", () => {
     expect(gameboard.visited.has(stringfoo(0,0))).toBeTruthy();
     expect(gameboard.visited.has(stringfoo(0,1))).toBeFalsy();
   })
+
+  test("receiveAttack function hits a ship",() => {
+    gameboard.placeShip([0,0],[0,4],"carrier");
+    gameboard.receiveAttack(0,0);
+    gameboard.receiveAttack(0,1);
+    expect(gameboard.allShip["carrier"].hitTaken).toBe(2);
+  })
 });
