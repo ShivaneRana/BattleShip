@@ -90,6 +90,11 @@ describe("gameboard.js", () => {
     expect(typeof gameboard.receiveAttack).toBe("function")
   })
 
+  test("recieveAttack function arg is out of bound",() => {
+    expect(() => gameboard.receiveAttack(0,10)).toThrow("argument out of bound");
+    expect(() => gameboard.receiveAttack(-100,0)).toThrow("argument out of bound");
+  })
+
   test("receiveAttack function return false on missing shots",() => {
     expect(gameboard.receiveAttack(0,0)).toBeFalsy();
   })
@@ -121,10 +126,39 @@ describe("gameboard.js", () => {
     expect(gameboard.visited.has(stringfoo(0,1))).toBeFalsy();
   })
 
-  test("receiveAttack function hits a ship",() => {
+  test("receiveAttack function hits a ship: carrier",() => {
     gameboard.placeShip([0,0],[0,4],"carrier");
-    gameboard.receiveAttack(0,0);
-    gameboard.receiveAttack(0,1);
+    gameboard.receiveAttack(0,0); //hit
+    gameboard.receiveAttack(0,1); //hit
     expect(gameboard.allShip["carrier"].hitTaken).toBe(2);
   })
+
+  
+  test("receiveAttack function hits a ship: destroyer",() => {
+    gameboard.placeShip([4,7],[4,9],"destroyer");
+    gameboard.receiveAttack(0,0); //miss
+    gameboard.receiveAttack(0,1); //miss
+    expect(gameboard.allShip["destroyer"].hitTaken).toBe(0);
+  })
+
+  
+  test("receiveAttack function hits a ship: submarine",() => {
+    gameboard.placeShip([0,0],[2,0],"submarine");
+    gameboard.receiveAttack(0,0); // hit
+    gameboard.receiveAttack(0,1); //miss
+    expect(gameboard.allShip["submarine"].hitTaken).toBe(1);
+  })
+
+  // check if the board position is 1 after hitting a ship
+  test("receiveAttack function changes target after hitting",() => {
+    gameboard.placeShip([0,0],[0,4],"carrier");
+    gameboard.receiveAttack(0,0); //hit
+    gameboard.receiveAttack(0,1); //hit
+    gameboard.receiveAttack(0,2); //hit
+    gameboard.receiveAttack(0,3); //hit
+    expect(gameboard.board[0][0]).toBe(1);
+    expect(gameboard.allShip["carrier"].hitTaken).toBe(4);
+  })
+
+  
 });
