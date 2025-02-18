@@ -26,10 +26,10 @@ describe("gameboard.js", () => {
 
   test("check if argument type are correct in placeShip", () => {
     expect(() => gameboard.placeShip("shivane", [0, 1], "carrier")).toThrow(
-      "start and end should be arrays",
+      "start and end should be arrays of length 2",
     );
     expect(() => gameboard.placeShip([0, 1], "shivane", "carrier")).toThrow(
-      "start and end should be arrays",
+      "start and end should be arrays of length 2",
     );
     expect(() => gameboard.placeShip([0, 1], [0, 1], 90)).toThrow(
       "name should be a string",
@@ -38,10 +38,10 @@ describe("gameboard.js", () => {
 
   test("check argument length for placeship", () => {
     expect(() => gameboard.placeShip([0, 9, 0], [0, 1], "carrier")).toThrow(
-      "array length should be 2",
+      "start and end should be arrays of length 2",
     );
     expect(() => gameboard.placeShip([0, 9], [0, 1, 0], "carrier")).toThrow(
-      "array length should be 2",
+      "start and end should be arrays of length 2",
     );
   });
 
