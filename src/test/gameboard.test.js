@@ -80,4 +80,34 @@ describe("gameboard.js", () => {
       expect(gameboard.board[i][8]).toBe("R");
     }
   });
+
+  test("receiveAttack function is created",() => {
+    expect(gameboard.receiveAttack).toBeDefined();
+    expect(typeof gameboard.receiveAttack).toBe("function")
+  })
+
+  test("receiveAttack function takes an array of x and y",() => {
+    expect(() => gameboard.receiveAttack("string")).toThrow("only array are allowed");
+    expect(() => gameboard.receiveAttack([0,0,0])).toThrow("only array of length 2 are allowed");
+  })
+
+  test("receiveAttack function return false on missing shots",() => {
+    expect(gameboard.receiveAttack([0,0])).toBeFalsy();
+  })
+
+  test("recieveAttack function return true on hitting a ship",() => {
+    gameboard.placeShip([0,0],[0,4],"carrier");
+    expect(gameboard.receiveAttack([0,0])).toBeTruthy();
+  })
+
+  test("receiveAttack function convert target position to to 1 (1)",() => {
+    gameboard.placeShip([0,0],[0,4],"carrier");
+    gameboard.receiveAttack([0,0]);
+    expect(gameboard.board[0][0]).toBe(1);
+  })
+
+  test("receiveAttack function convert target position to to 1 (2)",() => {
+    gameboard.receiveAttack([0,0]);
+    expect(gameboard.board[0][0]).toBe(1);
+  })
 });
