@@ -47,7 +47,7 @@ export class Gameboard {
       return false;
     }
 
-    if (x === x1 && y !== y1) {
+    if (x === x1 && y !== y1) { // vertical placement
       for (let i = y; i <= y1; i++) {
         if (this.board[x][i] !== 0) {
           return false;
@@ -59,7 +59,7 @@ export class Gameboard {
       return true;
     }
 
-    if (y === y1 && x !== x1) {
+    if (y === y1 && x !== x1) { // horizontal placement
       for (let i = x; i <= x1; i++) {
         if (this.board[i][y1] !== 0) {
           return false;
@@ -83,15 +83,43 @@ export class Gameboard {
     if(this.visited.has(this.stringfoo(posx,posy))){
       return false;
     }else{
-      if(this.board[posx][posy] === 0){
-        this.board[posx][posy] = 1;
+      if(this.board[posx][posy] === 0){ // no ship was hit, shot missed
+        this.board[posx][posy] = 1; 
         this.visited.add(this.stringfoo(posx,posy));
         return false;
-      }if(typeof this.board[posx][posy] === "string"){
+      }if(typeof this.board[posx][posy] === "string"){ // a ship was hit
+        const symbol = this.board[posx][posy];
+        this.getShip(symbol).hit();
         this.board[posx][posy] = 1;
         this.visited.add(this.stringfoo(posx,posy));
         return true;
       }
     }
   }
+
+
+  getShip(value){
+    switch(value){
+      case "C":
+        return this.allShip["carrier"];
+        break;
+
+      case "B":
+        return this.allShip["battlefield"];
+        break;
+      
+      case "R":
+        return this.allShip["cruiser"];
+        break;
+        
+      case "S":
+        return this.allShip["submarine"];
+        break;
+
+      case "D":
+        return this.allShip["destroyer"];
+        break;
+    }
+  }
 }
+
