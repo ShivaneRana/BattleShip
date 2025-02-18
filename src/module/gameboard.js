@@ -71,4 +71,25 @@ export class Gameboard {
       return true;
     }
   }
+
+  receiveAttack(arr){
+    if(!Array.isArray(arr)){
+      throw new Error("only array are allowed")
+    }
+
+    if(arr.length !== 2){
+      throw new Error("only array of length 2 are allowed")
+    }
+
+    const posx = arr[0]; // x axis
+    const posy = arr[1]; // y axis
+
+    if(this.board[posx][posy] === 0){
+      this.board[posx][posy] = 1;
+      return false;
+    }if(typeof this.board[posx][posy] === "string"){
+      this.board[posx][posy] = 1;
+      return true;
+    }
+  }
 }
