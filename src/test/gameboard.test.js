@@ -44,6 +44,14 @@ describe("placeShip function", () => {
     );
   });
 
+  test("check if coordinates length is equal to ship length(1)", () => {
+    expect(gameboard.placeShip([0, 0], [0, 5], "carrier")).toBeFalsy();
+  });
+
+  test("check if coordinates length is equal to ship length(1)", () => {
+    expect(gameboard.placeShip([4, 4], [9, 4], "submarine")).toBeFalsy();
+  });
+
   test("check argument length for placeship", () => {
     expect(() => gameboard.placeShip([0, 9, 0], [0, 1], "carrier")).toThrow(
       "start and end should be arrays of length 2",
@@ -73,15 +81,15 @@ describe("placeShip function", () => {
   });
 
   test("place ship in gameboard(1)", () => {
-    gameboard.placeShip([6, 0], [6, 3], "submarine");
-    for (let i = 0; i <= 3; i++) {
+    gameboard.placeShip([6, 0], [6, 2], "submarine");
+    for (let i = 0; i <= 2; i++) {
       expect(gameboard.board[6][i]).toBe("S");
     }
   });
 
   test("place ship in gameboard(2)", () => {
-    gameboard.placeShip([5, 0], [9, 0], "battleship");
-    for (let i = 5; i <= 9; i++) {
+    gameboard.placeShip([5, 0], [8, 0], "battleship");
+    for (let i = 5; i <= 8; i++) {
       expect(gameboard.board[i][0]).toBe("B");
     }
   });
