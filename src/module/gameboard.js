@@ -4,11 +4,11 @@ export class Gameboard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
     this.allShip = {
-      carrier: new Ship("carrier"),       //5
+      carrier: new Ship("carrier"), //5
       battleship: new Ship("battleship"), //4
-      cruiser: new Ship("cruiser"),       // 3
-      submarine: new Ship("submarine"),   //3
-      destroyer: new Ship("destroyer"),   //2
+      cruiser: new Ship("cruiser"), // 3
+      submarine: new Ship("submarine"), //3
+      destroyer: new Ship("destroyer"), //2
     };
     this.visited = new Set();
   }
@@ -16,7 +16,7 @@ export class Gameboard {
   print() {
     console.log("GameBoard~");
     this.board.forEach((row) => {
-      console.log(row.join("   "))
+      console.log(row.join("   "));
     });
   }
 
@@ -24,12 +24,17 @@ export class Gameboard {
     const ship = this.allShip[name];
     const x = start[0]; // start position x axis
     const y = start[1]; // start position y axis
-    const x1 = end[0];  // end position x axis
-    const y1 = end[1];  // end position y axis
+    const x1 = end[0]; // end position x axis
+    const y1 = end[1]; // end position y axis
 
-    if (!Array.isArray(start) || !Array.isArray(end) || start.length !== 2 || end.length !== 2){
-      throw new Error("start and end should be arrays of length 2")
-    };
+    if (
+      !Array.isArray(start) ||
+      !Array.isArray(end) ||
+      start.length !== 2 ||
+      end.length !== 2
+    ) {
+      throw new Error("start and end should be arrays of length 2");
+    }
 
     if (typeof name !== "string") throw new Error("name should be a string");
 
@@ -66,41 +71,42 @@ export class Gameboard {
   }
 
   //convert an array into a string to store in visted.
-  stringfoo(x,y){
+  stringfoo(x, y) {
     return `${x}:${y}`;
   }
 
-  receiveAttack(posx,posy){
+  receiveAttack(posx, posy) {
+    if (posx > 9 || posx < 0) {
+      throw new Error("argument out of bound");
+    }
 
-    if(posx > 9 || posx < 0){
+    if (posy > 9 || posy < 0) {
       throw new Error("argument out of bound");
     }
-    
-    if(posy > 9 || posy < 0){
-      throw new Error("argument out of bound");
-    }
-    
+
     // if the position has already been visited
-    if(this.visited.has(this.stringfoo(posx,posy))){
+    if (this.visited.has(this.stringfoo(posx, posy))) {
       return false;
-    }else{
-      if(this.board[posx][posy] === 0){ // no ship was hit, shot missed
-        this.board[posx][posy] = 1; 
-        this.visited.add(this.stringfoo(posx,posy));
+    } else {
+      if (this.board[posx][posy] === 0) {
+        // no ship was hit, shot missed
+        this.board[posx][posy] = 1;
+        this.visited.add(this.stringfoo(posx, posy));
         return false;
-      }if(typeof this.board[posx][posy] === "string"){ // a ship was hit
+      }
+      if (typeof this.board[posx][posy] === "string") {
+        // a ship was hit
         const symbol = this.board[posx][posy];
         this.getShip(symbol).hit(); // hit the specific ship
         this.board[posx][posy] = 1; // make the target board 1 after hitting
-        this.visited.add(this.stringfoo(posx,posy));
+        this.visited.add(this.stringfoo(posx, posy));
         return true;
       }
     }
   }
 
-
-  getShip(value){
-    switch(value){
+  getShip(value) {
+    switch (value) {
       case "C":
         return this.allShip["carrier"];
         break;
@@ -108,11 +114,11 @@ export class Gameboard {
       case "B":
         return this.allShip["battlefield"];
         break;
-      
+
       case "R":
         return this.allShip["cruiser"];
         break;
-        
+
       case "S":
         return this.allShip["submarine"];
         break;

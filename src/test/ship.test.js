@@ -36,13 +36,13 @@ describe("Ship class", () => {
     expect(new Ship("destroyer").length).toBe(2);
   });
 
-  test("ship have correct symbol for each ship",() => {
+  test("ship have correct symbol for each ship", () => {
     expect(new Ship("carrier").symbol).toBe("C");
     expect(new Ship("battleship").symbol).toBe("B");
     expect(new Ship("cruiser").symbol).toBe("R");
     expect(new Ship("submarine").symbol).toBe("S");
     expect(new Ship("destroyer").symbol).toBe("D");
-  })
+  });
 
   test("check if the ship can sink", () => {
     // this is a submarine
@@ -50,8 +50,7 @@ describe("Ship class", () => {
     ship1.hit();
     ship1.hit();
     expect(ship1.isSunk()).toBeFalsy();
-    ship1.hit();  // 3rd hit sank the ship
+    ship1.hit(); // 3rd hit sank the ship
     expect(ship1.isSunk()).toBeTruthy();
   });
-
 });

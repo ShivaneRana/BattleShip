@@ -2,7 +2,7 @@ import { Gameboard } from "../module/gameboard.js";
 
 describe("gameboard.js", () => {
   let gameboard;
-  function stringfoo(x,y){
+  function stringfoo(x, y) {
     return `${x}:${y}`;
   }
 
@@ -85,80 +85,80 @@ describe("gameboard.js", () => {
     }
   });
 
-  test("receiveAttack function is created",() => {
+  test("receiveAttack function is created", () => {
     expect(gameboard.receiveAttack).toBeDefined();
-    expect(typeof gameboard.receiveAttack).toBe("function")
-  })
+    expect(typeof gameboard.receiveAttack).toBe("function");
+  });
 
-  test("recieveAttack function arg is out of bound",() => {
-    expect(() => gameboard.receiveAttack(0,10)).toThrow("argument out of bound");
-    expect(() => gameboard.receiveAttack(-100,0)).toThrow("argument out of bound");
-  })
+  test("recieveAttack function arg is out of bound", () => {
+    expect(() => gameboard.receiveAttack(0, 10)).toThrow(
+      "argument out of bound",
+    );
+    expect(() => gameboard.receiveAttack(-100, 0)).toThrow(
+      "argument out of bound",
+    );
+  });
 
-  test("receiveAttack function return false on missing shots",() => {
-    expect(gameboard.receiveAttack(0,0)).toBeFalsy();
-  })
+  test("receiveAttack function return false on missing shots", () => {
+    expect(gameboard.receiveAttack(0, 0)).toBeFalsy();
+  });
 
-  test("recieveAttack function return true on hitting a ship",() => {
-    gameboard.placeShip([0,0],[0,4],"carrier");
-    expect(gameboard.receiveAttack(0,0)).toBeTruthy();
-  })
+  test("recieveAttack function return true on hitting a ship", () => {
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    expect(gameboard.receiveAttack(0, 0)).toBeTruthy();
+  });
 
-  test("receiveAttack function convert target position to to 1 if already occupied",() => {
-    gameboard.placeShip([0,0],[0,4],"carrier");
-    gameboard.receiveAttack(0,0);
+  test("receiveAttack function convert target position to to 1 if already occupied", () => {
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    gameboard.receiveAttack(0, 0);
     expect(gameboard.board[0][0]).toBe(1);
-  })
+  });
 
-  test("receiveAttack function convert target position to 1 if its empty",() => {
-    gameboard.receiveAttack(0,0);
+  test("receiveAttack function convert target position to 1 if its empty", () => {
+    gameboard.receiveAttack(0, 0);
     expect(gameboard.board[0][0]).toBe(1);
-  })
+  });
 
-  test("receiveAttack function return false on targeting already visited function",() => {
-    gameboard.receiveAttack(0,0);
-    expect(gameboard.receiveAttack(0,0)).toBeFalsy();
-  })
+  test("receiveAttack function return false on targeting already visited function", () => {
+    gameboard.receiveAttack(0, 0);
+    expect(gameboard.receiveAttack(0, 0)).toBeFalsy();
+  });
 
-  test("all recieveAttack position are stored in visited set",() => {
-    gameboard.receiveAttack(0,0);
-    expect(gameboard.visited.has(stringfoo(0,0))).toBeTruthy();
-    expect(gameboard.visited.has(stringfoo(0,1))).toBeFalsy();
-  })
+  test("all recieveAttack position are stored in visited set", () => {
+    gameboard.receiveAttack(0, 0);
+    expect(gameboard.visited.has(stringfoo(0, 0))).toBeTruthy();
+    expect(gameboard.visited.has(stringfoo(0, 1))).toBeFalsy();
+  });
 
-  test("receiveAttack function hits a ship: carrier",() => {
-    gameboard.placeShip([0,0],[0,4],"carrier");
-    gameboard.receiveAttack(0,0); //hit
-    gameboard.receiveAttack(0,1); //hit
+  test("receiveAttack function hits a ship: carrier", () => {
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    gameboard.receiveAttack(0, 0); //hit
+    gameboard.receiveAttack(0, 1); //hit
     expect(gameboard.allShip["carrier"].hitTaken).toBe(2);
-  })
+  });
 
-  
-  test("receiveAttack function hits a ship: destroyer",() => {
-    gameboard.placeShip([4,7],[4,9],"destroyer");
-    gameboard.receiveAttack(0,0); //miss
-    gameboard.receiveAttack(0,1); //miss
+  test("receiveAttack function hits a ship: destroyer", () => {
+    gameboard.placeShip([4, 7], [4, 9], "destroyer");
+    gameboard.receiveAttack(0, 0); //miss
+    gameboard.receiveAttack(0, 1); //miss
     expect(gameboard.allShip["destroyer"].hitTaken).toBe(0);
-  })
+  });
 
-  
-  test("receiveAttack function hits a ship: submarine",() => {
-    gameboard.placeShip([0,0],[2,0],"submarine");
-    gameboard.receiveAttack(0,0); // hit
-    gameboard.receiveAttack(0,1); //miss
+  test("receiveAttack function hits a ship: submarine", () => {
+    gameboard.placeShip([0, 0], [2, 0], "submarine");
+    gameboard.receiveAttack(0, 0); // hit
+    gameboard.receiveAttack(0, 1); //miss
     expect(gameboard.allShip["submarine"].hitTaken).toBe(1);
-  })
+  });
 
   // check if the board position is 1 after hitting a ship
-  test("receiveAttack function changes target after hitting",() => {
-    gameboard.placeShip([0,0],[0,4],"carrier");
-    gameboard.receiveAttack(0,0); //hit
-    gameboard.receiveAttack(0,1); //hit
-    gameboard.receiveAttack(0,2); //hit
-    gameboard.receiveAttack(0,3); //hit
+  test("receiveAttack function changes target after hitting", () => {
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    gameboard.receiveAttack(0, 0); //hit
+    gameboard.receiveAttack(0, 1); //hit
+    gameboard.receiveAttack(0, 2); //hit
+    gameboard.receiveAttack(0, 3); //hit
     expect(gameboard.board[0][0]).toBe(1);
     expect(gameboard.allShip["carrier"].hitTaken).toBe(4);
-  })
-
-  
+  });
 });
