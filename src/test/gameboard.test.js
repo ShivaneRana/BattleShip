@@ -2,6 +2,10 @@ import { Gameboard } from "../module/gameboard.js";
 
 describe("gameboard.js", () => {
   let gameboard;
+  function stringfoo(x,y){
+    return `${x}:${y}`;
+  }
+
   beforeEach(() => {
     gameboard = new Gameboard();
   });
@@ -86,28 +90,34 @@ describe("gameboard.js", () => {
     expect(typeof gameboard.receiveAttack).toBe("function")
   })
 
-  test("receiveAttack function takes an array of x and y",() => {
-    expect(() => gameboard.receiveAttack("string")).toThrow("only array are allowed");
-    expect(() => gameboard.receiveAttack([0,0,0])).toThrow("only array of length 2 are allowed");
-  })
-
   test("receiveAttack function return false on missing shots",() => {
-    expect(gameboard.receiveAttack([0,0])).toBeFalsy();
+    expect(gameboard.receiveAttack(0,0)).toBeFalsy();
   })
 
   test("recieveAttack function return true on hitting a ship",() => {
     gameboard.placeShip([0,0],[0,4],"carrier");
-    expect(gameboard.receiveAttack([0,0])).toBeTruthy();
+    expect(gameboard.receiveAttack(0,0)).toBeTruthy();
   })
 
-  test("receiveAttack function convert target position to to 1 (1)",() => {
+  test("receiveAttack function convert target position to to 1 if already occupied",() => {
     gameboard.placeShip([0,0],[0,4],"carrier");
-    gameboard.receiveAttack([0,0]);
+    gameboard.receiveAttack(0,0);
     expect(gameboard.board[0][0]).toBe(1);
   })
 
-  test("receiveAttack function convert target position to to 1 (2)",() => {
-    gameboard.receiveAttack([0,0]);
+  test("receiveAttack function convert target position to 1 if its empty",() => {
+    gameboard.receiveAttack(0,0);
     expect(gameboard.board[0][0]).toBe(1);
+  })
+
+  test("receiveAttack function return false on targeting already visited function",() => {
+    gameboard.receiveAttack(0,0);
+    expect(gameboard.receiveAttack(0,0)).toBeFalsy();
+  })
+
+  test("all recieveAttack position are stored in visited set",() => {
+    gameboard.receiveAttack(0,0);
+    expect(gameboard.visited.has(stringfoo(0,0))).toBeTruthy();
+    expect(gameboard.visited.has(stringfoo(0,1))).toBeFalsy();
   })
 });
