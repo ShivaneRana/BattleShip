@@ -72,24 +72,26 @@ export class Gameboard {
     }
   }
 
-  receiveAttack(arr){
-    if(!Array.isArray(arr)){
-      throw new Error("only array are allowed")
-    }
+  //convert an array into a string
+  stringfoo(x,y){
+    return `${x}:${y}`;
+  }
 
-    if(arr.length !== 2){
-      throw new Error("only array of length 2 are allowed")
-    }
-
-    const posx = arr[0]; // x axis
-    const posy = arr[1]; // y axis
-
-    if(this.board[posx][posy] === 0){
-      this.board[posx][posy] = 1;
+  receiveAttack(posx,posy){
+    
+    // if the position has already been visited
+    if(this.visited.has(this.stringfoo(posx,posy))){
       return false;
-    }if(typeof this.board[posx][posy] === "string"){
-      this.board[posx][posy] = 1;
-      return true;
+    }else{
+      if(this.board[posx][posy] === 0){
+        this.board[posx][posy] = 1;
+        this.visited.add(this.stringfoo(posx,posy));
+        return false;
+      }if(typeof this.board[posx][posy] === "string"){
+        this.board[posx][posy] = 1;
+        this.visited.add(this.stringfoo(posx,posy));
+        return true;
+      }
     }
   }
 }
