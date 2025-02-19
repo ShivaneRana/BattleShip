@@ -36,9 +36,11 @@ describe("placeShip function", () => {
     expect(() => gameboard.placeShip("shivane", [0, 1], "carrier")).toThrow(
       "start and end should be arrays of length 2",
     );
+
     expect(() => gameboard.placeShip([0, 1], "shivane", "carrier")).toThrow(
       "start and end should be arrays of length 2",
     );
+
     expect(() => gameboard.placeShip([0, 1], [0, 1], 90)).toThrow(
       "name should be a string",
     );

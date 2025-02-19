@@ -1,11 +1,7 @@
-class player1{
-    constructor(){
-        
-    }
-}  
+export class player1 {
+  constructor() {}
+}
 
-class player2{
-    constructor(){
-
-    }
+export class player2 {
+  constructor() {}
 }
