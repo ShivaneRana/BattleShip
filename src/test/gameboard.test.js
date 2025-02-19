@@ -193,3 +193,53 @@ describe("receiveAttack function", () => {
     expect(gameboard.allShip["carrier"].hitTaken).toBe(4);
   });
 });
+
+describe("allShipSank", () => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard();
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    gameboard.placeShip([1, 0], [1, 3], "battleship");
+    gameboard.placeShip([2, 0], [2, 2], "cruiser");
+    gameboard.placeShip([3, 0], [3, 2], "submarine");
+    gameboard.placeShip([4, 0], [4, 1], "destroyer");
+  });
+
+  test("allShipSank function exist", () => {
+    expect(gameboard.allShipSank).toBeDefined();
+  });
+
+  test("allShipSank is a function", () => {
+    expect(typeof gameboard.allShipSank).toBe("function");
+  });
+
+  test("allShipSank return false by default", () => {
+    expect(gameboard.allShipSank()).not.toBeUndefined();
+    expect(gameboard.allShipSank()).toBeFalsy();
+  });
+
+  test("allShipSank return true when all ship sank", () => {
+    for (let i = 0; i <= 4; i++) {
+      gameboard.receiveAttack(0, i);
+    }
+
+    for (let i = 0; i <= 3; i++) {
+      gameboard.receiveAttack(1, i);
+    }
+
+    for (let i = 0; i <= 2; i++) {
+      gameboard.receiveAttack(2, i);
+    }
+
+    for (let i = 0; i <= 2; i++) {
+      gameboard.receiveAttack(3, i);
+    }
+
+    for (let i = 0; i <= 1; i++) {
+      gameboard.receiveAttack(4, i);
+    }
+
+    expect(gameboard.allShipSank()).toBeTruthy();
+  });
+});
