@@ -38,7 +38,7 @@ export class Gameboard {
       end.length !== 2
     ) {
       throw new Error("start and end should be arrays of length 2");
-    }
+    }d
 
     if (typeof name !== "string") throw new Error("name should be a string");
 
