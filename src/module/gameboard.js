@@ -2,7 +2,8 @@ import { Ship } from "./ship.js";
 
 export class Gameboard {
   constructor() {
-    this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(0)); // this is where the game plays
+    // this store all the ship of each board
     this.allShip = {
       carrier: new Ship("carrier"), //5
       battleship: new Ship("battleship"), //4
@@ -10,9 +11,12 @@ export class Gameboard {
       submarine: new Ship("submarine"), //3
       destroyer: new Ship("destroyer"), //2
     };
+
+    // this store all the visited boxes
     this.visited = new Set();
   }
 
+  // used for visually representing the board in console
   print() {
     console.log("GameBoard~");
     this.board.forEach((row) => {
@@ -49,10 +53,9 @@ export class Gameboard {
         }
       }
 
+      // check for the cordinate length
       const len = y1 - y + 1;
-      if (len !== this.allShip[name].length) {
-        return false;
-      }
+      if (len !== this.allShip[name].length) return false;
 
       for (let i = y; i <= y1; i++) {
         this.board[x][i] = ship.symbol;
@@ -68,10 +71,9 @@ export class Gameboard {
         }
       }
 
+      // check for the cordinate length
       const len = x1 - x + 1;
-      if (len !== this.allShip[name].length) {
-        return false;
-      }
+      if (len !== this.allShip[name].length) return false;
 
       for (let i = x; i <= x1; i++) {
         this.board[i][y1] = ship.symbol;
