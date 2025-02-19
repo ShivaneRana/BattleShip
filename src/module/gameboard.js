@@ -124,7 +124,7 @@ export class Gameboard {
         break;
 
       case "B":
-        return this.allShip["battlefield"];
+        return this.allShip["battleship"];
         break;
 
       case "R":
@@ -139,5 +139,20 @@ export class Gameboard {
         return this.allShip["destroyer"];
         break;
     }
+  }
+
+  //check if all the ship in the board have sank
+  //if yes then return true
+  //else false
+  allShipSank() {
+    const list = [];
+    for (let i of Object.keys(this.allShip)) {
+      list.push(i);
+    }
+
+    if (list.every((item) => this.allShip[item].sank === true)) {
+      return true;
+    }
+    return false;
   }
 }
