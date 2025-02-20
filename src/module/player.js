@@ -1,7 +1,13 @@
-export class player1 {
-  constructor() {}
+import {Gameboard} from "../module/gameboard.js";
+
+export class RealPlayer{
+  constructor(){
+    this.gameboard = new Gameboard();
+  }
 }
 
-export class player2 {
-  constructor() {}
+export class ComputerPlayer{
+  constructor() {
+    this.gameboard = new Gameboard();
+  }
 }
