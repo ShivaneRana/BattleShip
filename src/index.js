@@ -6,9 +6,8 @@ const inputName = document.querySelector(".inputName");
 
 startButton.addEventListener("click",() => {
     document.body.textContent = "";
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "#ffffff";
-    new Gameflow();
+    const game = new Gameflow();
+    game.start();
 })
 
 export function getName(){
