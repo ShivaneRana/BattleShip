@@ -2,6 +2,11 @@ import {Gameboard} from "../module/gameboard.js";
 
 export class RealPlayer{
   constructor(name = "Player1"){
+
+    if(!this.name){
+      this.name = "Player1";
+    }
+
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
