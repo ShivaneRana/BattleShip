@@ -10,4 +10,67 @@
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(17, 25, 40, 0.75);
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.secondaryContainer{
+    height: 80%;
+    width: 80%;
+    background-color: red; 
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.shipContainer{
+    width: 450px;
+    height: 450px;
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.holder{
+    width: 450px;
+    height: 450px;
+    background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.heading{
+    font-size: 3rem;
+    color: white;
+}
+
+.carrier,.cruiser,.battleship,.destroyer,.submarine{
+    outline: 1px solid black;
+    height: 50px;
+    width: 50px;
+}
+
+.carrier{
+    background-color: darkcyan;
+}
+
+.battleship{
+    background-color: yellowgreen;
+}
+
+.cruiser{
+    background-color: darkorange;
+}
+
+.submarine{
+    background-color: darkslateblue;
+}
+
+.destroyer{
+    background-color: slateblue;
 }
