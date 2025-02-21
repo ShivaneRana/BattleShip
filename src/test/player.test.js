@@ -6,13 +6,11 @@ describe("player.js", () => {
     expect(ComputerPlayer).toBeDefined();
   });
 
+  test("RealPlayer have a gamboard object", () => {
+    expect(new RealPlayer().gameboard).toBeDefined();
+  });
 
-  test("RealPlayer have a gamboard object",() => {
-      expect(new RealPlayer().gameboard).toBeDefined();
-  })
-
-  test("ComputerPlayer have a gamboard object",() => {
-      expect(new ComputerPlayer().gameboard).toBeDefined();
-  })
-  
+  test("ComputerPlayer have a gamboard object", () => {
+    expect(new ComputerPlayer().gameboard).toBeDefined();
+  });
 });

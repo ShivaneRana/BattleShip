@@ -1,9 +1,8 @@
-import {Gameboard} from "../module/gameboard.js";
+import { Gameboard } from "../module/gameboard.js";
 
-export class RealPlayer{
-  constructor(name = "Player1"){
-
-    if(!this.name){
+export class RealPlayer {
+  constructor(name = "Player1") {
+    if (!this.name) {
       this.name = "Player1";
     }
 
@@ -14,7 +13,7 @@ export class RealPlayer{
   }
 }
 
-export class ComputerPlayer{
+export class ComputerPlayer {
   constructor(name = "Player2") {
     this.name = name;
     this.attackHit = 0;
