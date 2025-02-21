@@ -29,16 +29,23 @@ export const Render = (function () {
 function createGrid(arrayOfArray) {
   const holder = document.createElement("div");
   holder.classList.add("holder");
+  let x = 0;
+  let y = 0;
   const side = 45;
 
   arrayOfArray.forEach((array) => {
     array.forEach((item) => {
-      const div = document.createElement("div");
-      div.style.height = `${side}px`;
-      div.style.width = `${side}px`;
-      div.style.outline = "1px solid black";
-      holder.append(div);
+        const div = document.createElement("div");
+        div.style.height = `${side}px`;
+        div.style.width = `${side}px`;
+        div.style.border = "1px solid black";
+        div.setAttribute("data-x",x);
+        div.setAttribute("data-y",y);
+        holder.append(div);
+        y++;
     });
+    x++;
+    y = 0;
   });
 
   return holder;

@@ -14,12 +14,12 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  outline: 5px solid black;
 }
 
 .secondaryContainer {
   height: 80%;
   width: 80%;
-  background-color: red;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -28,9 +28,10 @@
 .holder {
   width: 450px;
   height: 450px;
-  background-color: lightblue;
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
+  outline: 10px solid black;
 }
 
 .heading {
