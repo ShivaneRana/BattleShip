@@ -32,6 +32,10 @@ export const Render = (function(){
     mainScreen.append(buttonHolder);
     document.body.append(mainScreen);
 
+    //adding functionality
+    howToButton.addEventListener("click",() => {
+      renderTutorialScreen();
+    })
   }
 
   return{
@@ -48,5 +52,23 @@ function renderTiles(array,holder){
           holder.append(div);
       })
   })
+}
 
+function renderTutorialScreen(){
+  const dialog = document.createElement("dialog");
+  const wrapper = document.createElement("div");
+
+  dialog.classList.add("tutorialD");
+  wrapper.classList.add("tutorialW");
+  
+  dialog.append(wrapper);
+  document.body.append(dialog);
+
+  dialog.addEventListener("click",(e) => {
+      if(!wrapper.contains(e.target)){
+        dialog.close();
+      }
+  })
+
+  dialog.showModal();
 }
