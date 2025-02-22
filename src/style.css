@@ -82,12 +82,15 @@ body {
   font-family: var(--font);
   font-size: 1.3rem;
   border-radius: 5px;
+  background-color: white;
   outline: 5px solid black;
 
-  &:active {
+
+  &:active{
     color: white;
     background-color: black;
   }
+
 }
 
 .github {
