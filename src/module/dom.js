@@ -6,18 +6,21 @@ export const Render = (function () {
     const mainContainer = document.createElement("div"); //this div will hold other html elements
     const secondaryContainer = document.createElement("div"); // contains board and ships
     const h1 = document.createElement("h1"); //heading
+    const randomButton = document.createElement("button");
 
     //assign classes
     h1.classList.add("heading");
     mainContainer.classList.add("startScreen");
     secondaryContainer.classList.add("secondaryContainer");
+    randomButton.classList.add("randomButton");
 
     //assinging value
     h1.textContent = "Place you ships!";
-
+    randomButton.textContent = "Randomize";
     secondaryContainer.append(createGrid(arrayOfArray)); //append the board
     mainContainer.append(h1); //heading
     mainContainer.append(secondaryContainer); //append everying to the mainContainer
+    mainContainer.append(randomButton);
     document.body.append(mainContainer); //append to body
   }
 
