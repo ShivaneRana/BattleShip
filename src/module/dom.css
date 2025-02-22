@@ -16,3 +16,22 @@
   align-items: center;
   outline: 5px solid black;
 }
+
+.header{
+  color: white;
+  font-size: 3rem;
+}
+
+.board{
+  height: 400px;
+  width: 400px;
+  outline: 5px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tiles{
+  height: 40px;
+  width: 40px;
+  outline: 1px solid black;
+}
