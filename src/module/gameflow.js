@@ -8,7 +8,6 @@ export class Gameflow {
     this.player2 = new ComputerPlayer("CPU"); //computer
   }
 
-  
   start() {
     Render.displayStartScreen(this.player1.gameboard.board);
   }

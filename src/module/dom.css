@@ -1,4 +1,4 @@
-body{
+body {
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -23,20 +23,32 @@ body{
   outline: 5px solid black;
 }
 
-.header{
-  font-family: pixelFont,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.header {
+  font-family:
+    pixelFont,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   color: white;
   font-size: 3rem;
 }
 
-.buttonHolder{
+.buttonHolder {
   width: 40%;
   height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 
-  & > button{
+  & > button {
     padding: 10px;
     border: none;
     font-family: var(--font);
@@ -45,14 +57,14 @@ body{
     background-color: white;
     outline: 5px solid black;
   }
- 
-  & > button:active{
+
+  & > button:active {
     color: white;
     background-color: black;
   }
 }
 
-.board{
+.board {
   height: 400px;
   width: 400px;
   outline: 5px solid black;
@@ -60,13 +72,13 @@ body{
   flex-wrap: wrap;
 }
 
-.tiles{
+.tiles {
   height: 40px;
   width: 40px;
   outline: 1px solid black;
 }
 
-.tutorialD{
+.tutorialD {
   position: absolute;
   margin: auto;
   border: none;
@@ -75,23 +87,21 @@ body{
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(17, 25, 40, 0.75);
 
-  &::backdrop{
+  &::backdrop {
     backdrop-filter: blur(15px);
   }
 }
 
-.tutorialW{
+.tutorialW {
   width: 800px;
   height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-
-  
 }
 
-.paraHolder{
+.paraHolder {
   height: 70%;
   width: 90%;
   display: flex;
@@ -99,34 +109,46 @@ body{
   justify-content: space-evenly;
   align-items: center;
 
-  & > p{
+  & > p {
     font-size: 1rem;
     color: white;
   }
 }
 
-.headingHolder{
+.headingHolder {
   height: 20%;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
+
   /* heading */
-  & > h1{
+  & > h1 {
     margin-left: 10%;
     font-size: 3rem;
     color: white;
   }
 
   /* close button */
-  & > button{
+  & > button {
     margin-left: 10%;
     font-size: 3rem;
     color: white;
     background-color: transparent;
     border: none;
     outline: none;
-    font-family: pixelFont,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:
+      pixelFont,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
   }
 }

@@ -85,12 +85,10 @@ body {
   background-color: white;
   outline: 5px solid black;
 
-
-  &:active{
+  &:active {
     color: white;
     background-color: black;
   }
-
 }
 
 .github {
