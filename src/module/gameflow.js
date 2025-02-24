@@ -9,6 +9,7 @@ export class Gameflow {
   }
 
   start() {
-    Render.displayStartScreen(this.player1.gameboard.board);
+    // Render.displayStartScreen(this.player1.gameboard.board);
+    Render.displayGameScreen(this.player1,this.player2);
   }
 }
