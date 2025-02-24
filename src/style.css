@@ -6,6 +6,7 @@
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   transition: all 0.75 ease;
   font-family: var(--font);
+  --transitionValue: 0.25s all ease;
 }
 
 * {
@@ -84,6 +85,12 @@ body {
   border-radius: 5px;
   background-color: white;
   outline: 5px solid black;
+  transition: var(--transitionValue);
+
+  &:hover {
+    padding: 15px 20px 15px 20px;
+    letter-spacing: 0.2rem;
+  }
 
   &:active {
     color: white;
@@ -95,3 +102,28 @@ body {
   width: 50px;
   height: 50px;
 }
+
+.tutorialButton{
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  padding: 15px;
+  border: none;
+  font-family: var(--font);
+  font-size: 1.3rem;
+  border-radius: 5px;
+  background-color: white;
+  outline: 5px solid black;
+  transition: var(--transitionValue);
+
+  &:hover {
+    padding: 15px 20px 15px 20px;
+    letter-spacing: 0.2rem;
+  }
+
+  &:active {
+    color: white;
+    background-color: black;
+  }
+}
+
