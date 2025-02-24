@@ -35,18 +35,45 @@ export const Render = (function () {
     });
   }
 
+  function displayGameScreen(p1,p2){
+    const mainScreen = document.createElement("div");
+    const leftScreen = document.createElement("div");
+    const rightScreen = document.createElement("div");
+    
+    mainScreen.classList.add("gameScreen");
+    leftScreen.classList.add("leftScreen");
+    rightScreen.classList.add("rightScreen");
+    document.body.append(mainScreen);
+  }
+
   return {
     displayStartScreen,
+    displayGameScreen
   };
 })();
 
 function renderTiles(array, holder) {
+  let row = 0;
+  let col = 0;
   array.forEach((arr) => {
     arr.forEach((element) => {
       const div = document.createElement("div");
-      div.classList.add("tiles");
+      div.setAttribute("data-row",row);
+      div.setAttribute("data-col",col);
+      div.classList.add("tile");
       holder.append(div);
+
+      div.addEventListener("mouseover",() => {
+        div.classList.add("highlight");
+      });
+      
+      div.addEventListener("mouseleave",() => {
+        div.classList.remove("highlight");
+      });
+      col++;
     });
+    row++;
+    col = 0;
   });
 }
 
