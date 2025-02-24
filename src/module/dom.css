@@ -4,85 +4,6 @@ body {
   width: 100vw;
 }
 
-.startScreen {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 85%;
-  width: 85%;
-  background-color: black;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  outline: 5px solid black;
-}
-
-.header {
-  font-family:
-    pixelFont,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
-  color: white;
-  font-size: 3rem;
-}
-
-.buttonHolder {
-  width: 40%;
-  height: 50px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  & > button {
-    padding: 10px;
-    border: none;
-    font-family: var(--font);
-    font-size: 1.3rem;
-    border-radius: 5px;
-    background-color: white;
-    outline: 5px solid black;
-  }
-
-  & > button:active {
-    color: white;
-    background-color: black;
-  }
-}
-
-.board {
-  height: 400px;
-  width: 400px;
-  outline: 5px solid black;
-  background-color: white;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.tile {
-  height: 40px;
-  width: 40px;
-  outline: 1px solid black;
-}
-
-.highlight{
-  background-color: lightblue;
-}
-
 .tutorialD {
   position: absolute;
   margin: auto;
@@ -156,31 +77,4 @@ body {
       "Helvetica Neue",
       sans-serif;
   }
-}
-
-.gameScreen{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 95%;
-  width: 95%;
-  background-color: black;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  outline: 5px solid black;
-}
-
-.leftScreen{
-  
-}
-
-.rightScreen{
-
 }
