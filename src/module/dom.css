@@ -68,14 +68,19 @@ body {
   height: 400px;
   width: 400px;
   outline: 5px solid black;
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
 }
 
-.tiles {
+.tile {
   height: 40px;
   width: 40px;
   outline: 1px solid black;
+}
+
+.highlight{
+  background-color: lightblue;
 }
 
 .tutorialD {
@@ -151,4 +156,31 @@ body {
       "Helvetica Neue",
       sans-serif;
   }
+}
+
+.gameScreen{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 95%;
+  width: 95%;
+  background-color: black;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  outline: 5px solid black;
+}
+
+.leftScreen{
+  
+}
+
+.rightScreen{
+
 }
