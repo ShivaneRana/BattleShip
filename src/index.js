@@ -1,5 +1,6 @@
 import "./style.css";
 import { renderTutorialScreen } from "./module/dom.js";
+import { Game } from "./module/game.js";
 
 const tutorialButton = document.querySelector(".tutorialButton");
 const startButton = document.querySelector(".startButton");
@@ -10,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 startButton.addEventListener("click", () => {
-
+  const game = new Game();
+  game.start();
 });
 
 tutorialButton.addEventListener("click",() => {
