@@ -1,18 +1,16 @@
 import "./dom.css";
 
 export const Render = (function(){
-  function renderStarterScreen(arrayOfArray){
+  function renderStarterScreen(board){
     //create element
     const starterScreen = document.createElement("div");
     const heading = document.createElement("h1");
-    const boardHolder = document.createElement("div");
     const buttonHolder = document.createElement("div");
     const randomButton = document.createElement("button");
 
     //assign screen
     starterScreen.classList.add("starterScreen");
     heading.classList.add("header");
-    boardHolder.classList.add("boardHolder");
     buttonHolder.classList.add("buttonHolder");
     randomButton.classList.add("randomButton");
 
@@ -23,7 +21,7 @@ export const Render = (function(){
 
     //append
     buttonHolder.append(randomButton);
-    starterScreen.append(heading,boardHolder,buttonHolder);
+    starterScreen.append(heading,renderBoard(board),buttonHolder);
     document.body.append(starterScreen);
   }
 
@@ -84,4 +82,49 @@ export function renderTutorialScreen() {
   });
 
   dialog.showModal();
+}
+
+function renderBoard(board){
+  // create element
+  const container = document.createElement("div");  //holds the columnlayer, rowlayer and board itself
+  const boardLayer = document.createElement("div"); //board render here
+  const columnLayer = document.createElement("div");//display columns
+  const rowsLayer = document.createElement("div");  //display rows
+  let row = 0;
+  let col = 0;
+  
+  // assign class
+  container.classList.add("container");
+  boardLayer.classList.add("boardLayer");
+  columnLayer.classList.add("columnLayer");
+  rowsLayer.classList.add("rowLayer");
+
+  // insert content
+  board.forEach(arr => {
+    arr.forEach(item => {
+      const div = document.createElement("div");
+      div.classList.add("tile");
+      boardLayer.append(div);
+    })
+  })
+
+  for(let i = 65;i <= 74;i++){
+    const div = document.createElement("div");
+    div.classList.add("sideItem");
+    const character = String.fromCharCode(i);
+    div.textContent = character;
+    rowsLayer.append(div);
+  }
+  
+  for(let i = 0;i <= 9;i++){
+    const div = document.createElement("div");
+    div.classList.add("sideItem");
+    const character = i;
+    div.textContent = character;
+    columnLayer.append(div);
+  }
+
+
+  container.append(columnLayer,rowsLayer,boardLayer);
+  return container;
 }
