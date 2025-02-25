@@ -1,7 +1,35 @@
 import "./dom.css";
 
 export const Render = (function(){
-  
+  function renderStarterScreen(arrayOfArray){
+    //create element
+    const starterScreen = document.createElement("div");
+    const heading = document.createElement("h1");
+    const boardHolder = document.createElement("div");
+    const buttonHolder = document.createElement("div");
+    const randomButton = document.createElement("button");
+
+    //assign screen
+    starterScreen.classList.add("starterScreen");
+    heading.classList.add("header");
+    boardHolder.classList.add("boardHolder");
+    buttonHolder.classList.add("buttonHolder");
+    randomButton.classList.add("randomButton");
+
+    //assign value
+    heading.textContent = "Place all ships!";
+    randomButton.textContent = "Randomize";
+
+
+    //append
+    buttonHolder.append(randomButton);
+    starterScreen.append(heading,boardHolder,buttonHolder);
+    document.body.append(starterScreen);
+  }
+
+  return{
+    renderStarterScreen
+  }
 })();
 
 // display a tutorial page on how to play the game
