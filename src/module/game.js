@@ -10,7 +10,6 @@ export const Game = (function () {
     playerName = name;
     player1 = new RealPlayer(playerName); //user
     player2 = new ComputerPlayer("CPU"); //computer
-    console.log(player1);
     Render.renderStarterScreen(player1.gameboard.board);
   }
 
