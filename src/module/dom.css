@@ -205,3 +205,34 @@ body {
 .wrongHighlight{
   background-color: darkred;
 }
+
+/* this is for the gamescreen */
+.gameScreen{
+  width:95%;
+  height:95%;
+  position: absolute;
+  margin: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  border: none;
+  outline: 5px solid black;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  display: flex;
+
+}
+
+.leftSide,.rightSide{
+  width: 50%;
+  height: 100%;
+}
+
+.leftSide{
+  background-color: darkcyan;
+}
+
+.rightSide{
+  background-color: darkblue;
+}
