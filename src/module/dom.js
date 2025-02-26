@@ -1,4 +1,5 @@
 import "./dom.css";
+import { Game } from "./game.js";
 
 export const Render = (function(){
   function renderStarterScreen(board){
@@ -30,7 +31,7 @@ export const Render = (function(){
     document.body.append(starterScreen);
 
     playButton.addEventListener("click",() => {
-      renderGameScreen();
+      Game.play();
     })
   }
 
@@ -51,7 +52,8 @@ export const Render = (function(){
   }
 
   return{
-    renderStarterScreen
+    renderStarterScreen,
+    renderGameScreen
   }
 })();
 
