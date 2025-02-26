@@ -290,6 +290,7 @@ body {
   }
 }
 
+/* top indicator */
 .turnCounter {
   color: white;
   font-size: 2rem;
@@ -301,6 +302,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* bottom indicator */
 .playerTurnIndicator {
   color: white;
   font-size: 2rem;
@@ -310,4 +312,21 @@ body {
   left: 50%;
   top: 95%;
   transform: translate(-50%, -50%);
+  animation: float 1s ease-in-out infinite;
+
+  &:hover{
+    animation: normal;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -70%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
 }
