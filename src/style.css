@@ -103,7 +103,7 @@ body {
   height: 50px;
 }
 
-.tutorialButton{
+.tutorialButton {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -126,4 +126,3 @@ body {
     background-color: black;
   }
 }
-

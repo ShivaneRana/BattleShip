@@ -244,8 +244,7 @@ describe("allShipSank", () => {
   });
 });
 
-
-describe("clear board",() => {
+describe("clear board", () => {
   let gameboard;
 
   beforeEach(() => {
@@ -257,21 +256,20 @@ describe("clear board",() => {
     gameboard.placeShip([4, 0], [4, 1], "destroyer");
   });
 
-  test("clear function is defined",() => {
+  test("clear function is defined", () => {
     expect(gameboard.clear).toBeDefined();
-  })
+  });
 
-  
-  test("clear function is a function",() => {
+  test("clear function is a function", () => {
     expect(typeof gameboard.clear).toBe("function");
-  })
+  });
 
-  test("clear function happy path(1)",() => {
+  test("clear function happy path(1)", () => {
     gameboard.clear();
-    gameboard.board.forEach(arr => {
-      arr.forEach(item => {
+    gameboard.board.forEach((arr) => {
+      arr.forEach((item) => {
         expect(item).toBe(0);
-      })
-    })
-  })  
-})
+      });
+    });
+  });
+});
