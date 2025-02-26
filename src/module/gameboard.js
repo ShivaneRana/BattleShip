@@ -155,4 +155,9 @@ export class Gameboard {
     }
     return false;
   }
+
+  clear(){
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
+  }
 }
+
