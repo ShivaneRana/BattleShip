@@ -15,6 +15,6 @@ startButton.addEventListener("click", () => {
   Game.start(playerName);
 });
 
-tutorialButton.addEventListener("click",() => {
+tutorialButton.addEventListener("click", () => {
   renderTutorialScreen();
-})
+});
