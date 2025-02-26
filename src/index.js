@@ -11,15 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 startButton.addEventListener("click", () => {
-  const game = new Game();
-  game.start();
+  const playerName = inputName.value;
+  Game.start(playerName);
 });
 
 tutorialButton.addEventListener("click",() => {
   renderTutorialScreen();
 })
-
-// return the player input to the game class
-export function getName() {
-  return inputName.value;
-}
