@@ -243,3 +243,35 @@ describe("allShipSank", () => {
     expect(gameboard.allShipSank()).toBeTruthy();
   });
 });
+
+
+describe("clear board",() => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard();
+    gameboard.placeShip([0, 0], [0, 4], "carrier");
+    gameboard.placeShip([1, 0], [1, 3], "battleship");
+    gameboard.placeShip([2, 0], [2, 2], "cruiser");
+    gameboard.placeShip([3, 0], [3, 2], "submarine");
+    gameboard.placeShip([4, 0], [4, 1], "destroyer");
+  });
+
+  test("clear function is defined",() => {
+    expect(gameboard.clear).toBeDefined();
+  })
+
+  
+  test("clear function is a function",() => {
+    expect(typeof gameboard.clear).toBe("function");
+  })
+
+  test("clear function happy path(1)",() => {
+    gameboard.clear();
+    gameboard.board.forEach(arr => {
+      arr.forEach(item => {
+        expect(item).toBe(0);
+      })
+    })
+  })  
+})
