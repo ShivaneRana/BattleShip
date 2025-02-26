@@ -7,6 +7,8 @@ export const Render = (function(){
     const heading = document.createElement("h1");
     const buttonHolder = document.createElement("div");
     const randomButton = document.createElement("button");
+    const playButton = document.createElement("button");
+    const clearButton = document.createElement("button");
 
     //assign screen
     starterScreen.classList.add("starterScreen");
@@ -14,13 +16,16 @@ export const Render = (function(){
     buttonHolder.classList.add("buttonHolder");
     randomButton.classList.add("randomButton");
 
+
     //assign value
     heading.textContent = "Place all ships!";
     randomButton.textContent = "Randomize";
+    clearButton.textContent = "Clear";
+    playButton.textContent = "Play";
 
 
     //append
-    buttonHolder.append(randomButton);
+    buttonHolder.append(clearButton,randomButton,playButton);
     starterScreen.append(heading,renderBoard(board),buttonHolder);
     document.body.append(starterScreen);
   }
@@ -109,11 +114,27 @@ function renderBoard(board){
       boardLayer.append(div);
       
       div.addEventListener("mouseenter",() => {
-       div.classList.add("highlight"); 
+        const x = +div.dataset.row;
+        const y = +div.dataset.col;
+        const end = y + 4;
+        for(let i = y;i <= end;i++){
+          if(i <= 9){
+          const board = boardLayer.querySelector(`[data-row="${x}"][data-col="${i}"]`);
+          board.classList.add("highlight");   
+          }
+        }  
       })
       
       div.addEventListener("mouseleave",() => {
-        div.classList.remove("highlight"); 
+        const x = +div.dataset.row;
+        const y = +div.dataset.col;
+        const end = y + 4;
+        for(let i = y;i <= end;i++){
+          if(i <= 9){
+          const board = boardLayer.querySelector(`[data-row="${x}"][data-col="${i}"]`);
+          board.classList.remove("highlight");   
+          }
+        }  
       })
 
       div.addEventListener("click",() => {
