@@ -1,8 +1,8 @@
 import "./dom.css";
 import { Game } from "./game.js";
 
-export const Render = (function(){
-  function renderStarterScreen(board){
+export const Render = (function () {
+  function renderStarterScreen(board) {
     //create element
     const starterScreen = document.createElement("div");
     const heading = document.createElement("h1");
@@ -17,44 +17,74 @@ export const Render = (function(){
     buttonHolder.classList.add("buttonHolder");
     randomButton.classList.add("randomButton");
 
-
     //assign value
     heading.textContent = "Place all ships!";
     randomButton.textContent = "Randomize";
     clearButton.textContent = "Clear";
     playButton.textContent = "Play";
 
-
     //append
-    buttonHolder.append(clearButton,randomButton,playButton);
-    starterScreen.append(heading,renderBoard(board),buttonHolder);
+    buttonHolder.append(clearButton, randomButton, playButton);
+    starterScreen.append(heading, renderBoard(board), buttonHolder);
     document.body.append(starterScreen);
 
-    playButton.addEventListener("click",() => {
+    playButton.addEventListener("click", () => {
       Game.play();
-    })
+    });
   }
 
-  function renderGameScreen(){
+  function renderGameScreen(player1, player2) {
+    //create element
     document.body.textContent = "";
     const gameScreen = document.createElement("div");
+    const turnCounter = document.createElement("h1");
+    const playerTurnIndicator = document.createElement("h1");
     const leftSide = document.createElement("div");
+    const leftBoardHolder = document.createElement("div");
+    const leftCountHolder = document.createElement("div");
+    const leftHit = document.createElement("p");
+    const leftMiss = document.createElement("p");
     const rightSide = document.createElement("div");
+    const rightBoardHolder = document.createElement("div");
+    const rightCountHolder = document.createElement("div");
+    const rightHit = document.createElement("p");
+    const rightMiss = document.createElement("p");
 
-
+    //assign class
     gameScreen.classList.add("gameScreen");
+    turnCounter.classList.add("turnCounter");
+    playerTurnIndicator.classList.add("playerTurnIndicator");
     leftSide.classList.add("leftSide");
+    leftBoardHolder.classList.add("boardHolder");
+    leftCountHolder.classList.add("countHolder");
     rightSide.classList.add("rightSide");
+    rightBoardHolder.classList.add("boardHolder");
+    rightCountHolder.classList.add("countHolder");
 
+    //assign value
+    playerTurnIndicator.textContent = "Enemy Turn!";
+    leftHit.textContent = "Hit: 0";
+    leftMiss.textContent = "Miss: 0";
+    rightHit.textContent = "Hit: 0";
+    rightMiss.textContent = "Miss: 0";
+    turnCounter.textContent = "Round: 0";
 
-    gameScreen.append(leftSide,rightSide);
+    //append element
+    leftBoardHolder.append(renderBoard(player1.gameboard.board));
+    rightBoardHolder.append(renderBoard(player2.gameboard.board));
+    leftCountHolder.append(leftHit, leftMiss);
+    leftSide.append(leftBoardHolder, leftCountHolder);
+    rightCountHolder.append(rightHit, rightMiss);
+    rightSide.append(rightBoardHolder, rightCountHolder);
+    gameScreen.append(leftSide, rightSide);
+    gameScreen.append(playerTurnIndicator, turnCounter);
     document.body.append(gameScreen);
   }
 
-  return{
+  return {
     renderStarterScreen,
-    renderGameScreen
-  }
+    renderGameScreen,
+  };
 })();
 
 // display a tutorial page on how to play the game
@@ -111,29 +141,15 @@ export function renderTutorialScreen() {
   dialog.showModal();
 }
 
-function renderBoard(board){
+function renderBoard(board) {
   // create element
-  const container = document.createElement("div");  //holds the columnlayer, rowlayer and board itself
+  const container = document.createElement("div"); //holds the columnlayer, rowlayer and board itself
   const boardLayer = document.createElement("div"); //board render here
-  const columnLayer = document.createElement("div");//display columns
-  const rowsLayer = document.createElement("div");  //display rows
+  const columnLayer = document.createElement("div"); //display columns
+  const rowsLayer = document.createElement("div"); //display rows
   let row = 0;
   let col = 0;
-  let isHorizontal = true;
 
-  
-  document.addEventListener("keydown",(e) => {
-    if(e.key =="r"){
-      if(isHorizontal){
-        isHorizontal = false;
-      }else{
-        isHorizontal = true;
-      }
-    }
-
-    console.log(isHorizontal);
-  })
-  
   // assign class
   container.classList.add("container");
   boardLayer.classList.add("boardLayer");
@@ -141,39 +157,30 @@ function renderBoard(board){
   rowsLayer.classList.add("rowLayer");
 
   // insert content
-  board.forEach(arr => {
-    arr.forEach(item => {
+  board.forEach((arr) => {
+    arr.forEach((item) => {
       const div = document.createElement("div");
       div.classList.add("tile");
-      div.setAttribute("data-row",row);
-      div.setAttribute("data-col",col);
+      div.setAttribute("data-row", row);
+      div.setAttribute("data-col", col);
       boardLayer.append(div);
-      
-      div.addEventListener("mouseenter",() => {});
-      
-      div.addEventListener("mouseleave",() => {})
-
-      div.addEventListener("click",() => {})
-      
       col++;
-    })
+    });
     row++;
     col = 0;
-  })
-
+  });
 
   //assign value to rows
-  for(let i = 65;i <= 74;i++){
+  for (let i = 65; i <= 74; i++) {
     const div = document.createElement("div");
     div.classList.add("sideItem");
     const character = String.fromCharCode(i);
     div.textContent = character;
     rowsLayer.append(div);
   }
-  
 
   //assign value to columns
-  for(let i = 0;i <= 9;i++){
+  for (let i = 0; i <= 9; i++) {
     const div = document.createElement("div");
     div.classList.add("sideItem");
     const character = i;
@@ -181,7 +188,6 @@ function renderBoard(board){
     columnLayer.append(div);
   }
 
-
-  container.append(columnLayer,rowsLayer,boardLayer);
+  container.append(columnLayer, rowsLayer, boardLayer);
   return container;
 }
