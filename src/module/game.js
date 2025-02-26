@@ -1,14 +1,25 @@
 import { RealPlayer, ComputerPlayer } from "./player.js";
-import { getName } from "../index.js";
 import { Render } from "./dom.js";
 
-export class Game{
-  constructor() {
-    this.player1 = new RealPlayer(getName()); //user
-    this.player2 = new ComputerPlayer("CPU"); //computer
+export const Game = (function(){
+  let playerName;
+  let player1 = new RealPlayer(playerName); //user
+  let player2 = new ComputerPlayer("CPU"); //computer
+
+  function start(name){
+    playerName = name;
+    player1 = new RealPlayer(playerName); //user
+    player2 = new ComputerPlayer("CPU"); //computer
+    console.log(player1);
+    Render.renderStarterScreen(player1.gameboard.board);
   }
 
-  start(){
-    Render.renderStarterScreen(this.player1.gameboard.board);
+  function play(){
+    Render.renderGameScreen();
   }
-}
+
+  return {
+    start,
+    play
+  }
+})();
