@@ -1,20 +1,24 @@
 import { Gameboard } from "../module/gameboard.js";
 
 export class RealPlayer {
-  constructor(name = "Player1") {
-    if (!this.name) {
-      this.name = "Player1";
-    }
-
-    this.name = name;
+  constructor(name = "player") {
+    this.name = assingName(name);
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard = new Gameboard();
   }
 }
 
+function assingName(name){
+  if(name === ""){
+    return "player";
+  }else{
+    return name;
+  }
+}
+
 export class ComputerPlayer {
-  constructor(name = "Player2") {
+  constructor(name = "CPU"){
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
