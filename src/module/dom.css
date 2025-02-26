@@ -2,6 +2,9 @@ body {
   position: relative;
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tutorialD {
@@ -80,14 +83,14 @@ body {
 }
 
 /* starter screen */
-.starterScreen{
-  width:70%;
-  height:90%;
+.starterScreen {
+  width: 70%;
+  height: 90%;
   position: absolute;
   margin: auto;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border: none;
   outline: 5px solid black;
   backdrop-filter: blur(16px) saturate(180%);
@@ -98,30 +101,32 @@ body {
   justify-content: space-evenly;
   align-items: center;
 
-  & > .header,.boardHolder,.buttonHolder{
+  & > .header,
+  .boardHolder,
+  .buttonHolder {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   /* heading for the tutorial screen */
-  & > .header{
+  & > .header {
     color: white;
-    width:100%;
+    width: 100%;
     height: 10%;
     font-size: 3rem;
   }
 
   /* holder for button */
-  & > .buttonHolder{
-    width:50%;
+  & > .buttonHolder {
+    width: 50%;
     height: 10%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 30px;
 
-    & > button{
+    & > button {
       padding: 15px;
       border: none;
       font-family: var(--font);
@@ -130,12 +135,12 @@ body {
       background-color: white;
       outline: 5px solid black;
       transition: var(--transitionValue);
-    
+
       &:hover {
         padding: 15px 20px 15px 20px;
         letter-spacing: 0.2rem;
       }
-    
+
       &:active {
         color: white;
         background-color: black;
@@ -145,7 +150,7 @@ body {
 }
 
 /* renderBoard  */
-.container{
+.container {
   width: 450px;
   height: 450px;
   display: grid;
@@ -153,7 +158,7 @@ body {
   grid-template-columns: 50px 400px;
 }
 
-.boardLayer{
+.boardLayer {
   display: flex;
   flex-wrap: wrap;
   width: 400px;
@@ -163,7 +168,7 @@ body {
   outline: 5px solid black;
 }
 
-.columnLayer{
+.columnLayer {
   width: 400px;
   height: 50px;
   grid-row: 1/2;
@@ -171,15 +176,14 @@ body {
   display: flex;
 }
 
-
-.rowLayer{
+.rowLayer {
   width: 50px;
   height: 400px;
   grid-row: 2/3;
   grid-column: 1/2;
 }
 
-.tile{
+.tile {
   width: 40px;
   height: 40px;
   border: 1px solid black;
@@ -189,7 +193,7 @@ body {
   align-items: center;
 }
 
-.sideItem{
+.sideItem {
   width: 40px;
   height: 40px;
   display: flex;
@@ -198,41 +202,102 @@ body {
   color: white;
 }
 
-.highlight{
+.highlight {
   background-color: darkcyan;
 }
 
-.wrongHighlight{
+.wrongHighlight {
   background-color: darkred;
 }
 
 /* this is for the gamescreen */
-.gameScreen{
-  width:95%;
-  height:95%;
-  position: absolute;
+.gameScreen {
+  position: relative;
+  width: 95%;
+  height: 95%;
   margin: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
   border: none;
   outline: 5px solid black;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(17, 25, 40, 0.75);
   display: flex;
-
 }
 
-.leftSide,.rightSide{
+.leftSide,
+.rightSide {
   width: 50%;
   height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.leftSide{
-  background-color: darkcyan;
+.leftSide {
+  & > .boardHolder {
+    margin-left: 10%;
+  }
+
+  & > .countHolder {
+    left: -10%;
+    top: 50%;
+    transform: translate(50%, -50%);
+  }
 }
 
-.rightSide{
-  background-color: darkblue;
+.rightSide {
+  & > .boardHolder {
+    margin-right: 10%;
+  }
+
+  & > .countHolder {
+    right: -10%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.boardHolder {
+  width: 450px;
+  height: 450px;
+}
+
+.countHolder {
+  padding: 10px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline: 5px solid black;
+
+  /* hit and miss counter*/
+  & > p {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+.turnCounter {
+  color: white;
+  font-size: 2.5rem;
+  position: absolute;
+  padding: 10px;
+  margin: auto;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.playerTurnIndicator {
+  color: white;
+  font-size: 2.5rem;
+  position: absolute;
+  padding: 10px;
+  margin: auto;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
 }
