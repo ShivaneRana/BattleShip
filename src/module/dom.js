@@ -28,6 +28,26 @@ export const Render = (function(){
     buttonHolder.append(clearButton,randomButton,playButton);
     starterScreen.append(heading,renderBoard(board),buttonHolder);
     document.body.append(starterScreen);
+
+    playButton.addEventListener("click",() => {
+      renderGameScreen();
+    })
+  }
+
+  function renderGameScreen(){
+    document.body.textContent = "";
+    const gameScreen = document.createElement("div");
+    const leftSide = document.createElement("div");
+    const rightSide = document.createElement("div");
+
+
+    gameScreen.classList.add("gameScreen");
+    leftSide.classList.add("leftSide");
+    rightSide.classList.add("rightSide");
+
+
+    gameScreen.append(leftSide,rightSide);
+    document.body.append(gameScreen);
   }
 
   return{
@@ -97,6 +117,20 @@ function renderBoard(board){
   const rowsLayer = document.createElement("div");  //display rows
   let row = 0;
   let col = 0;
+  let isHorizontal = true;
+
+  
+  document.addEventListener("keydown",(e) => {
+    if(e.key =="r"){
+      if(isHorizontal){
+        isHorizontal = false;
+      }else{
+        isHorizontal = true;
+      }
+    }
+
+    console.log(isHorizontal);
+  })
   
   // assign class
   container.classList.add("container");
@@ -113,33 +147,11 @@ function renderBoard(board){
       div.setAttribute("data-col",col);
       boardLayer.append(div);
       
-      div.addEventListener("mouseenter",() => {
-        const x = +div.dataset.row;
-        const y = +div.dataset.col;
-        const end = y + 4;
-        for(let i = y;i <= end;i++){
-          if(i <= 9){
-          const board = boardLayer.querySelector(`[data-row="${x}"][data-col="${i}"]`);
-          board.classList.add("highlight");   
-          }
-        }  
-      })
+      div.addEventListener("mouseenter",() => {});
       
-      div.addEventListener("mouseleave",() => {
-        const x = +div.dataset.row;
-        const y = +div.dataset.col;
-        const end = y + 4;
-        for(let i = y;i <= end;i++){
-          if(i <= 9){
-          const board = boardLayer.querySelector(`[data-row="${x}"][data-col="${i}"]`);
-          board.classList.remove("highlight");   
-          }
-        }  
-      })
+      div.addEventListener("mouseleave",() => {})
 
-      div.addEventListener("click",() => {
-        console.log(`row: ${div.dataset.row}, col: ${div.dataset.col}`);
-      })
+      div.addEventListener("click",() => {})
       
       col++;
     })
