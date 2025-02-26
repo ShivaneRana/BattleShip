@@ -260,7 +260,17 @@ body {
 
 .boardHolder {
   width: 450px;
-  height: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  /* player name */
+  & > p{
+    font-size: 1.5rem;
+    color: white;
+  }
 }
 
 .countHolder {
@@ -282,22 +292,22 @@ body {
 
 .turnCounter {
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem;
   position: absolute;
   padding: 10px;
   margin: auto;
   left: 50%;
-  top: 10%;
+  top: 5%;
   transform: translate(-50%, -50%);
 }
 
 .playerTurnIndicator {
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem;
   position: absolute;
   padding: 10px;
   margin: auto;
   left: 50%;
-  top: 90%;
+  top: 95%;
   transform: translate(-50%, -50%);
 }
