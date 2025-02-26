@@ -40,15 +40,18 @@ export const Render = (function () {
     const turnCounter = document.createElement("h1");
     const playerTurnIndicator = document.createElement("h1");
     const leftSide = document.createElement("div");
+    const leftSideName = document.createElement("p");
     const leftBoardHolder = document.createElement("div");
     const leftCountHolder = document.createElement("div");
     const leftHit = document.createElement("p");
     const leftMiss = document.createElement("p");
     const rightSide = document.createElement("div");
+    const rightSideName = document.createElement("p");
     const rightBoardHolder = document.createElement("div");
     const rightCountHolder = document.createElement("div");
     const rightHit = document.createElement("p");
     const rightMiss = document.createElement("p");
+
 
     //assign class
     gameScreen.classList.add("gameScreen");
@@ -68,14 +71,21 @@ export const Render = (function () {
     rightHit.textContent = "Hit: 0";
     rightMiss.textContent = "Miss: 0";
     turnCounter.textContent = "Round: 0";
+    leftSideName.textContent = player1.name;
+    rightSideName.textContent = player2.name;
 
     //append element
+    leftBoardHolder.append(leftSideName);
     leftBoardHolder.append(renderBoard(player1.gameboard.board));
-    rightBoardHolder.append(renderBoard(player2.gameboard.board));
     leftCountHolder.append(leftHit, leftMiss);
     leftSide.append(leftBoardHolder, leftCountHolder);
+    
+    rightBoardHolder.append(rightSideName);
+    rightBoardHolder.append(renderBoard(player2.gameboard.board));
     rightCountHolder.append(rightHit, rightMiss);
     rightSide.append(rightBoardHolder, rightCountHolder);
+
+
     gameScreen.append(leftSide, rightSide);
     gameScreen.append(playerTurnIndicator, turnCounter);
     document.body.append(gameScreen);
