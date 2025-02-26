@@ -104,10 +104,30 @@ function renderBoard(board){
     arr.forEach(item => {
       const div = document.createElement("div");
       div.classList.add("tile");
+      div.setAttribute("data-row",row);
+      div.setAttribute("data-col",col);
       boardLayer.append(div);
+      
+      div.addEventListener("mouseenter",() => {
+       div.classList.add("highlight"); 
+      })
+      
+      div.addEventListener("mouseleave",() => {
+        div.classList.remove("highlight"); 
+      })
+
+      div.addEventListener("click",() => {
+        console.log(`row: ${div.dataset.row}, col: ${div.dataset.col}`);
+      })
+      
+      col++;
     })
+    row++;
+    col = 0;
   })
 
+
+  //assign value to rows
   for(let i = 65;i <= 74;i++){
     const div = document.createElement("div");
     div.classList.add("sideItem");
@@ -116,6 +136,8 @@ function renderBoard(board){
     rowsLayer.append(div);
   }
   
+
+  //assign value to columns
   for(let i = 0;i <= 9;i++){
     const div = document.createElement("div");
     div.classList.add("sideItem");
