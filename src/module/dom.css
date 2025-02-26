@@ -116,8 +116,12 @@ body {
   & > .buttonHolder{
     width:50%;
     height: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
 
-    & > .randomButton{
+    & > button{
       padding: 15px;
       border: none;
       font-family: var(--font);
@@ -196,4 +200,8 @@ body {
 
 .highlight{
   background-color: darkcyan;
+}
+
+.wrongHighlight{
+  background-color: darkred;
 }
