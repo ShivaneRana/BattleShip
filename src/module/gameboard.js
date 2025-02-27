@@ -159,4 +159,13 @@ export class Gameboard {
   clear() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
   }
+
+  //reset the enitre gameboard including all the ships
+  reset(){
+    this.clear();
+    this.visited.clear();
+    for(let i of Object.keys(this.allShip)){
+      this.allShip[`${i}`].reset();
+    }
+  }
 }

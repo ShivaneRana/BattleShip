@@ -7,6 +7,12 @@ export class RealPlayer {
     this.attackMiss = 0;
     this.gameboard = new Gameboard();
   }
+
+  reset(){
+    this.attackHit = 0;
+    this.attackMiss = 0;
+    this.gameboard.reset();
+  }
 }
 
 function assingName(name){
@@ -23,5 +29,11 @@ export class ComputerPlayer {
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard = new Gameboard();
+  }
+
+  reset(){
+    this.attackHit = 0;
+    this.attackMiss = 0;
+    this.gameboard.reset();
   }
 }

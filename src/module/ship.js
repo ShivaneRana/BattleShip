@@ -53,4 +53,9 @@ export class Ship {
   isSunk() {
     return this.sank;
   }
+
+  reset(){
+    this.hitTaken = 0;
+    this.sank = false;
+  }
 }
