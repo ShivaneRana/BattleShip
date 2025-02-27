@@ -38,6 +38,7 @@ export const Render = (function () {
 
     clearButton.addEventListener("click",() => {
       boardContainer.textContent = "";
+      Game.reset();
       boardContainer.append(renderGameBoard(board));
     })
   }
