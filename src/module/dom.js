@@ -5,11 +5,11 @@ export const Render = (function () {
   function renderStarterScreen(board) {
     //create element
     const starterScreen = document.createElement("div");
-    const heading = document.createElement("h1"); 
+    const heading = document.createElement("h1");
     const boardContainer = document.createElement("div"); // holds board
     const buttonHolder = document.createElement("div"); // hold all the button
-    const randomButton = document.createElement("button");  //random button
-    const playButton = document.createElement("button");  //play button
+    const randomButton = document.createElement("button"); //random button
+    const playButton = document.createElement("button"); //play button
     const clearButton = document.createElement("button"); //clear button
 
     //assign screen
@@ -26,7 +26,6 @@ export const Render = (function () {
     playButton.textContent = "Play";
     boardContainer.append(renderGameBoard(board));
 
-
     //append
     buttonHolder.append(clearButton, randomButton, playButton);
     starterScreen.append(heading, boardContainer, buttonHolder);
@@ -36,11 +35,11 @@ export const Render = (function () {
       Game.play();
     });
 
-    clearButton.addEventListener("click",() => {
+    clearButton.addEventListener("click", () => {
       boardContainer.textContent = "";
       Game.reset();
       boardContainer.append(renderGameBoard(board));
-    })
+    });
   }
 
   function renderGameScreen(player1, player2) {
@@ -61,7 +60,6 @@ export const Render = (function () {
     const rightCountHolder = document.createElement("div");
     const rightHit = document.createElement("p");
     const rightMiss = document.createElement("p");
-
 
     //assign class
     gameScreen.classList.add("gameScreen");
@@ -89,12 +87,11 @@ export const Render = (function () {
     leftBoardHolder.append(renderGameBoard(player1.gameboard.board));
     leftCountHolder.append(leftHit, leftMiss);
     leftSide.append(leftBoardHolder, leftCountHolder);
-    
+
     rightBoardHolder.append(rightSideName);
     rightBoardHolder.append(renderGameBoard(player2.gameboard.board));
     rightCountHolder.append(rightHit, rightMiss);
     rightSide.append(rightBoardHolder, rightCountHolder);
-
 
     gameScreen.append(leftSide, rightSide);
     gameScreen.append(playerTurnIndicator, turnCounter);
@@ -108,7 +105,7 @@ export const Render = (function () {
 })();
 
 // display a tutorial page on how to play the game
-export function renderTutorialScreen(){
+export function renderTutorialScreen() {
   const dialog = document.createElement("dialog");
   const wrapper = document.createElement("div");
   const headingHolder = document.createElement("div");
@@ -162,7 +159,7 @@ export function renderTutorialScreen(){
 }
 
 // render the board where the player place ship at start
-function renderStarterBoard(board){
+function renderStarterBoard(board) {
   // create element
   const container = document.createElement("div"); //holds the columnlayer, rowlayer and board itself
   const boardLayer = document.createElement("div"); //board render here
@@ -212,7 +209,6 @@ function renderStarterBoard(board){
   container.append(columnLayer, rowsLayer, boardLayer);
   return container;
 }
-
 
 // render the game board where the actual game take place
 function renderGameBoard(board) {

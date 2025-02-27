@@ -8,30 +8,30 @@ export class RealPlayer {
     this.gameboard = new Gameboard();
   }
 
-  reset(){
+  reset() {
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard.reset();
   }
 }
 
-function assingName(name){
-  if(name === ""){
+function assingName(name) {
+  if (name === "") {
     return "player";
-  }else{
+  } else {
     return name;
   }
 }
 
 export class ComputerPlayer {
-  constructor(name = "CPU"){
+  constructor(name = "CPU") {
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard = new Gameboard();
   }
 
-  reset(){
+  reset() {
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard.reset();

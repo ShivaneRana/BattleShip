@@ -109,7 +109,6 @@ body {
     align-items: center;
   }
 
-
   /* heading for the tutorial screen */
   & > .header {
     color: white;
@@ -119,7 +118,7 @@ body {
   }
 
   /* hold the board */
-  & > .boardContainer{
+  & > .boardContainer {
     width: 450px;
     height: 450px;
   }
@@ -274,7 +273,7 @@ body {
   justify-content: space-between;
 
   /* player name */
-  & > p{
+  & > p {
     font-size: 1.5rem;
     color: white;
   }
@@ -321,7 +320,7 @@ body {
   transform: translate(-50%, -50%);
   animation: float 1s ease-in-out infinite;
 
-  &:hover{
+  &:hover {
     animation: normal;
   }
 }

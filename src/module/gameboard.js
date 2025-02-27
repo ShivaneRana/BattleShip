@@ -161,131 +161,136 @@ export class Gameboard {
   }
 
   //reset the enitre gameboard including all the ships
-  reset(){
+  reset() {
     this.clear();
     this.visited.clear();
-    for(let i of Object.keys(this.allShip)){
+    for (let i of Object.keys(this.allShip)) {
       this.allShip[`${i}`].reset();
     }
   }
 
   // place carrier randomly on the gameboard
-  randomlyPlaceCarrier(){
-    let x,x1,y,y1;
+  randomlyPlaceCarrier() {
+    let x, x1, y, y1;
     let placed = false;
-    while(!placed){
-    let toss = Math.floor(Math.random()*2);
-    const isHorizontal = (toss === 0);
-    // place ship horizontally
-    if(isHorizontal){
-      x = Math.floor(Math.random()*10);
-      x1 = x;
-      y = Math.floor(Math.random()*6);
-      y1 = y + 4;
-    }else{  //place ship vertically
-      y = Math.floor(Math.random()*10);
-      y1 = y;
-      x = Math.floor(Math.random()*6);
-      x1 = x+4;
-    }
-    
-    placed = this.placeShip([x,y],[x1,y1],"carrier"); // if the ship is placed then return true else loop continues
+    while (!placed) {
+      let toss = Math.floor(Math.random() * 2);
+      const isHorizontal = toss === 0;
+      // place ship horizontally
+      if (isHorizontal) {
+        x = Math.floor(Math.random() * 10);
+        x1 = x;
+        y = Math.floor(Math.random() * 6);
+        y1 = y + 4;
+      } else {
+        //place ship vertically
+        y = Math.floor(Math.random() * 10);
+        y1 = y;
+        x = Math.floor(Math.random() * 6);
+        x1 = x + 4;
+      }
+
+      placed = this.placeShip([x, y], [x1, y1], "carrier"); // if the ship is placed then return true else loop continues
     }
   }
 
-  randomlyPlaceBattleship(){
-    let x,x1,y,y1;
+  randomlyPlaceBattleship() {
+    let x, x1, y, y1;
     let placed = false;
-    while(!placed){
-    let toss = Math.floor(Math.random()*2);
-    const isHorizontal = (toss === 0);
-    // place ship horizontally
-    if(isHorizontal){
-      x = Math.floor(Math.random()*10);
-      x1 = x;
-      y = Math.floor(Math.random()*7);
-      y1 = y + 3;
-    }else{  //place ship vertically
-      y = Math.floor(Math.random()*10);
-      y1 = y;
-      x = Math.floor(Math.random()*7);
-      x1 = x+3;
-    }
-    
-    placed = this.placeShip([x,y],[x1,y1],"battleship"); // if the ship is placed then return true else loop continues
+    while (!placed) {
+      let toss = Math.floor(Math.random() * 2);
+      const isHorizontal = toss === 0;
+      // place ship horizontally
+      if (isHorizontal) {
+        x = Math.floor(Math.random() * 10);
+        x1 = x;
+        y = Math.floor(Math.random() * 7);
+        y1 = y + 3;
+      } else {
+        //place ship vertically
+        y = Math.floor(Math.random() * 10);
+        y1 = y;
+        x = Math.floor(Math.random() * 7);
+        x1 = x + 3;
+      }
+
+      placed = this.placeShip([x, y], [x1, y1], "battleship"); // if the ship is placed then return true else loop continues
     }
   }
 
-  randomlyPlaceCruiser(){
-    let x,x1,y,y1;
+  randomlyPlaceCruiser() {
+    let x, x1, y, y1;
     let placed = false;
-    while(!placed){
-    let toss = Math.floor(Math.random()*2);
-    const isHorizontal = (toss === 0);
-    // place ship horizontally
-    if(isHorizontal){
-      x = Math.floor(Math.random()*10);
-      x1 = x;
-      y = Math.floor(Math.random()*8);
-      y1 = y + 2;
-    }else{  //place ship vertically
-      y = Math.floor(Math.random()*10);
-      y1 = y;
-      x = Math.floor(Math.random()*8);
-      x1 = x+2;
-    }
-    
-    placed = this.placeShip([x,y],[x1,y1],"cruiser"); // if the ship is placed then return true else loop continues
+    while (!placed) {
+      let toss = Math.floor(Math.random() * 2);
+      const isHorizontal = toss === 0;
+      // place ship horizontally
+      if (isHorizontal) {
+        x = Math.floor(Math.random() * 10);
+        x1 = x;
+        y = Math.floor(Math.random() * 8);
+        y1 = y + 2;
+      } else {
+        //place ship vertically
+        y = Math.floor(Math.random() * 10);
+        y1 = y;
+        x = Math.floor(Math.random() * 8);
+        x1 = x + 2;
+      }
+
+      placed = this.placeShip([x, y], [x1, y1], "cruiser"); // if the ship is placed then return true else loop continues
     }
   }
 
-  randomlyPlaceSubmarine(){
-    let x,x1,y,y1;
+  randomlyPlaceSubmarine() {
+    let x, x1, y, y1;
     let placed = false;
-    while(!placed){
-    let toss = Math.floor(Math.random()*2);
-    const isHorizontal = (toss === 0);
-    // place ship horizontally
-    if(isHorizontal){
-      x = Math.floor(Math.random()*10);
-      x1 = x;
-      y = Math.floor(Math.random()*8);
-      y1 = y + 2;
-    }else{  //place ship vertically
-      y = Math.floor(Math.random()*10);
-      y1 = y;
-      x = Math.floor(Math.random()*8);
-      x1 = x+2;
-    }
-    
-    placed = this.placeShip([x,y],[x1,y1],"submarine"); // if the ship is placed then return true else loop continues
+    while (!placed) {
+      let toss = Math.floor(Math.random() * 2);
+      const isHorizontal = toss === 0;
+      // place ship horizontally
+      if (isHorizontal) {
+        x = Math.floor(Math.random() * 10);
+        x1 = x;
+        y = Math.floor(Math.random() * 8);
+        y1 = y + 2;
+      } else {
+        //place ship vertically
+        y = Math.floor(Math.random() * 10);
+        y1 = y;
+        x = Math.floor(Math.random() * 8);
+        x1 = x + 2;
+      }
+
+      placed = this.placeShip([x, y], [x1, y1], "submarine"); // if the ship is placed then return true else loop continues
     }
   }
 
-  randomlyPlaceDestroyer(){
-    let x,x1,y,y1;
+  randomlyPlaceDestroyer() {
+    let x, x1, y, y1;
     let placed = false;
-    while(!placed){
-    let toss = Math.floor(Math.random()*2);
-    const isHorizontal = (toss === 0);
-    // place ship horizontally
-    if(isHorizontal){
-      x = Math.floor(Math.random()*10);
-      x1 = x;
-      y = Math.floor(Math.random()*9);
-      y1 = y + 1;
-    }else{  //place ship vertically
-      y = Math.floor(Math.random()*10);
-      y1 = y;
-      x = Math.floor(Math.random()*9);
-      x1 = x+1;
-    }
-    
-    placed = this.placeShip([x,y],[x1,y1],"destroyer"); // if the ship is placed then return true else loop continues
+    while (!placed) {
+      let toss = Math.floor(Math.random() * 2);
+      const isHorizontal = toss === 0;
+      // place ship horizontally
+      if (isHorizontal) {
+        x = Math.floor(Math.random() * 10);
+        x1 = x;
+        y = Math.floor(Math.random() * 9);
+        y1 = y + 1;
+      } else {
+        //place ship vertically
+        y = Math.floor(Math.random() * 10);
+        y1 = y;
+        x = Math.floor(Math.random() * 9);
+        x1 = x + 1;
+      }
+
+      placed = this.placeShip([x, y], [x1, y1], "destroyer"); // if the ship is placed then return true else loop continues
     }
   }
 
-  placeShipRandomly(){
+  placeShipRandomly() {
     this.randomlyPlaceCarrier();
     this.randomlyPlaceBattleship();
     this.randomlyPlaceCruiser();

@@ -17,7 +17,7 @@ export const Game = (function () {
     Render.renderGameScreen(player1, player2);
   }
 
-  function reset(){
+  function reset() {
     player1.reset();
     player2.reset();
   }
@@ -25,6 +25,6 @@ export const Game = (function () {
   return {
     start,
     play,
-    reset
+    reset,
   };
 })();

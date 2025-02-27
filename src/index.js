@@ -11,9 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   Game.start();
 });
 
-startButton.addEventListener("click", () => {
-  
-});
+startButton.addEventListener("click", () => {});
 
 tutorialButton.addEventListener("click", () => {
   renderTutorialScreen();
