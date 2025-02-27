@@ -8,30 +8,18 @@ export const Game = (function () {
 
   function start(name) {
     playerName = name;
-    player1 = new RealPlayer(playerName); //user
+    player1 = new RealPlayer(playerName = "Player"); //user
     player2 = new ComputerPlayer("CPU"); //computer
-    Render.renderStarterScreen(player1.gameboard.board);
   }
 
-  function play() {
-    Render.renderGameScreen(player1, player2);
-  }
-
+  // reset the entire game
   function reset() {
     player1.reset();
     player2.reset();
   }
 
-  function randomPlacement(){
-    player1.gameboard.placeShipRandomly();
-  }
-
   return {
     start,
-    play,
-    reset,
-    randomPlacement,
-    player1,
-    player2
+    reset
   };
 })();

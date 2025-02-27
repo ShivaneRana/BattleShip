@@ -54,7 +54,7 @@ export class Ship {
     return this.sank;
   }
 
-  reset() {
+  reset(){
     this.hitTaken = 0;
     this.sank = false;
   }
