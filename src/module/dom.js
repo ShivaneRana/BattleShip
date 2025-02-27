@@ -5,32 +5,41 @@ export const Render = (function () {
   function renderStarterScreen(board) {
     //create element
     const starterScreen = document.createElement("div");
-    const heading = document.createElement("h1");
-    const buttonHolder = document.createElement("div");
-    const randomButton = document.createElement("button");
-    const playButton = document.createElement("button");
-    const clearButton = document.createElement("button");
+    const heading = document.createElement("h1"); 
+    const boardContainer = document.createElement("div"); // holds board
+    const buttonHolder = document.createElement("div"); // hold all the button
+    const randomButton = document.createElement("button");  //random button
+    const playButton = document.createElement("button");  //play button
+    const clearButton = document.createElement("button"); //clear button
 
     //assign screen
     starterScreen.classList.add("starterScreen");
     heading.classList.add("header");
     buttonHolder.classList.add("buttonHolder");
     randomButton.classList.add("randomButton");
+    boardContainer.classList.add("boardContainer");
 
     //assign value
     heading.textContent = "Place all ships!";
     randomButton.textContent = "Randomize";
     clearButton.textContent = "Clear";
     playButton.textContent = "Play";
+    boardContainer.append(renderGameBoard(board));
+
 
     //append
     buttonHolder.append(clearButton, randomButton, playButton);
-    starterScreen.append(heading, renderBoard(board), buttonHolder);
+    starterScreen.append(heading, boardContainer, buttonHolder);
     document.body.append(starterScreen);
 
     playButton.addEventListener("click", () => {
       Game.play();
     });
+
+    clearButton.addEventListener("click",() => {
+      boardContainer.textContent = "";
+      boardContainer.append(renderGameBoard(board));
+    })
   }
 
   function renderGameScreen(player1, player2) {
@@ -76,12 +85,12 @@ export const Render = (function () {
 
     //append element
     leftBoardHolder.append(leftSideName);
-    leftBoardHolder.append(renderBoard(player1.gameboard.board));
+    leftBoardHolder.append(renderGameBoard(player1.gameboard.board));
     leftCountHolder.append(leftHit, leftMiss);
     leftSide.append(leftBoardHolder, leftCountHolder);
     
     rightBoardHolder.append(rightSideName);
-    rightBoardHolder.append(renderBoard(player2.gameboard.board));
+    rightBoardHolder.append(renderGameBoard(player2.gameboard.board));
     rightCountHolder.append(rightHit, rightMiss);
     rightSide.append(rightBoardHolder, rightCountHolder);
 
@@ -98,7 +107,7 @@ export const Render = (function () {
 })();
 
 // display a tutorial page on how to play the game
-export function renderTutorialScreen() {
+export function renderTutorialScreen(){
   const dialog = document.createElement("dialog");
   const wrapper = document.createElement("div");
   const headingHolder = document.createElement("div");
@@ -151,7 +160,61 @@ export function renderTutorialScreen() {
   dialog.showModal();
 }
 
-function renderBoard(board) {
+// render the board where the player place ship at start
+function renderStarterBoard(board){
+  // create element
+  const container = document.createElement("div"); //holds the columnlayer, rowlayer and board itself
+  const boardLayer = document.createElement("div"); //board render here
+  const columnLayer = document.createElement("div"); //display columns
+  const rowsLayer = document.createElement("div"); //display rows
+  let row = 0;
+  let col = 0;
+
+  // assign class
+  container.classList.add("container");
+  boardLayer.classList.add("boardLayer");
+  columnLayer.classList.add("columnLayer");
+  rowsLayer.classList.add("rowLayer");
+
+  // insert content
+  board.forEach((arr) => {
+    arr.forEach((item) => {
+      const div = document.createElement("div");
+      div.classList.add("tile");
+      div.setAttribute("data-row", row);
+      div.setAttribute("data-col", col);
+      boardLayer.append(div);
+      col++;
+    });
+    row++;
+    col = 0;
+  });
+
+  //assign value to rows
+  for (let i = 65; i <= 74; i++) {
+    const div = document.createElement("div");
+    div.classList.add("sideItem");
+    const character = String.fromCharCode(i);
+    div.textContent = character;
+    rowsLayer.append(div);
+  }
+
+  //assign value to columns
+  for (let i = 0; i <= 9; i++) {
+    const div = document.createElement("div");
+    div.classList.add("sideItem");
+    const character = i;
+    div.textContent = character;
+    columnLayer.append(div);
+  }
+
+  container.append(columnLayer, rowsLayer, boardLayer);
+  return container;
+}
+
+
+// render the game board where the actual game take place
+function renderGameBoard(board) {
   // create element
   const container = document.createElement("div"); //holds the columnlayer, rowlayer and board itself
   const boardLayer = document.createElement("div"); //board render here

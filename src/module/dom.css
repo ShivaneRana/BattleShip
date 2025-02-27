@@ -109,12 +109,19 @@ body {
     align-items: center;
   }
 
+
   /* heading for the tutorial screen */
   & > .header {
     color: white;
     width: 100%;
     height: 10%;
     font-size: 3rem;
+  }
+
+  /* hold the board */
+  & > .boardContainer{
+    width: 450px;
+    height: 450px;
   }
 
   /* holder for button */
@@ -149,7 +156,7 @@ body {
   }
 }
 
-/* renderBoard  */
+/* renderBoard  for start */
 .container {
   width: 450px;
   height: 450px;

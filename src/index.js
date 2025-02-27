@@ -7,12 +7,12 @@ const startButton = document.querySelector(".startButton");
 const inputName = document.querySelector(".inputName");
 
 document.addEventListener("DOMContentLoaded", () => {
-  
+  const playerName = inputName.value;
+  Game.start();
 });
 
 startButton.addEventListener("click", () => {
-  const playerName = inputName.value;
-  Game.start(playerName);
+  
 });
 
 tutorialButton.addEventListener("click", () => {
