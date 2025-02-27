@@ -22,9 +22,16 @@ export const Game = (function () {
     player2.reset();
   }
 
+  function randomPlacement(){
+    player1.gameboard.placeShipRandomly();
+  }
+
   return {
     start,
     play,
     reset,
+    randomPlacement,
+    player1,
+    player2
   };
 })();

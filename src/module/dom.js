@@ -35,10 +35,17 @@ export const Render = (function () {
       Game.play();
     });
 
+    randomButton.addEventListener("click",() => {
+      Game.player1.gameboard.placeShipRandomly();
+      boardContainer.textContent = "";
+      boardContainer.append(renderStarterBoard(board));
+    })
+
     clearButton.addEventListener("click", () => {
+      console.log("board cleared");
       boardContainer.textContent = "";
       Game.reset();
-      boardContainer.append(renderGameBoard(board));
+      boardContainer.append(renderStarterBoard(board));
     });
   }
 

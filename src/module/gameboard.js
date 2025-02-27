@@ -291,6 +291,7 @@ export class Gameboard {
   }
 
   placeShipRandomly() {
+    this.clear();
     this.randomlyPlaceCarrier();
     this.randomlyPlaceBattleship();
     this.randomlyPlaceCruiser();

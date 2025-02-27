@@ -336,3 +336,23 @@ body {
     transform: translate(-50%, -50%);
   }
 }
+
+.carrier{
+  background-color: darkblue;
+}
+
+.battleship{
+  background-color: darkcyan;
+}
+
+.cruiser{
+  background-color: darkorange;
+}
+
+.submarine{
+  background-color: darkred;
+}
+
+.destroyer{
+  background-color: darkgreen;
+}
