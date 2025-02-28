@@ -11,6 +11,8 @@ export const Render = (function () {
     const randomButton = document.createElement("button");  //randomize
     const clearButton = document.createElement("button");   //clear
     const playButton = document.createElement("button");    //play
+    let isPlayable = false;
+
 
     //assign class
     mainContainer.classList.add("placementScreenBackground");
@@ -32,10 +34,44 @@ export const Render = (function () {
     buttonHolder.append(clearButton,randomButton,playButton);
     mainContainer.append(header,boardAndTipHolder,buttonHolder);
     document.body.append(mainContainer);
+
+    playButton.addEventListener("click",() => {
+      // if(!isPlayable){
+      //   console.log("Not playable yet");
+      // }else{  
+      //   console.log("game start");
+      // }
+    })
+ 
+    clearButton.addEventListener("click",() => {
+      console.log("board cleared");
+    })
+
+    
+    randomButton.addEventListener("click",() => {
+      console.log("randomButton pressed");
+    })
   }
 
+  function gameScreen(player,computer){
+    const mainContainer = document.createElement("div");
+    const roundCounter = document.createElement("h1");
+    const turnCounter = document.createElement("h1");
+
+
+    mainContainer.classList.add("gameScreenBackground");
+
+
+    //assign value
+    roundCounter.textContent = "Round: 0";
+    turnCounter.textContent = "Enemy Turn";
+
+    mainContainer.append(roundCounter,turnCounter)
+    document.body.append(mainContainer);
+  }
   return {
     placementScreen,
+    gameScreen
   };
 })();
 
@@ -99,13 +135,100 @@ function renderPlacementBoard(boardArray){
   const columnLayer = document.createElement("div");
   const board = document.createElement("div");
   const rowLayer = document.createElement("div");
+  let horizontalPlacement = true;
+  let row = 0;
+  let col = 0;
+
+  
+  document.body.addEventListener("keydown",(e) => {
+    if(e.key === "r" || e.key === "R"){
+      if(horizontalPlacement){
+        const list = board.querySelectorAll(".highlight");
+        list.forEach(item => {
+          item.classList.remove("highlight");
+        })
+        horizontalPlacement = false;
+      }else{
+        const list = board.querySelectorAll(".highlight");
+        list.forEach(item => {
+          item.classList.remove("highlight");
+        })
+        horizontalPlacement = true;
+      }
+      console.log(horizontalPlacement);
+    }
+  })
 
   boardArray.forEach(array => {
     array.forEach(item => {
       const div = document.createElement("div");
+      div.setAttribute("data-row",row);
+      div.setAttribute("data-col",col);
       div.classList.add("tile");
       board.append(div);
+
+
+      div.addEventListener("mouseenter",() => {
+        if(horizontalPlacement){
+          for(let i = 0;i<= 4;i++){
+            const x = +div.dataset.row;
+            const y = +div.dataset.col+i;
+            if(y <= 9 && x <= 9){
+              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
+              choosenTile.classList.add("highlight");  
+            }
+          }
+        }else{
+          for(let i = 0;i<= 4;i++){
+            const x = +div.dataset.row+i;
+            const y = +div.dataset.col;
+            if(y <= 9 && x <= 9){
+              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
+              choosenTile.classList.add("highlight");  
+            }
+          }
+        }
+      })
+
+      div.addEventListener("mouseleave",() => {
+        if(horizontalPlacement){
+
+          for(let i = 0;i<= 4;i++){
+            const x = +div.dataset.row;
+            const y = +div.dataset.col+i;
+            if(y <= 9 && x <= 9){
+              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
+              choosenTile.classList.remove("highlight");  
+            }
+          }
+        }else{
+          for(let i = 0;i<= 4;i++){
+            const x = +div.dataset.row+i;
+            const y = +div.dataset.col;
+            if(y <= 9 && x <= 9){
+              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
+              choosenTile.classList.remove("highlight");  
+            }
+          }
+        }
+      })
+      
+      div.addEventListener("click",() => {
+        const x = +div.dataset.row;
+        const y = +div.dataset.col;
+        if(horizontalPlacement === true){
+          console.log(`${x},${y}`);
+          console.log(`${x},${y+4}`);
+        }else{
+          console.log(`${x},${y}`);
+          console.log(`${x+4},${y}`);
+        }
+      })
+
+      col++;
     })
+    col = 0;
+    row++;
   })
 
   // for column
@@ -132,3 +255,10 @@ function renderPlacementBoard(boardArray){
   return div;
 }
 
+function renderPlayerBoard(boardArray){
+
+}
+
+function renderEnemyBoard(boardArray){
+
+}
