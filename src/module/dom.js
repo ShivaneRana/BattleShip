@@ -4,7 +4,33 @@ import { Game } from "./game.js";
 export const Render = (function () {
   function placementScreen(board) {
     const mainContainer = document.createElement("div");
+    const header = document.createElement("h1");            //heading
+    const tip = document.createElement("p");
+    const boardAndTipHolder = document.createElement("div");
+    const buttonHolder = document.createElement("div");
+    const randomButton = document.createElement("button");  //randomize
+    const clearButton = document.createElement("button");   //clear
+    const playButton = document.createElement("button");    //play
+
+    //assign class
     mainContainer.classList.add("placementScreenBackground");
+    buttonHolder.classList.add("buttonHolder");
+    boardAndTipHolder.classList.add("boardTipHolder");
+    randomButton.classList.add("but");
+    clearButton.classList.add("but");
+    playButton.classList.add("but");
+
+    //assign value
+    header.textContent = "Place all the ships!";
+    randomButton.textContent = "Randomize";
+    clearButton.textContent = "Clear";
+    playButton.textContent = "Play";
+    tip.textContent = "Press R to rotate the ship";
+
+    //append all content
+    boardAndTipHolder.append(renderPlacementBoard(board),tip);
+    buttonHolder.append(clearButton,randomButton,playButton);
+    mainContainer.append(header,boardAndTipHolder,buttonHolder);
     document.body.append(mainContainer);
   }
 
@@ -66,3 +92,43 @@ export function renderTutorialScreen() {
 
   dialog.showModal();
 }
+
+// function to render board for placing ships
+function renderPlacementBoard(boardArray){
+  const div = document.createElement("div");
+  const columnLayer = document.createElement("div");
+  const board = document.createElement("div");
+  const rowLayer = document.createElement("div");
+
+  boardArray.forEach(array => {
+    array.forEach(item => {
+      const div = document.createElement("div");
+      div.classList.add("tile");
+      board.append(div);
+    })
+  })
+
+  // for column
+  for(let i = 0;i <= 9;i++){
+    const div = document.createElement("div");
+    div.textContent = i;
+    columnLayer.append(div);
+  }
+
+  // // for row
+  for(let i = 65;i <= 74;i++){
+    const char = String.fromCharCode(i);
+    const div = document.createElement("div");
+    div.textContent = char;
+    rowLayer.append(div);
+  }
+
+  div.classList.add("boardContainer");
+  columnLayer.classList.add("columnLayer");
+  board.classList.add("board");
+  rowLayer.classList.add("rowLayer");
+
+  div.append(columnLayer,rowLayer,board);
+  return div;
+}
+
