@@ -2,7 +2,7 @@ import { Gameboard } from "../module/gameboard.js";
 
 export class RealPlayer {
   constructor(name) {
-    this.name =  name;
+    this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard = new Gameboard();
@@ -23,7 +23,7 @@ export class ComputerPlayer {
     this.gameboard = new Gameboard();
   }
 
-  reset(){
+  reset() {
     this.attackHit = 0;
     this.attackMiss = 0;
     this.gameboard.reset();
