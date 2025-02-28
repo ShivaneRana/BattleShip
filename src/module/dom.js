@@ -2,6 +2,15 @@ import "./dom.css";
 import { Game } from "./game.js";
 
 export const Render = (function () {
+  function placementScreen(board){
+    const mainContainer = document.createElement("div");
+    mainContainer.classList.add("placementScreenBackground");
+    document.body.append(mainContainer);
+  }
+
+  return{
+    placementScreen,
+  }
 })();
 
 // display a tutorial page on how to play the game
