@@ -6,12 +6,17 @@ const startButton = document.querySelector(".startButton");
 const inputName = document.querySelector(".inputName");
 const introContainer = document.querySelector(".introContainer");
 
-document.addEventListener("DOMContentLoaded", () => {});
+document.addEventListener("DOMContentLoaded", () => {
+    inputName.value = "";
+    introContainer.remove();
+    Game.showPlacementScreen("shivane");
+});
 
 startButton.addEventListener("click", () => {
-  const name = inputName.value;
-  introContainer.remove();
-  Game.showPlacementScreen(name);
+    let name = inputName.value;
+    if(name === ""){
+        name = "Player";
+    }
 });
 
 tutorialButton.addEventListener("click", () => {
