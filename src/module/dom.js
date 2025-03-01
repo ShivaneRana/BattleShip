@@ -30,44 +30,47 @@ export const Render = (function () {
     tip.textContent = "Press R to rotate the ship";
 
     //append all content
-    boardAndTipHolder.append(renderPlacementBoard(board),tip);
+    boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
     buttonHolder.append(clearButton,randomButton,playButton);
     mainContainer.append(header,boardAndTipHolder,buttonHolder);
     document.body.append(mainContainer);
 
     playButton.addEventListener("click",() => {
-      // if(!isPlayable){
-      //   console.log("Not playable yet");
-      // }else{  
-      //   console.log("game start");
-      // }
+      document.body.textContent = "";
+      Game.showGameScreen();
     })
  
     clearButton.addEventListener("click",() => {
-      console.log("board cleared");
+      board.clear();
+      boardAndTipHolder.textContent = "";
+      boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
     })
 
     
     randomButton.addEventListener("click",() => {
-      console.log("randomButton pressed");
+      board.clear();
+      board.placeShipRandomly();
+      boardAndTipHolder.textContent = "";
+      boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
     })
   }
 
   function gameScreen(player,computer){
     const mainContainer = document.createElement("div");
-    const roundCounter = document.createElement("h1");
-    const turnCounter = document.createElement("h1");
+    const playerSide = document.createElement("div");
+    const enemySide = document.createElement("div");
+    const playerBoard = renderPlayerBoard(player.gameboard.board);
+    const enemyBoard = renderEnemyBoard(computer.gameboard.board);
 
-
+    //assign class
     mainContainer.classList.add("gameScreenBackground");
+    playerSide.classList.add("playerSide");
+    enemySide.classList.add("enemySide");
 
-
-    //assign value
-    roundCounter.textContent = "Round: 0";
-    turnCounter.textContent = "Enemy Turn";
-
-    mainContainer.append(roundCounter,turnCounter)
-    document.body.append(mainContainer);
+    playerSide.append(playerBoard,renderStats(player));
+    enemySide.append(enemyBoard);
+    mainContainer.append(renderRound(1),renderTurn(2),playerSide,enemySide);
+    return mainContainer;
   }
   return {
     placementScreen,
@@ -142,20 +145,7 @@ function renderPlacementBoard(boardArray){
   
   document.body.addEventListener("keydown",(e) => {
     if(e.key === "r" || e.key === "R"){
-      if(horizontalPlacement){
-        const list = board.querySelectorAll(".highlight");
-        list.forEach(item => {
-          item.classList.remove("highlight");
-        })
-        horizontalPlacement = false;
-      }else{
-        const list = board.querySelectorAll(".highlight");
-        list.forEach(item => {
-          item.classList.remove("highlight");
-        })
-        horizontalPlacement = true;
-      }
-      console.log(horizontalPlacement);
+    
     }
   })
 
@@ -167,62 +157,42 @@ function renderPlacementBoard(boardArray){
       div.classList.add("tile");
       board.append(div);
 
+      if(item === "C"){
+        div.textContent = "C";
+        div.classList.add("ship");
+      }
+
+      if(item === "R"){
+        div.textContent = "R";
+        div.classList.add("ship");
+      }
+
+      if(item === "B"){
+        div.textContent = "B";
+        div.classList.add("ship");
+      }
+
+      if(item === "S"){
+        div.textContent = "S";
+        div.classList.add("ship");
+      }
+
+      if(item === "D"){
+        div.textContent = "D";
+        div.classList.add("ship");
+      }
+
 
       div.addEventListener("mouseenter",() => {
-        if(horizontalPlacement){
-          for(let i = 0;i<= 4;i++){
-            const x = +div.dataset.row;
-            const y = +div.dataset.col+i;
-            if(y <= 9 && x <= 9){
-              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
-              choosenTile.classList.add("highlight");  
-            }
-          }
-        }else{
-          for(let i = 0;i<= 4;i++){
-            const x = +div.dataset.row+i;
-            const y = +div.dataset.col;
-            if(y <= 9 && x <= 9){
-              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
-              choosenTile.classList.add("highlight");  
-            }
-          }
-        }
+        
       })
 
       div.addEventListener("mouseleave",() => {
-        if(horizontalPlacement){
-
-          for(let i = 0;i<= 4;i++){
-            const x = +div.dataset.row;
-            const y = +div.dataset.col+i;
-            if(y <= 9 && x <= 9){
-              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
-              choosenTile.classList.remove("highlight");  
-            }
-          }
-        }else{
-          for(let i = 0;i<= 4;i++){
-            const x = +div.dataset.row+i;
-            const y = +div.dataset.col;
-            if(y <= 9 && x <= 9){
-              const choosenTile = board.querySelector(`[data-row="${x}"][data-col="${y}"]`);
-              choosenTile.classList.remove("highlight");  
-            }
-          }
-        }
+        
       })
       
       div.addEventListener("click",() => {
-        const x = +div.dataset.row;
-        const y = +div.dataset.col;
-        if(horizontalPlacement === true){
-          console.log(`${x},${y}`);
-          console.log(`${x},${y+4}`);
-        }else{
-          console.log(`${x},${y}`);
-          console.log(`${x+4},${y}`);
-        }
+        
       })
 
       col++;
@@ -256,9 +226,151 @@ function renderPlacementBoard(boardArray){
 }
 
 function renderPlayerBoard(boardArray){
+  const div = document.createElement("div");
+  const columnLayer = document.createElement("div");
+  const board = document.createElement("div");
+  const rowLayer = document.createElement("div");
+  let row = 0;
+  let col = 0;
 
+  boardArray.forEach(array => {
+    array.forEach(item => {
+      const div = document.createElement("div");
+      div.setAttribute("data-row",row);
+      div.setAttribute("data-col",col);
+      div.classList.add("tile");
+      board.append(div);
+
+      
+      if(item === "C"){
+        div.textContent = "C";
+        div.classList.add("ship");
+      }
+
+      if(item === "R"){
+        div.textContent = "R";
+        div.classList.add("ship");
+      }
+
+      if(item === "B"){
+        div.textContent = "B";
+        div.classList.add("ship");
+      }
+
+      if(item === "S"){
+        div.textContent = "S";
+        div.classList.add("ship");
+      }
+
+      if(item === "D"){
+        div.textContent = "D";
+        div.classList.add("ship");
+      }
+      
+      col++;
+    })
+    col = 0;
+    row++;
+  })
+
+  // for column
+  for(let i = 0;i <= 9;i++){
+    const div = document.createElement("div");
+    div.textContent = i;
+    columnLayer.append(div);
+  }
+
+  // // for row
+  for(let i = 65;i <= 74;i++){
+    const char = String.fromCharCode(i);
+    const div = document.createElement("div");
+    div.textContent = char;
+    rowLayer.append(div);
+  }
+
+  div.classList.add("boardContainer");
+  columnLayer.classList.add("columnLayer");
+  board.classList.add("board");
+  rowLayer.classList.add("rowLayer");
+
+  div.append(columnLayer,rowLayer,board);
+  return div;
 }
 
 function renderEnemyBoard(boardArray){
+  const div = document.createElement("div");
+  const columnLayer = document.createElement("div");
+  const board = document.createElement("div");
+  const rowLayer = document.createElement("div");
+  let row = 0;
+  let col = 0;
 
+  boardArray.forEach(array => {
+    array.forEach(item => {
+      const div = document.createElement("div");
+      div.setAttribute("data-row",row);
+      div.setAttribute("data-col",col);
+      div.classList.add("tile");
+      board.append(div);
+
+      col++;
+    })
+    col = 0;
+    row++;
+  })
+
+  // for column
+  for(let i = 0;i <= 9;i++){
+    const div = document.createElement("div");
+    div.textContent = i;
+    columnLayer.append(div);
+  }
+
+  // // for row
+  for(let i = 65;i <= 74;i++){
+    const char = String.fromCharCode(i);
+    const div = document.createElement("div");
+    div.textContent = char;
+    rowLayer.append(div);
+  }
+
+  div.classList.add("boardContainer");
+  columnLayer.classList.add("columnLayer");
+  board.classList.add("board");
+  rowLayer.classList.add("rowLayer");
+
+  div.append(columnLayer,rowLayer,board);
+  return div;
+}
+
+function renderRound(value){
+  const roundCount = document.createElement("h1")
+  roundCount.classList.add("roundCount")
+  roundCount.textContent = `Round: ${value}`;
+
+  return roundCount;
+}
+
+function renderTurn(value){
+  const turnIndicator = document.createElement("h1");
+  turnIndicator.classList.add("turnIndicator");
+  
+  if(value === 1){
+    turnIndicator.textContent = "Player's turn!";
+  }else{
+    turnIndicator.textContent = "Enemy's turn!";
+  }
+
+  return turnIndicator;
+}
+
+function renderStats(entity){
+  const div = document.createElement("div");
+  const hitTaken = document.createElement("p");
+  const hitMiss = document.createElement("p");
+  hitTaken.textContent = `Hit taken: ${entity.attackHit}`;
+  hitMiss.textContent = `Hit miss: ${entity.attackMiss}`;
+  div.classList.add("stats");
+  div.append(hitTaken,hitMiss);
+  return div;
 }
