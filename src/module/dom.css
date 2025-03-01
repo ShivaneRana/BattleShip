@@ -242,7 +242,7 @@ body {
   align-items: center;
 
   &:hover{
-    background-color: black;
+    background-color: lightgray;
   }
 }
 
@@ -273,19 +273,19 @@ body {
 }
 
 .enemyHit{
-  background-color: lightcoral;
+  background-color: lightgreen;
 }
 
 .enemyMiss{
-  background-color: lightgreen;
-}
-
-.playerHit{
   background-color: lightcoral;
 }
 
-.playerMis{
+.playerHit{
   background-color: lightgreen;
+}
+
+.playerMiss{
+  background-color: lightcoral;
 }
 
 .roundCount{
@@ -317,7 +317,7 @@ body {
 
   & > p{
     color: white;
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 }
 
