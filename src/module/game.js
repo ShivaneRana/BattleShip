@@ -3,8 +3,8 @@ import { Render, renderTutorialScreen } from "./dom.js";
 
 export const Game = (function () {
   let playerName;
-  let player1 = new RealPlayer(playerName);
-  let player2 = new ComputerPlayer("CPU");
+  let player1;
+  let player2;
 
   function showTutorialScreen() {
     renderTutorialScreen();
@@ -15,13 +15,15 @@ export const Game = (function () {
     playerName = name;
     player1 = new RealPlayer(playerName);
     player2 = new ComputerPlayer("CPU");
-    Render.placementScreen(player1.gameboard.board);
+    Render.placementScreen(player1.gameboard);
   }
 
 
 
   function showGameScreen(){
-    Render.gameScreen(player1.gameboard.board,player2.gameboard.board);
+    document.body.textContent = "";
+    //append the returned element to DOM
+    document.body.append(Render.gameScreen(player1,player2));
   }
 
   return {
