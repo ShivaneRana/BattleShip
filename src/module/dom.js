@@ -69,7 +69,7 @@ export const Render = (function () {
 
     playerSide.append(playerBoard,renderStats(player));
     enemySide.append(enemyBoard);
-    mainContainer.append(renderRound(1),renderTurn(2),playerSide,enemySide);
+    mainContainer.append(renderRound(1),renderTurn(0),playerSide,enemySide);
     return mainContainer;
   }
   return {
@@ -303,7 +303,26 @@ function renderEnemyBoard(computerObject){
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
-      
+      div.addEventListener("click",() => {
+        const x = +div.dataset.row;
+        const y = +div.dataset.col;
+        const gboard = computerObject.gameboard;
+        if(gboard.receiveAttack(x,y)){
+          div.classList.add("enemyHit");
+        }else if(!gboard.receiveAttack(x,y)){
+          div.classList.add("enemyMiss");
+        }
+
+        if(computerObject.gameboard.allShipSank()){
+          console.log("all ship sank");
+        }else{
+          console.log("some ship remaining");
+        }
+
+        // ensure that the player cant interact with already selected tiles.
+        div.style.userSelect = "none";
+        div.style.pointerEvents = "none";
+      })
 
       col++;
     })
@@ -347,7 +366,7 @@ function renderTurn(value){
   const turnIndicator = document.createElement("h1");
   turnIndicator.classList.add("turnIndicator");
   
-  if(value === 1){
+  if(value === 0){
     turnIndicator.textContent = "Player's turn!";
   }else{
     turnIndicator.textContent = "Enemy's turn!";
