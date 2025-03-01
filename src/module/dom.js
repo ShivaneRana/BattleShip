@@ -4,15 +4,14 @@ import { Game } from "./game.js";
 export const Render = (function () {
   function placementScreen(playerObject) {
     const mainContainer = document.createElement("div");
-    const header = document.createElement("h1");            //heading
+    const header = document.createElement("h1"); //heading
     const tip = document.createElement("p");
     const boardAndTipHolder = document.createElement("div");
     const buttonHolder = document.createElement("div");
-    const randomButton = document.createElement("button");  //randomize
-    const clearButton = document.createElement("button");   //clear
-    const playButton = document.createElement("button");    //play
+    const randomButton = document.createElement("button"); //randomize
+    const clearButton = document.createElement("button"); //clear
+    const playButton = document.createElement("button"); //play
     let isPlayable = false;
-
 
     //assign class
     mainContainer.classList.add("placementScreenBackground");
@@ -30,32 +29,31 @@ export const Render = (function () {
     tip.textContent = "Press R to rotate the ship";
 
     //append all content
-    boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
-    buttonHolder.append(clearButton,randomButton,playButton);
-    mainContainer.append(header,boardAndTipHolder,buttonHolder);
+    boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+    buttonHolder.append(clearButton, randomButton, playButton);
+    mainContainer.append(header, boardAndTipHolder, buttonHolder);
     document.body.append(mainContainer);
 
-    playButton.addEventListener("click",() => {
+    playButton.addEventListener("click", () => {
       document.body.textContent = "";
       Game.showGameScreen();
-    })
- 
-    clearButton.addEventListener("click",() => {
+    });
+
+    clearButton.addEventListener("click", () => {
       playerObject.gameboard.clear();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
-    })
+      boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+    });
 
-    
-    randomButton.addEventListener("click",() => {
+    randomButton.addEventListener("click", () => {
       playerObject.gameboard.clear();
       playerObject.gameboard.placeShipRandomly();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
-    })
+      boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+    });
   }
 
-  function gameScreen(player,computer){
+  function gameScreen(player, computer) {
     const mainContainer = document.createElement("div");
     const playerSide = document.createElement("div");
     const enemySide = document.createElement("div");
@@ -67,14 +65,14 @@ export const Render = (function () {
     playerSide.classList.add("playerSide");
     enemySide.classList.add("enemySide");
 
-    playerSide.append(playerBoard,renderStats(player));
+    playerSide.append(playerBoard, renderStats(player));
     enemySide.append(enemyBoard);
-    mainContainer.append(renderRound(1),renderTurn(0),playerSide,enemySide);
+    mainContainer.append(renderRound(1), renderTurn(0), playerSide, enemySide);
     return mainContainer;
   }
   return {
     placementScreen,
-    gameScreen
+    gameScreen,
   };
 })();
 
@@ -133,7 +131,7 @@ export function renderTutorialScreen() {
 }
 
 // function to render board for placing ships
-function renderPlacementBoard(playerObject){
+function renderPlacementBoard(playerObject) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -143,62 +141,59 @@ function renderPlacementBoard(playerObject){
   let row = 0;
   let col = 0;
 
-  
-  document.body.addEventListener("keydown",(e) => {
-    if(e.key === "r" || e.key === "R"){
-    
+  document.body.addEventListener("keydown", (e) => {
+    if (e.key === "r" || e.key === "R") {
     }
-  })
+  });
 
-  boardArray.forEach(array => {
-    array.forEach(item => {
+  boardArray.forEach((array) => {
+    array.forEach((item) => {
       const div = document.createElement("div");
-      div.setAttribute("data-row",row);
-      div.setAttribute("data-col",col);
+      div.setAttribute("data-row", row);
+      div.setAttribute("data-col", col);
       div.classList.add("tile");
       boardLayer.append(div);
 
-      if(item === "C"){
+      if (item === "C") {
         div.textContent = "C";
         div.classList.add("ship");
       }
 
-      if(item === "R"){
+      if (item === "R") {
         div.textContent = "R";
         div.classList.add("ship");
       }
 
-      if(item === "B"){
+      if (item === "B") {
         div.textContent = "B";
         div.classList.add("ship");
       }
 
-      if(item === "S"){
+      if (item === "S") {
         div.textContent = "S";
         div.classList.add("ship");
       }
 
-      if(item === "D"){
+      if (item === "D") {
         div.textContent = "D";
         div.classList.add("ship");
       }
 
-
       col++;
-    })
+    });
     col = 0;
     row++;
-  })
+  });
 
   // for column
-  for(let i = 0;i <= 9;i++){
+  for (let i = 0; i <= 9; i++) {
     const div = document.createElement("div");
     div.textContent = i;
     columnLayer.append(div);
   }
 
   // // for row
-  for(let i = 65;i <= 74;i++){
+  for (let i = 65; i <= 74; i++) {
     const char = String.fromCharCode(i);
     const div = document.createElement("div");
     div.textContent = char;
@@ -210,11 +205,11 @@ function renderPlacementBoard(playerObject){
   boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,boardLayer);
+  div.append(columnLayer, rowLayer, boardLayer);
   return div;
 }
 
-function renderPlayerBoard(playerObject){
+function renderPlayerBoard(playerObject) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -223,54 +218,54 @@ function renderPlayerBoard(playerObject){
   let row = 0;
   let col = 0;
 
-  boardArray.forEach(array => {
-    array.forEach(item => {
+  boardArray.forEach((array) => {
+    array.forEach((item) => {
       const div = document.createElement("div");
-      div.setAttribute("data-row",row);
-      div.setAttribute("data-col",col);
+      div.setAttribute("data-row", row);
+      div.setAttribute("data-col", col);
       div.classList.add("tile");
       boardLayer.append(div);
-      
-      if(item === "C"){
+
+      if (item === "C") {
         div.textContent = "C";
         div.classList.add("ship");
       }
 
-      if(item === "R"){
+      if (item === "R") {
         div.textContent = "R";
         div.classList.add("ship");
       }
 
-      if(item === "B"){
+      if (item === "B") {
         div.textContent = "B";
         div.classList.add("ship");
       }
 
-      if(item === "S"){
+      if (item === "S") {
         div.textContent = "S";
         div.classList.add("ship");
       }
 
-      if(item === "D"){
+      if (item === "D") {
         div.textContent = "D";
         div.classList.add("ship");
       }
 
       col++;
-    })
+    });
     col = 0;
     row++;
-  })
+  });
 
   // for column
-  for(let i = 0;i <= 9;i++){
+  for (let i = 0; i <= 9; i++) {
     const div = document.createElement("div");
     div.textContent = i;
     columnLayer.append(div);
   }
 
   // // for row
-  for(let i = 65;i <= 74;i++){
+  for (let i = 65; i <= 74; i++) {
     const char = String.fromCharCode(i);
     const div = document.createElement("div");
     div.textContent = char;
@@ -282,11 +277,11 @@ function renderPlayerBoard(playerObject){
   boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,boardLayer);
+  div.append(columnLayer, rowLayer, boardLayer);
   return div;
 }
 
-function renderEnemyBoard(computerObject){
+function renderEnemyBoard(computerObject) {
   const boardArray = computerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -295,50 +290,50 @@ function renderEnemyBoard(computerObject){
   let row = 0;
   let col = 0;
 
-  boardArray.forEach(array => {
-    array.forEach(item => {
+  boardArray.forEach((array) => {
+    array.forEach((item) => {
       const div = document.createElement("div");
-      div.setAttribute("data-row",row);
-      div.setAttribute("data-col",col);
+      div.setAttribute("data-row", row);
+      div.setAttribute("data-col", col);
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
-      div.addEventListener("click",() => {
+      div.addEventListener("click", () => {
         const x = +div.dataset.row;
         const y = +div.dataset.col;
         const gboard = computerObject.gameboard;
-        if(gboard.receiveAttack(x,y)){
+        if (gboard.receiveAttack(x, y)) {
           div.classList.add("enemyHit");
-        }else if(!gboard.receiveAttack(x,y)){
+        } else if (!gboard.receiveAttack(x, y)) {
           div.classList.add("enemyMiss");
         }
 
-        if(computerObject.gameboard.allShipSank()){
+        if (computerObject.gameboard.allShipSank()) {
           console.log("all ship sank");
-        }else{
+        } else {
           console.log("some ship remaining");
         }
 
         // ensure that the player cant interact with already selected tiles.
         div.style.userSelect = "none";
         div.style.pointerEvents = "none";
-      })
+      });
 
       col++;
-    })
+    });
     col = 0;
     row++;
-  })
+  });
 
   // for column
-  for(let i = 0;i <= 9;i++){
+  for (let i = 0; i <= 9; i++) {
     const div = document.createElement("div");
     div.textContent = i;
     columnLayer.append(div);
   }
 
   // // for row
-  for(let i = 65;i <= 74;i++){
+  for (let i = 65; i <= 74; i++) {
     const char = String.fromCharCode(i);
     const div = document.createElement("div");
     div.textContent = char;
@@ -350,38 +345,38 @@ function renderEnemyBoard(computerObject){
   boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,boardLayer);
+  div.append(columnLayer, rowLayer, boardLayer);
   return div;
 }
 
-function renderRound(value){
-  const roundCount = document.createElement("h1")
-  roundCount.classList.add("roundCount")
+function renderRound(value) {
+  const roundCount = document.createElement("h1");
+  roundCount.classList.add("roundCount");
   roundCount.textContent = `Round: ${value}`;
 
   return roundCount;
 }
 
-function renderTurn(value){
+function renderTurn(value) {
   const turnIndicator = document.createElement("h1");
   turnIndicator.classList.add("turnIndicator");
-  
-  if(value === 0){
+
+  if (value === 0) {
     turnIndicator.textContent = "Player's turn!";
-  }else{
+  } else {
     turnIndicator.textContent = "Enemy's turn!";
   }
 
   return turnIndicator;
 }
 
-function renderStats(entity){
+function renderStats(entity) {
   const div = document.createElement("div");
   const hitTaken = document.createElement("p");
   const hitMiss = document.createElement("p");
   hitTaken.textContent = `Hit taken: ${entity.attackHit}`;
   hitMiss.textContent = `Hit miss: ${entity.attackMiss}`;
   div.classList.add("stats");
-  div.append(hitTaken,hitMiss);
+  div.append(hitTaken, hitMiss);
   return div;
 }

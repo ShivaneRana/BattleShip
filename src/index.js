@@ -7,17 +7,17 @@ const inputName = document.querySelector(".inputName");
 const introContainer = document.querySelector(".introContainer");
 
 document.addEventListener("DOMContentLoaded", () => {
-    inputName.value = "";
-    // introContainer.remove();
-    // Game.showPlacementScreen("shivane");
-    Game.showGameScreen()
+  inputName.value = "";
+  // introContainer.remove();
+  // Game.showPlacementScreen("shivane");
+  Game.showGameScreen();
 });
 
 startButton.addEventListener("click", () => {
-    let name = inputName.value;
-    if(name === ""){
-        name = "Player";
-    }
+  let name = inputName.value;
+  if (name === "") {
+    name = "Player";
+  }
 });
 
 tutorialButton.addEventListener("click", () => {
