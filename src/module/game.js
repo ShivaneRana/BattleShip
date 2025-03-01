@@ -18,8 +18,6 @@ export const Game = (function () {
     Render.placementScreen(player1.gameboard);
   }
 
-
-
   function showGameScreen(){
     document.body.textContent = "";
     //append the returned element to DOM
