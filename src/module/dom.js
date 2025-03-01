@@ -2,7 +2,7 @@ import "./dom.css";
 import { Game } from "./game.js";
 
 export const Render = (function () {
-  function placementScreen(board) {
+  function placementScreen(playerObject) {
     const mainContainer = document.createElement("div");
     const header = document.createElement("h1");            //heading
     const tip = document.createElement("p");
@@ -30,7 +30,7 @@ export const Render = (function () {
     tip.textContent = "Press R to rotate the ship";
 
     //append all content
-    boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
+    boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
     buttonHolder.append(clearButton,randomButton,playButton);
     mainContainer.append(header,boardAndTipHolder,buttonHolder);
     document.body.append(mainContainer);
@@ -41,17 +41,17 @@ export const Render = (function () {
     })
  
     clearButton.addEventListener("click",() => {
-      board.clear();
+      playerObject.gameboard.clear();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
+      boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
     })
 
     
     randomButton.addEventListener("click",() => {
-      board.clear();
-      board.placeShipRandomly();
+      playerObject.gameboard.clear();
+      playerObject.gameboard.placeShipRandomly();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(board.board),tip);
+      boardAndTipHolder.append(renderPlacementBoard(playerObject),tip);
     })
   }
 
@@ -59,8 +59,8 @@ export const Render = (function () {
     const mainContainer = document.createElement("div");
     const playerSide = document.createElement("div");
     const enemySide = document.createElement("div");
-    const playerBoard = renderPlayerBoard(player.gameboard.board);
-    const enemyBoard = renderEnemyBoard(computer.gameboard.board);
+    const playerBoard = renderPlayerBoard(player);
+    const enemyBoard = renderEnemyBoard(computer);
 
     //assign class
     mainContainer.classList.add("gameScreenBackground");
@@ -133,10 +133,11 @@ export function renderTutorialScreen() {
 }
 
 // function to render board for placing ships
-function renderPlacementBoard(boardArray){
+function renderPlacementBoard(playerObject){
+  const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
-  const board = document.createElement("div");
+  const boardLayer = document.createElement("div");
   const rowLayer = document.createElement("div");
   let horizontalPlacement = true;
   let row = 0;
@@ -155,7 +156,7 @@ function renderPlacementBoard(boardArray){
       div.setAttribute("data-row",row);
       div.setAttribute("data-col",col);
       div.classList.add("tile");
-      board.append(div);
+      boardLayer.append(div);
 
       if(item === "C"){
         div.textContent = "C";
@@ -183,18 +184,6 @@ function renderPlacementBoard(boardArray){
       }
 
 
-      div.addEventListener("mouseenter",() => {
-        
-      })
-
-      div.addEventListener("mouseleave",() => {
-        
-      })
-      
-      div.addEventListener("click",() => {
-        
-      })
-
       col++;
     })
     col = 0;
@@ -218,17 +207,18 @@ function renderPlacementBoard(boardArray){
 
   div.classList.add("boardContainer");
   columnLayer.classList.add("columnLayer");
-  board.classList.add("board");
+  boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,board);
+  div.append(columnLayer,rowLayer,boardLayer);
   return div;
 }
 
-function renderPlayerBoard(boardArray){
+function renderPlayerBoard(playerObject){
+  const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
-  const board = document.createElement("div");
+  const boardLayer = document.createElement("div");
   const rowLayer = document.createElement("div");
   let row = 0;
   let col = 0;
@@ -239,8 +229,7 @@ function renderPlayerBoard(boardArray){
       div.setAttribute("data-row",row);
       div.setAttribute("data-col",col);
       div.classList.add("tile");
-      board.append(div);
-
+      boardLayer.append(div);
       
       if(item === "C"){
         div.textContent = "C";
@@ -266,7 +255,7 @@ function renderPlayerBoard(boardArray){
         div.textContent = "D";
         div.classList.add("ship");
       }
-      
+
       col++;
     })
     col = 0;
@@ -290,17 +279,18 @@ function renderPlayerBoard(boardArray){
 
   div.classList.add("boardContainer");
   columnLayer.classList.add("columnLayer");
-  board.classList.add("board");
+  boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,board);
+  div.append(columnLayer,rowLayer,boardLayer);
   return div;
 }
 
-function renderEnemyBoard(boardArray){
+function renderEnemyBoard(computerObject){
+  const boardArray = computerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
-  const board = document.createElement("div");
+  const boardLayer = document.createElement("div");
   const rowLayer = document.createElement("div");
   let row = 0;
   let col = 0;
@@ -310,8 +300,10 @@ function renderEnemyBoard(boardArray){
       const div = document.createElement("div");
       div.setAttribute("data-row",row);
       div.setAttribute("data-col",col);
-      div.classList.add("tile");
-      board.append(div);
+      div.classList.add("enemyTile");
+      boardLayer.append(div);
+
+      
 
       col++;
     })
@@ -336,10 +328,10 @@ function renderEnemyBoard(boardArray){
 
   div.classList.add("boardContainer");
   columnLayer.classList.add("columnLayer");
-  board.classList.add("board");
+  boardLayer.classList.add("board");
   rowLayer.classList.add("rowLayer");
 
-  div.append(columnLayer,rowLayer,board);
+  div.append(columnLayer,rowLayer,boardLayer);
   return div;
 }
 

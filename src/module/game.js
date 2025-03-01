@@ -15,11 +15,12 @@ export const Game = (function () {
     playerName = name;
     player1 = new RealPlayer(playerName);
     player2 = new ComputerPlayer("CPU");
-    Render.placementScreen(player1.gameboard);
+    Render.placementScreen(player1);
   }
 
   function showGameScreen(){
     document.body.textContent = "";
+    player2.gameboard.placeShipRandomly();// place ship randomly on the enemy board;
     //append the returned element to DOM
     document.body.append(Render.gameScreen(player1,player2));
   }
