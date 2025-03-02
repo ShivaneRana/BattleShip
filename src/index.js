@@ -8,9 +8,6 @@ const introContainer = document.querySelector(".introContainer");
 
 document.addEventListener("DOMContentLoaded", () => {
   inputName.value = "";
-  // introContainer.remove();
-  // Game.showPlacementScreen("shivane");
-  Game.showGameScreen();
 });
 
 startButton.addEventListener("click", () => {
@@ -18,6 +15,8 @@ startButton.addEventListener("click", () => {
   if (name === "") {
     name = "Player";
   }
+  introContainer.remove();
+  Game.showPlacementScreen(name);
 });
 
 tutorialButton.addEventListener("click", () => {

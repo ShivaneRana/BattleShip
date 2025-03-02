@@ -331,21 +331,19 @@ function renderEnemyBoard(playerObject,computerObject) {
       div.addEventListener("click", () => {
         const x = +div.dataset.row;
         const y = +div.dataset.col;
-        const randomx = Math.floor(Math.random()*10);
-        const randomy = Math.floor(Math.random()*10);
         const gboard = computerObject.gameboard;
 
         //if receiveAttack is true then a ship has been hit
         if (gboard.receiveAttack(x, y)) {
           div.classList.add("enemyHit");
-          playerObject.gameboard.receiveAttack(randomx,randomy);
+          gboard.print();
         } else if (!gboard.receiveAttack(x, y)) {
           div.classList.add("enemyMiss");
         }
 
         //check if all ship sank or not for starting new game
         if (computerObject.gameboard.allShipSank()) {
-          Game.restart();
+          Game.showBanner();
         }
 
         // ensure that the player cant interact with already selected tiles.
@@ -429,6 +427,10 @@ export function renderBanner(){
   div.append(wrapper);
   document.body.append(div);
   div.showModal();
+
+  restartButton.addEventListener("click",() => {
+    Game.restart();
+  })
 
   div.addEventListener('cancel', (event) => {
     event.preventDefault();
