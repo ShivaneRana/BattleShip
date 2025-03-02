@@ -6,6 +6,7 @@ const startButton = document.querySelector(".startButton");
 const inputName = document.querySelector(".inputName");
 const introContainer = document.querySelector(".introContainer");
 
+
 document.addEventListener("DOMContentLoaded", () => {
   inputName.value = "";
 });
