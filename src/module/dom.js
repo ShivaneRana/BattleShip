@@ -30,17 +30,20 @@ export const Render = (function () {
     tip.textContent = ""; //press R to rotate the ship
 
     //append all content
-    boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
+    boardAndTipHolder.append(
+      renderPlacementBoard(playerObject, manualShipPlacement),
+      tip,
+    );
     buttonHolder.append(clearButton, randomButton, playButton);
     mainContainer.append(header, boardAndTipHolder, buttonHolder);
     document.body.append(mainContainer);
 
     playButton.addEventListener("click", () => {
       // game is only playable when all ship are placed
-      if(isPlayable){
+      if (isPlayable) {
         playButton.classList.remove("error");
         document.body.textContent = "";
-        Game.showGameScreen();  
+        Game.showGameScreen();
       }
     });
 
@@ -49,7 +52,10 @@ export const Render = (function () {
       isPlayable = false;
       manualShipPlacement = true;
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
+      boardAndTipHolder.append(
+        renderPlacementBoard(playerObject, manualShipPlacement),
+        tip,
+      );
     });
 
     randomButton.addEventListener("click", () => {
@@ -58,7 +64,10 @@ export const Render = (function () {
       manualShipPlacement = false;
       playerObject.gameboard.placeShipRandomly();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
+      boardAndTipHolder.append(
+        renderPlacementBoard(playerObject, manualShipPlacement),
+        tip,
+      );
     });
   }
 
@@ -81,7 +90,7 @@ export const Render = (function () {
     playerName.classList.add("namename");
     computerName.classList.add("namename");
 
-    turnIndicator.textContent = "Keep pressing enemy Tiles!"
+    turnIndicator.textContent = "Keep pressing enemy Tiles!";
     playerName.textContent = player.name;
     computerName.textContent = "CPU";
     playerBoard.append(playerName);
@@ -89,7 +98,12 @@ export const Render = (function () {
 
     playerSide.append(playerBoard, renderStats(player));
     enemySide.append(enemyBoard);
-    mainContainer.append(renderRound(player), turnIndicator, playerSide, enemySide);
+    mainContainer.append(
+      renderRound(player),
+      turnIndicator,
+      playerSide,
+      enemySide,
+    );
     return mainContainer;
   }
 
@@ -154,7 +168,7 @@ export function renderTutorialScreen() {
 }
 
 // function to render board for placing ships
-function renderPlacementBoard(playerObject,manualShipPlacement) {
+function renderPlacementBoard(playerObject, manualShipPlacement) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -164,18 +178,17 @@ function renderPlacementBoard(playerObject,manualShipPlacement) {
   let row = 0;
   let col = 0;
 
-  if(manualShipPlacement){
+  if (manualShipPlacement) {
     document.body.addEventListener("keydown", (e) => {
       if (e.key === "r" || e.key === "R") {
-        if(horizontalPlacement){
+        if (horizontalPlacement) {
           horizontalPlacement = false;
-        }else{
+        } else {
           horizontalPlacement = true;
         }
       }
     });
   }
-  
 
   boardArray.forEach((array) => {
     array.forEach((item) => {
@@ -211,8 +224,7 @@ function renderPlacementBoard(playerObject,manualShipPlacement) {
       }
 
       // ship can only be placed when manualShipPlacement in true
-      if(manualShipPlacement){
-        
+      if (manualShipPlacement) {
       }
 
       col++;
@@ -287,12 +299,12 @@ function renderPlayerBoard(playerObject, computerObject) {
         div.classList.add("ship");
       }
 
-      if (item === 2){
-        div.classList.add("enemyHit")
+      if (item === 2) {
+        div.classList.add("enemyHit");
       }
 
-      if (item === 1){
-        div.classList.add("enemyMiss")
+      if (item === 1) {
+        div.classList.add("enemyMiss");
       }
 
       div.style.userSelect = "none";
@@ -344,12 +356,12 @@ function renderEnemyBoard(playerObject, computerObject) {
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
-      if (item === 2){
-        div.classList.add("enemyHit")
+      if (item === 2) {
+        div.classList.add("enemyHit");
       }
 
-      if (item === 1){
-        div.classList.add("enemyMiss")
+      if (item === 1) {
+        div.classList.add("enemyMiss");
       }
 
       div.addEventListener("click", () => {
@@ -359,46 +371,46 @@ function renderEnemyBoard(playerObject, computerObject) {
         const pboard = playerObject.gameboard;
 
         // if player hit enemy ship
-        if(cboard.receiveAttack(x,y)){
+        if (cboard.receiveAttack(x, y)) {
           cboard.board[x][y] = 2;
           playerObject.attackHit++;
           playerObject.round++;
 
           let flag = true;
-          while(flag){
-            const x = Math.floor(Math.random()*10);
-            const y = Math.floor(Math.random()*10);
-            if(!pboard.visited.has(`${x}:${y}`)){
-              if(pboard.receiveAttack(x,y)){
+          while (flag) {
+            const x = Math.floor(Math.random() * 10);
+            const y = Math.floor(Math.random() * 10);
+            if (!pboard.visited.has(`${x}:${y}`)) {
+              if (pboard.receiveAttack(x, y)) {
                 pboard.board[x][y] = 2;
-              }else{
-                pboard.board[x][y] = 1;  
-              };
+              } else {
+                pboard.board[x][y] = 1;
+              }
               flag = false;
             }
-            Game.showGameScreen1(playerObject,computerObject)
+            Game.showGameScreen1(playerObject, computerObject);
           }
-        }else{
+        } else {
           // if player miss enemy ship
           cboard.board[x][y] = 1;
           playerObject.attackMiss++;
           playerObject.round++;
           div.classList.add("enemyMiss");
-          
+
           let flag = true;
-          while(flag){
-            const x = Math.floor(Math.random()*10);
-            const y = Math.floor(Math.random()*10);
-            if(!pboard.visited.has(`${x}:${y}`)){
-              if(pboard.receiveAttack(x,y)){
+          while (flag) {
+            const x = Math.floor(Math.random() * 10);
+            const y = Math.floor(Math.random() * 10);
+            if (!pboard.visited.has(`${x}:${y}`)) {
+              if (pboard.receiveAttack(x, y)) {
                 pboard.board[x][y] = 2;
-              }else{
-                pboard.board[x][y] = 1;  
-              };
+              } else {
+                pboard.board[x][y] = 1;
+              }
               flag = false;
             }
           }
-          Game.showGameScreen1(playerObject,computerObject)
+          Game.showGameScreen1(playerObject, computerObject);
         }
 
         pboard.print();
@@ -409,7 +421,7 @@ function renderEnemyBoard(playerObject, computerObject) {
           Game.showBanner("Player won!");
         }
 
-        if(playerObject.gameboard.allShipSank()){
+        if (playerObject.gameboard.allShipSank()) {
           Game.showBanner("CPU won!");
         }
 
