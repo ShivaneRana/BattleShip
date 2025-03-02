@@ -25,8 +25,13 @@ export const Game = (function () {
     document.body.append(Render.gameScreen(player1, player2));
   }
 
-  function showBanner() {
-    renderBanner();
+  function showGameScreen1() {
+    document.body.textContent = "";
+    document.body.append(Render.gameScreen(player1, player2));
+  }
+
+  function showBanner(value) {
+    renderBanner(value);
   }
 
   //restart new game
@@ -42,6 +47,7 @@ export const Game = (function () {
     showBanner,
     showTutorialScreen,
     showPlacementScreen,
+    showGameScreen1,
     showGameScreen,
   };
 })();
