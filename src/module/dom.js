@@ -27,7 +27,7 @@ export const Render = (function () {
     randomButton.textContent = "Randomize";
     clearButton.textContent = "Clear";
     playButton.textContent = "Play";
-    tip.textContent = "Press R to rotate the ship";
+    tip.textContent = ""; //press R to rotate the ship
 
     //append all content
     boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
