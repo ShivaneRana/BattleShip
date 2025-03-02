@@ -25,6 +25,7 @@ export const Game = (function () {
     document.body.append(Render.gameScreen(player1, player2));
   }
 
+  // this is used when rendering over and over again
   function showGameScreen1() {
     document.body.textContent = "";
     document.body.append(Render.gameScreen(player1, player2));

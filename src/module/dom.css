@@ -179,6 +179,8 @@ body {
   display: grid;
   grid-template-columns: 50px 400px;
   grid-template-rows: 50px 400px;
+  position: relative;
+  
 
   & > .columnLayer {
     grid-row: 1/2;
@@ -391,4 +393,13 @@ body {
       color: white;
     }
   }
+}
+
+.namename{
+  font-size: 2.5rem;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top:-10%;
+  transform: translate(-50%,-50%);
 }

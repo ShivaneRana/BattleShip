@@ -17,7 +17,7 @@ export class RealPlayer {
 }
 
 export class ComputerPlayer {
-  constructor(name = "CPU") {
+  constructor(name) {
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;

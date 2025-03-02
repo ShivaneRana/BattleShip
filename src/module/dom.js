@@ -70,14 +70,22 @@ export const Render = (function () {
     const playerBoard = renderPlayerBoard(player, computer);
     const enemyBoard = renderEnemyBoard(player, computer);
     const turnIndicator = document.createElement("h1");
+    const playerName = document.createElement("h1");
+    const computerName = document.createElement("h1");
 
     //assign class
     mainContainer.classList.add("gameScreenBackground");
     playerSide.classList.add("playerSide");
     enemySide.classList.add("enemySide");
     turnIndicator.classList.add("turnIndicator");
+    playerName.classList.add("namename");
+    computerName.classList.add("namename");
 
     turnIndicator.textContent = "Keep pressing enemy Tiles!"
+    playerName.textContent = player.name;
+    computerName.textContent = "CPU";
+    playerBoard.append(playerName);
+    enemyBoard.append(computerName);
 
     playerSide.append(playerBoard, renderStats(player));
     enemySide.append(enemyBoard);
