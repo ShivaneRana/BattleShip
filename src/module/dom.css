@@ -287,6 +287,8 @@ body {
 }
 
 .turnIndicator {
+  width: 100%;
+  text-align: center;
   position: absolute;
   left: 50%;
   top: 90%;

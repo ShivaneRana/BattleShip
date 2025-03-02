@@ -69,15 +69,19 @@ export const Render = (function () {
     const enemySide = document.createElement("div");
     const playerBoard = renderPlayerBoard(player, computer);
     const enemyBoard = renderEnemyBoard(player, computer);
+    const turnIndicator = document.createElement("h1");
 
     //assign class
     mainContainer.classList.add("gameScreenBackground");
     playerSide.classList.add("playerSide");
     enemySide.classList.add("enemySide");
+    turnIndicator.classList.add("turnIndicator");
+
+    turnIndicator.textContent = "Keep pressing enemy Tiles!"
 
     playerSide.append(playerBoard, renderStats(player));
     enemySide.append(enemyBoard);
-    mainContainer.append(renderRound(player), renderTurn(0), playerSide, enemySide);
+    mainContainer.append(renderRound(player), turnIndicator, playerSide, enemySide);
     return mainContainer;
   }
 
@@ -275,8 +279,12 @@ function renderPlayerBoard(playerObject, computerObject) {
         div.classList.add("ship");
       }
 
-      if(item === 1){
-        div.classList.add("playerMiss");
+      if (item === 2){
+        div.classList.add("enemyHit")
+      }
+
+      if (item === 1){
+        div.classList.add("enemyMiss")
       }
 
       div.style.userSelect = "none";
@@ -328,31 +336,6 @@ function renderEnemyBoard(playerObject, computerObject) {
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
-      if (item === "C") {
-        div.textContent = "C";
-        div.classList.add("ship");
-      }
-
-      if (item === "R") {
-        div.textContent = "R";
-        div.classList.add("ship");
-      }
-
-      if (item === "B") {
-        div.textContent = "B";
-        div.classList.add("ship");
-      }
-
-      if (item === "S") {
-        div.textContent = "S";
-        div.classList.add("ship");
-      }
-
-      if (item === "D") {
-        div.textContent = "D";
-        div.classList.add("ship");
-      }
-
       if (item === 2){
         div.classList.add("enemyHit")
       }
@@ -378,7 +361,11 @@ function renderEnemyBoard(playerObject, computerObject) {
             const x = Math.floor(Math.random()*10);
             const y = Math.floor(Math.random()*10);
             if(!pboard.visited.has(`${x}:${y}`)){
-              pboard.receiveAttack(x,y);
+              if(pboard.receiveAttack(x,y)){
+                pboard.board[x][y] = 2;
+              }else{
+                pboard.board[x][y] = 1;  
+              };
               flag = false;
             }
             Game.showGameScreen1(playerObject,computerObject)
@@ -395,7 +382,11 @@ function renderEnemyBoard(playerObject, computerObject) {
             const x = Math.floor(Math.random()*10);
             const y = Math.floor(Math.random()*10);
             if(!pboard.visited.has(`${x}:${y}`)){
-              pboard.receiveAttack(x,y);
+              if(pboard.receiveAttack(x,y)){
+                pboard.board[x][y] = 2;
+              }else{
+                pboard.board[x][y] = 1;  
+              };
               flag = false;
             }
           }
@@ -455,19 +446,6 @@ function renderRound(playerobject) {
   roundCount.textContent = `Round: ${playerobject.round}`;
 
   return roundCount;
-}
-
-function renderTurn(value) {
-  const turnIndicator = document.createElement("h1");
-  turnIndicator.classList.add("turnIndicator");
-
-  if (value === 0) {
-    turnIndicator.textContent = "Player's turn!";
-  } else {
-    turnIndicator.textContent = "Enemy's turn!";
-  }
-
-  return turnIndicator;
 }
 
 function renderStats(entity) {
