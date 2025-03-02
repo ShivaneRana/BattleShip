@@ -54,11 +54,12 @@ export const Render = (function () {
   }
 
   function gameScreen(player, computer) {
+    document.body.textContent = "";
     const mainContainer = document.createElement("div");
     const playerSide = document.createElement("div");
     const enemySide = document.createElement("div");
-    const playerBoard = renderPlayerBoard(player);
-    const enemyBoard = renderEnemyBoard(computer);
+    const playerBoard = renderPlayerBoard(player,computer);
+    const enemyBoard = renderEnemyBoard(player,computer);
 
     //assign class
     mainContainer.classList.add("gameScreenBackground");
@@ -70,6 +71,7 @@ export const Render = (function () {
     mainContainer.append(renderRound(1), renderTurn(0), playerSide, enemySide);
     return mainContainer;
   }
+  
   return {
     placementScreen,
     gameScreen,
@@ -209,7 +211,7 @@ function renderPlacementBoard(playerObject) {
   return div;
 }
 
-function renderPlayerBoard(playerObject) {
+function renderPlayerBoard(playerObject,computerObject) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -251,6 +253,8 @@ function renderPlayerBoard(playerObject) {
         div.classList.add("ship");
       }
 
+      div.style.userSelect = "none";
+      div.style.pointerEvents = "none";
       col++;
     });
     col = 0;
@@ -281,7 +285,7 @@ function renderPlayerBoard(playerObject) {
   return div;
 }
 
-function renderEnemyBoard(computerObject) {
+function renderEnemyBoard(playerObject,computerObject) {
   const boardArray = computerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -298,20 +302,50 @@ function renderEnemyBoard(computerObject) {
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
+      
+      if (item === "C") {
+        div.textContent = "C";
+        div.classList.add("ship");
+      }
+
+      if (item === "R") {
+        div.textContent = "R";
+        div.classList.add("ship");
+      }
+
+      if (item === "B") {
+        div.textContent = "B";
+        div.classList.add("ship");
+      }
+
+      if (item === "S") {
+        div.textContent = "S";
+        div.classList.add("ship");
+      }
+
+      if (item === "D") {
+        div.textContent = "D";
+        div.classList.add("ship");
+      }
+
       div.addEventListener("click", () => {
         const x = +div.dataset.row;
         const y = +div.dataset.col;
+        const randomx = Math.floor(Math.random()*10);
+        const randomy = Math.floor(Math.random()*10);
         const gboard = computerObject.gameboard;
+
+        //if receiveAttack is true then a ship has been hit
         if (gboard.receiveAttack(x, y)) {
           div.classList.add("enemyHit");
+          playerObject.gameboard.receiveAttack(randomx,randomy);
         } else if (!gboard.receiveAttack(x, y)) {
           div.classList.add("enemyMiss");
         }
 
+        //check if all ship sank or not for starting new game
         if (computerObject.gameboard.allShipSank()) {
-          console.log("all ship sank");
-        } else {
-          console.log("some ship remaining");
+          Game.restart();
         }
 
         // ensure that the player cant interact with already selected tiles.
@@ -379,4 +413,24 @@ function renderStats(entity) {
   div.classList.add("stats");
   div.append(hitTaken, hitMiss);
   return div;
+}
+
+export function renderBanner(){
+  const div = document.createElement("dialog");
+  const wrapper = document.createElement("div");
+  const restartButton = document.createElement("button");
+  const h1 = document.createElement("h1");
+
+  h1.textContent = "Player Won!";
+  restartButton.textContent = "Restart";
+  div.classList.add("banner");
+  
+  wrapper.append(h1,restartButton);
+  div.append(wrapper);
+  document.body.append(div);
+  div.showModal();
+
+  div.addEventListener('cancel', (event) => {
+    event.preventDefault();
+  });
 }
