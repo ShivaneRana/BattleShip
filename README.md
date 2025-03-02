@@ -5,8 +5,8 @@ A fun, interactive **Battleship** game built using JavaScript, HTML, and CSS. Pl
 ---
 
 ## 🚀 Features
-- **Classic Battleship Gameplay** – Place your ships and strategize to sink your opponent's fleet.
-- **Modern UI** – Clean and simple design for an enjoyable experience.
+- **Classic Battleship Gameplay** – Place your ships and strategize to sink your opponent's fleet. <br>
+- **Modern UI** – Clean and simple design for an enjoyable experience. <br>
 
 ---
 
