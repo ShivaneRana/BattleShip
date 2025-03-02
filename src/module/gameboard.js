@@ -16,13 +16,14 @@ export class Gameboard {
     this.visited = new Set();
   }
 
-  // used for visually representing the board in console
+  // visually represent the board;
   print() {
-    console.log("GameBoard~");
-    this.board.forEach((row) => {
-      console.log(row.join("   "));
+    let str = "";
+    this.board.forEach(row => {
+        str += row.join(" ") + "\n"; // Append each row followed by a newline
     });
-  }
+    console.log(str);
+}
 
   placeShip(start, end, name) {
     const ship = this.allShip[name];
