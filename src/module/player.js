@@ -5,6 +5,7 @@ export class RealPlayer {
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
+    this.round = 0;
     this.gameboard = new Gameboard();
   }
 
@@ -20,6 +21,7 @@ export class ComputerPlayer {
     this.name = name;
     this.attackHit = 0;
     this.attackMiss = 0;
+    this.round = 0; // this is kinda useless ngl.
     this.gameboard = new Gameboard();
   }
 
