@@ -19,11 +19,11 @@ export class Gameboard {
   // visually represent the board;
   print() {
     let str = "";
-    this.board.forEach(row => {
-        str += row.join(" ") + "\n"; // Append each row followed by a newline
+    this.board.forEach((row) => {
+      str += row.join(" ") + "\n"; // Append each row followed by a newline
     });
     console.log(str);
-}
+  }
 
   placeShip(start, end, name) {
     const ship = this.allShip[name];

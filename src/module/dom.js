@@ -58,8 +58,8 @@ export const Render = (function () {
     const mainContainer = document.createElement("div");
     const playerSide = document.createElement("div");
     const enemySide = document.createElement("div");
-    const playerBoard = renderPlayerBoard(player,computer);
-    const enemyBoard = renderEnemyBoard(player,computer);
+    const playerBoard = renderPlayerBoard(player, computer);
+    const enemyBoard = renderEnemyBoard(player, computer);
 
     //assign class
     mainContainer.classList.add("gameScreenBackground");
@@ -71,7 +71,7 @@ export const Render = (function () {
     mainContainer.append(renderRound(1), renderTurn(0), playerSide, enemySide);
     return mainContainer;
   }
-  
+
   return {
     placementScreen,
     gameScreen,
@@ -211,7 +211,7 @@ function renderPlacementBoard(playerObject) {
   return div;
 }
 
-function renderPlayerBoard(playerObject,computerObject) {
+function renderPlayerBoard(playerObject, computerObject) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -285,7 +285,7 @@ function renderPlayerBoard(playerObject,computerObject) {
   return div;
 }
 
-function renderEnemyBoard(playerObject,computerObject) {
+function renderEnemyBoard(playerObject, computerObject) {
   const boardArray = computerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -302,7 +302,6 @@ function renderEnemyBoard(playerObject,computerObject) {
       div.classList.add("enemyTile");
       boardLayer.append(div);
 
-      
       if (item === "C") {
         div.textContent = "C";
         div.classList.add("ship");
@@ -413,7 +412,7 @@ function renderStats(entity) {
   return div;
 }
 
-export function renderBanner(){
+export function renderBanner() {
   const div = document.createElement("dialog");
   const wrapper = document.createElement("div");
   const restartButton = document.createElement("button");
@@ -422,17 +421,17 @@ export function renderBanner(){
   h1.textContent = "Player Won!";
   restartButton.textContent = "Restart";
   div.classList.add("banner");
-  
-  wrapper.append(h1,restartButton);
+
+  wrapper.append(h1, restartButton);
   div.append(wrapper);
   document.body.append(div);
   div.showModal();
 
-  restartButton.addEventListener("click",() => {
+  restartButton.addEventListener("click", () => {
     Game.restart();
-  })
+  });
 
-  div.addEventListener('cancel', (event) => {
+  div.addEventListener("cancel", (event) => {
     event.preventDefault();
   });
 }

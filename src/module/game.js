@@ -18,22 +18,22 @@ export const Game = (function () {
     Render.placementScreen(player1);
   }
 
-  //display game screen 
+  //display game screen
   function showGameScreen() {
     document.body.textContent = "";
     player2.gameboard.placeShipRandomly();
     document.body.append(Render.gameScreen(player1, player2));
   }
 
-  function showBanner(){
+  function showBanner() {
     renderBanner();
   }
 
   //restart new game
-  function restart(){
+  function restart() {
     document.body.textContent = "";
-    player1.reset();  //reset player1
-    player2.reset();  //reset player2
+    player1.reset(); //reset player1
+    player2.reset(); //reset player2
     Render.placementScreen(player1);
   }
 
