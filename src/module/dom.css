@@ -250,7 +250,7 @@ body {
 }
 
 .highlight {
-  background-color: darkcyan;
+  background-color: lightseagreen;
 }
 
 /* this is where the game take place */
@@ -317,18 +317,26 @@ body {
 
 .enemyHit {
   background-color: lightgreen;
+  user-select: none;
+  pointer-events: none;
 }
 
 .enemyMiss {
   background-color: lightcoral;
+  user-select: none;
+  pointer-events: none;
 }
 
 .playerHit {
   background-color: lightgreen;
+  user-select: none;
+  pointer-events: none;
 }
 
 .playerMiss {
   background-color: lightcoral;
+  user-select: none;
+  pointer-events: none;
 }
 
 .banner {
