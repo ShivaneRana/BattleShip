@@ -11,7 +11,8 @@ export const Render = (function () {
     const randomButton = document.createElement("button"); //randomize
     const clearButton = document.createElement("button"); //clear
     const playButton = document.createElement("button"); //play
-    let isPlayable = false;
+    let isPlayable = false; //check if the game is playable
+    let manualShipPlacement = true;
 
     //assign class
     mainContainer.classList.add("placementScreenBackground");
@@ -29,27 +30,35 @@ export const Render = (function () {
     tip.textContent = "Press R to rotate the ship";
 
     //append all content
-    boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+    boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
     buttonHolder.append(clearButton, randomButton, playButton);
     mainContainer.append(header, boardAndTipHolder, buttonHolder);
     document.body.append(mainContainer);
 
     playButton.addEventListener("click", () => {
-      document.body.textContent = "";
-      Game.showGameScreen();
+      // game is only playable when all ship are placed
+      if(isPlayable){
+        playButton.classList.remove("error");
+        document.body.textContent = "";
+        Game.showGameScreen();  
+      }
     });
 
     clearButton.addEventListener("click", () => {
       playerObject.gameboard.clear();
+      isPlayable = false;
+      manualShipPlacement = true;
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+      boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
     });
 
     randomButton.addEventListener("click", () => {
       playerObject.gameboard.clear();
+      isPlayable = true;
+      manualShipPlacement = false;
       playerObject.gameboard.placeShipRandomly();
       boardAndTipHolder.textContent = "";
-      boardAndTipHolder.append(renderPlacementBoard(playerObject), tip);
+      boardAndTipHolder.append(renderPlacementBoard(playerObject,manualShipPlacement), tip);
     });
   }
 
@@ -68,7 +77,7 @@ export const Render = (function () {
 
     playerSide.append(playerBoard, renderStats(player));
     enemySide.append(enemyBoard);
-    mainContainer.append(renderRound(1), renderTurn(0), playerSide, enemySide);
+    mainContainer.append(renderRound(player), renderTurn(0), playerSide, enemySide);
     return mainContainer;
   }
 
@@ -133,7 +142,7 @@ export function renderTutorialScreen() {
 }
 
 // function to render board for placing ships
-function renderPlacementBoard(playerObject) {
+function renderPlacementBoard(playerObject,manualShipPlacement) {
   const boardArray = playerObject.gameboard.board;
   const div = document.createElement("div");
   const columnLayer = document.createElement("div");
@@ -143,10 +152,18 @@ function renderPlacementBoard(playerObject) {
   let row = 0;
   let col = 0;
 
-  document.body.addEventListener("keydown", (e) => {
-    if (e.key === "r" || e.key === "R") {
-    }
-  });
+  if(manualShipPlacement){
+    document.body.addEventListener("keydown", (e) => {
+      if (e.key === "r" || e.key === "R") {
+        if(horizontalPlacement){
+          horizontalPlacement = false;
+        }else{
+          horizontalPlacement = true;
+        }
+      }
+    });
+  }
+  
 
   boardArray.forEach((array) => {
     array.forEach((item) => {
@@ -179,6 +196,11 @@ function renderPlacementBoard(playerObject) {
       if (item === "D") {
         div.textContent = "D";
         div.classList.add("ship");
+      }
+
+      // ship can only be placed when manualShipPlacement in true
+      if(manualShipPlacement){
+        
       }
 
       col++;
@@ -251,6 +273,10 @@ function renderPlayerBoard(playerObject, computerObject) {
       if (item === "D") {
         div.textContent = "D";
         div.classList.add("ship");
+      }
+
+      if(item === 1){
+        div.classList.add("playerMiss");
       }
 
       div.style.userSelect = "none";
@@ -327,22 +353,65 @@ function renderEnemyBoard(playerObject, computerObject) {
         div.classList.add("ship");
       }
 
+      if (item === 2){
+        div.classList.add("enemyHit")
+      }
+
+      if (item === 1){
+        div.classList.add("enemyMiss")
+      }
+
       div.addEventListener("click", () => {
         const x = +div.dataset.row;
         const y = +div.dataset.col;
-        const gboard = computerObject.gameboard;
+        const cboard = computerObject.gameboard;
+        const pboard = playerObject.gameboard;
 
-        //if receiveAttack is true then a ship has been hit
-        if (gboard.receiveAttack(x, y)) {
-          div.classList.add("enemyHit");
-          gboard.print();
-        } else if (!gboard.receiveAttack(x, y)) {
+        // if player hit enemy ship
+        if(cboard.receiveAttack(x,y)){
+          cboard.board[x][y] = 2;
+          playerObject.attackHit++;
+          playerObject.round++;
+
+          let flag = true;
+          while(flag){
+            const x = Math.floor(Math.random()*10);
+            const y = Math.floor(Math.random()*10);
+            if(!pboard.visited.has(`${x}:${y}`)){
+              pboard.receiveAttack(x,y);
+              flag = false;
+            }
+            Game.showGameScreen1(playerObject,computerObject)
+          }
+        }else{
+          // if player miss enemy ship
+          cboard.board[x][y] = 1;
+          playerObject.attackMiss++;
+          playerObject.round++;
           div.classList.add("enemyMiss");
+          
+          let flag = true;
+          while(flag){
+            const x = Math.floor(Math.random()*10);
+            const y = Math.floor(Math.random()*10);
+            if(!pboard.visited.has(`${x}:${y}`)){
+              pboard.receiveAttack(x,y);
+              flag = false;
+            }
+          }
+          Game.showGameScreen1(playerObject,computerObject)
         }
+
+        pboard.print();
+        cboard.print();
 
         //check if all ship sank or not for starting new game
         if (computerObject.gameboard.allShipSank()) {
-          Game.showBanner();
+          Game.showBanner("Player won!");
+        }
+
+        if(playerObject.gameboard.allShipSank()){
+          Game.showBanner("CPU won!");
         }
 
         // ensure that the player cant interact with already selected tiles.
@@ -380,10 +449,10 @@ function renderEnemyBoard(playerObject, computerObject) {
   return div;
 }
 
-function renderRound(value) {
+function renderRound(playerobject) {
   const roundCount = document.createElement("h1");
   roundCount.classList.add("roundCount");
-  roundCount.textContent = `Round: ${value}`;
+  roundCount.textContent = `Round: ${playerobject.round}`;
 
   return roundCount;
 }
@@ -412,13 +481,13 @@ function renderStats(entity) {
   return div;
 }
 
-export function renderBanner() {
+export function renderBanner(str) {
   const div = document.createElement("dialog");
   const wrapper = document.createElement("div");
   const restartButton = document.createElement("button");
   const h1 = document.createElement("h1");
 
-  h1.textContent = "Player Won!";
+  h1.textContent = str;
   restartButton.textContent = "Restart";
   div.classList.add("banner");
 
